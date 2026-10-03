@@ -1,0 +1,16 @@
+{
+  "name": "reliefvue-demo",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "server": "node server.js",
+    "build": "vite build",
+    "build:web": "VITE_PUBLIC_DEMO=1 vite build"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "vite": "^7.3.1"
+  }
+}
