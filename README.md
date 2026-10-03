@@ -36,7 +36,7 @@ No real transaction signature should be claimed in a submission until both donat
 
 `npm run build:web` creates a static Vercel demo. `vercel.json` selects that command. The public build reads the Devnet treasury balance and can verify a wallet-signed donation. The fictional event activation is stored only in that visitor's browser. Recipient payouts and duplicate rejection are labeled previews: the local demo service is not deployed. Its key file and claim records must never be uploaded. The public receipt list contains only donations verified in the current browser, so it is not a complete ledger.
 
-The project URL and GitHub integration must be confirmed separately. Building the static bundle does not publish it.
+The Vercel project URL and GitHub-to-Vercel integration must be confirmed separately. Building the static bundle or pushing this repository does not deploy the site.
 
 ## Product and design documents
 
