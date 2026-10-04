@@ -1,4 +1,6 @@
-# ReliefVue senior developer handoff - 2026-10-04
+# ReliefVue implementation status and next steps - 2026-10-04
+
+Current team: Geraldine and Codex are building the hackathon prototype. No senior developer has been hired. Hiring remains conditional on future funding. The next engineering work is ours to continue.
 
 ## Delivered
 

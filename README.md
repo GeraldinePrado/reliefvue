@@ -51,7 +51,7 @@ The static preview reads a Devnet reserve and verifies donations, but its receip
 ## Documents
 
 - [Current brief](docs/brief.md), [technical design](docs/spec.md), [implementation plan](docs/plan.md), [progress](docs/progress.md).
-- [Senior developer handoff](docs/developer-handoff.md), [reserve program handoff](chain/README.md).
+- [Implementation status and next steps](docs/developer-handoff.md), [reserve program handoff](chain/README.md).
 - [Brandbook v02](docs/brandbook_v02/index.html) remains a review candidate, not the implemented identity.
 - Earlier recovery briefs and `docs/history/` are historical context; the current brief governs when they differ.
 
