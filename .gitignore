@@ -14,3 +14,9 @@ desktop.ini
 /review-captures/
 /reliefvue/
 /01-sessions/
+
+.sdd/
+chain/target/
+chain/.anchor/
+chain/node_modules/
+*-keypair.json

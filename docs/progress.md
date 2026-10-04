@@ -1,5 +1,13 @@
 # ReliefVue product work
 
-- [x] Brainstorm: product feasibility, differentiation, deployed evidence, investor pitch -> [brief.md](brief.md). Open decisions are marked in the brief.
-- [x] Session checkpoint: the private workspace session record is kept outside this public repository. The 100,000-household figure is only an illustrative scale scenario.
-- [~] Forge: locked public program-controlled reserve versus separate operating wallet; pressure-test founder control, household eligibility, prototype proof, and the competing ReliefVue Network proposal. No pivot verdict yet.
+- [x] Brainstorm and Forge: clarified the household-relief MVP in [brief.md](brief.md). Production governance and grant valuation remain open.
+- [x] Design and plan: [spec.md](spec.md), [plan.md](plan.md).
+- [x] Typed local stack: TypeScript, Vite, Solana Kit, Wallet Standard; cross-platform commands and separate modules.
+- [x] Verification: typecheck, eight tests, both builds, root audit zero vulnerabilities; browser evidence review and empty-reserve rejection. No horizontal overflow in checked desktop/mobile views.
+- [x] Independent review: fixed uncertain-wallet resend guard, donation reconciliation, wallet selection and proxy origin handling.
+- [~] Reserve program: source/native tests supplied, no native compiler or deployment evidence. [Developer handoff](developer-handoff.md).
+- [ ] Confirm live Devnet donation/payout receipts and verify Vercel deployment.
+- [ ] Production custody, staff identities, governance, Thai basket/pricing, conversion and private eligibility validation.
+- [~] Git backup and Drive handoff: finalize after source review; Mac local sync/offline state requires device verification.
+
+100,000 households is illustrative, not a forecast. Test SOL values have no Thai purchasing-power equivalence.

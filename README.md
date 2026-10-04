@@ -1,55 +1,58 @@
-# ReliefVue demo application
+# ReliefVue ideathon prototype
 
-This repository contains ReliefVue's ideathon prototype and current product brief. The application uses a fictional Bangkok event, synthetic households and Solana Devnet test SOL. It is a demonstration, not a live relief service.
+Thailand-first household emergency relief using Solana Devnet. Fictional flood evidence and synthetic households only. No real aid service, identity checks, custody or baht conversion.
 
-## Run locally
+## Stack
 
-Requires Node 20 or later. In this folder:
+Node >=22.12, Vite 7, strict TypeScript, Solana Kit and Wallet Standard. The localhost API separates policy, persistence and chain transport. `chain/` contains an Anchor reserve design and test source; **it is uncompiled and undeployed**.
+
+## Run on Windows or Mac
 
 ```sh
-npm install
+npm ci
 npm run server
 ```
 
-In a second terminal, from the same folder:
+In a second terminal in this repository:
 
 ```sh
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173/`. The demo API runs on `127.0.0.1:8787`. The two processes are both required. `npm run build` produces the frontend bundle.
+Open http://127.0.0.1:5173. The API binds localhost port 8787. Keep it local: staff buttons simulate roles and the session token is not production authentication.
 
-The API creates Devnet-only demonstration keys and claim records in `data/` on first run. Do not publish that directory. It is excluded by `.gitignore`. Keep the server on localhost: the operator and claim endpoints are demonstration endpoints without production authentication.
+```sh
+npm run check
+npm audit
+```
 
-## Features and limits
+`check` runs typecheck, eight focused tests and both builds. `build:web` is cross-platform and produces the static public preview selected by `vercel.json`. `build` produces the frontend for use with the local API. Both write `dist/`, so the last build determines its mode.
 
-- A browser Solana wallet can sign a donation to the displayed Devnet treasury. The service verifies the confirmed transfer before recording it.
-- A funded demo donor can also submit a real Devnet donation without a browser wallet. Its public address is shown in Donate. The public faucet was rate limited during this build, so that wallet is currently empty.
-- After the fictional event is activated, a Bangkok synthetic household can receive one Devnet payout at its assigned demo address if the treasury has enough confirmed funds. Chiang Mai is blocked. The service stores the household/event claim state across reloads; this is backend enforcement, not a smart contract.
-- The recipient screen can preview success and repeat-claim messages without moving SOL. Preview output is labeled as an illustration.
-- The operator screen accepts a supplied notice and requires a human action to open the fictional event. The keyword scan is not AI. A prewritten AI review example is labeled illustrative. Set `OPENAI_API_KEY` for live server-side AI notice review; that path still needs a live test.
-- Baht conversion, real identity checks, a real government feed and production authorization are not implemented.
+## Demonstration
 
-No real transaction signature should be claimed in a submission until both donation and payout are confirmed and opened on Solana Explorer.
+1. Watching blocks payouts; review the fictional observed-impact fixture.
+2. Simulate reviewer and primary or backup authorization. Activation requires enough reserve for the event budget.
+3. Fund the displayed **Devnet** reserve and donor using test SOL only. A compatible Wallet Standard wallet can donate; the local demo donor needs its own test SOL plus fees. No airdrop is automatic.
+4. Submit the earliest complete eligible household claim. A second applicant for that household is blocked; a separate rented unit may qualify. Pending cases need simulated human review and use a protected allocation.
+5. Inspect confirmed Devnet receipts. Timeout/ambiguous payment intents remain blocked across restart; never reset state to retry them.
 
-## Public web build
+The fixture grant is 0.01 test SOL, event cap 0.05 and review hold 0.01. These are test values, not a Thai grant estimate. Real event approval and staff authorization are **not** enforced by the deployed reserve program because none is deployed yet.
 
-`npm run build:web` creates a static Vercel demo. `vercel.json` selects that command. The public build reads the Devnet treasury balance and can verify a wallet-signed donation. The fictional event activation is stored only in that visitor's browser. Recipient payouts and duplicate rejection are labeled previews: the local demo service is not deployed. Its key file and claim records must never be uploaded. The public receipt list contains only donations verified in the current browser, so it is not a complete ledger.
+## Data and recovery boundaries
 
-The Vercel project URL and GitHub-to-Vercel integration must be confirmed separately. Building the static bundle or pushing this repository does not deploy the site.
+Ignored `data/v2/` stores generated demonstration keys and atomic local claim state. Older `data/` is preserved but not imported into v2. Never publish keys or reset state against funded wallets. These keys belong to fictional demo recipients and do not establish a recoverable production wallet. A lost self-custody key cannot be recovered through a login reset.
 
-## Product and design documents
+Wallet submission is marked uncertain before broadcasting. If a wallet may have broadcast without returning a signature, check its history before another donation; the app blocks resending in that session. For a recorded signature, retry verification instead of sending again. Staff investigations of uncertain payouts are a manual developer task in this MVP; no unsafe reset button is provided.
 
-- [Current ReliefVue brief](docs/brief.md) records the active product decisions, open risks, and future safeguards. [Progress](docs/progress.md) tracks the MRI forge step. These decisions are not all implemented in the prototype.
-- [Earlier corrected brief](docs/recovery_brief_v02.md) and [screen/state map](docs/screen_state_map_v01.md) provide historical design context; use the current brief when they differ.
-- [Brandbook v02](docs/brandbook_v02/index.html) is the latest **review candidate** for identity and web design. It includes Geraldine's navy, purple, coral, mint, and off-white color direction; logo and typography options; and the requirement for real, consented impact photography. It is not implemented in this app.
-- [Brandbook v01](docs/brandbook_v01/index.html) preserves the earlier design review.
-- [Historical handover](docs/history/README.md) preserves the original ReadyFund requirements and build pack. Its early all-simulated ReliefVue brief is superseded by the corrected brief above.
+## Public build and deployment
 
-The brandbooks are standalone local HTML files. Open them directly or serve the repository locally. They load review fonts from Google Fonts and have system fallbacks. Their logo concepts and photo placements are not approved production assets.
+The static preview reads a Devnet reserve and verifies donations, but its receipt list is browser-local. Its event approvals and recipient outcomes are illustrative; no public payout API is deployed. The public preview reserve differs from the new local v2 reserve. A Git push does not prove Vercel deployed this revision; inspect the deployment before presenting it.
 
-## Repository boundaries
+## Documents
 
-This repository contains source code and design/requirements documents. It excludes locally generated demonstration keys and claim data, dependencies, browser profiles, screenshots, and build output. The repository is public; do not add identity documents, secrets, wallet keys, or private recipient records.
+- [Current brief](docs/brief.md), [technical design](docs/spec.md), [implementation plan](docs/plan.md), [progress](docs/progress.md).
+- [Senior developer handoff](docs/developer-handoff.md), [reserve program handoff](chain/README.md).
+- [Brandbook v02](docs/brandbook_v02/index.html) remains a review candidate, not the implemented identity.
+- Earlier recovery briefs and `docs/history/` are historical context; the current brief governs when they differ.
 
-The latest brandbook proposes an optional $1, $2, or custom platform-support choice. The current app does not process that payment. A production checkout needs a separate recipient, payment rail, fee disclosure, and receipt from relief funding.
+Only reviewed source, configuration and project documents belong in this public repository. Keep dependencies, build output, real identities, secrets, keys and private workspace records out of Git and shared source archives. Optional operating support remains a future separate payment route.

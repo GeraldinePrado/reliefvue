@@ -13,3 +13,6 @@
 .profile-line span,.profile-line small,.radio-card small,.field-note,.footer,.eligibility small{color:#53675e!important}.radio-card.unavailable{opacity:1;background:#f7f8f5}
 
 .stats span,.stats small,.small-disclosure,.approved-note small{color:#52685e!important}.side-card h2{font-size:1.22rem}
+
+/* Keep staff actions inside their card at intermediate widths. */
+.button-row{display:flex;flex-wrap:wrap;gap:10px}.work-card,.side-card{min-width:0}.button-row .button{justify-content:center}

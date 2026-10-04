@@ -1,5 +1,10 @@
 data/
 node_modules/
-browser_profile/
+review-captures/
+01-sessions/
+reliefvue/
+chain/
+server/
+tests/
+.sdd/
 *.png
-server.js
