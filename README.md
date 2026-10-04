@@ -2,6 +2,14 @@
 
 Thailand-first household emergency relief using Solana Devnet. Fictional flood evidence and synthetic households only. No real aid service, identity checks, custody or baht conversion.
 
+## UI redesign entry point
+
+For GIE design work, read [the current design brief](docs/design-brief.md) first. It consolidates the approved receiver/donor journeys, homepage activity, demo privacy rules and remaining visual decisions. These redesigned flows are documented requirements, not implemented/deployed features yet.
+
+## Current priority
+
+This is an ideathon idea with a hackathon prototype seeking possible funding. Our next deliverable is the pitch and one clearly labelled demo story, not a production service. [Submission scope and task order](docs/submission-scope.md) govern the current work; technical source is prototype groundwork.
+
 ## Stack
 
 Node >=22.12, Vite 7, strict TypeScript, Solana Kit and Wallet Standard. The localhost API separates policy, persistence and chain transport. `chain/` contains an Anchor reserve design and test source; **it is uncompiled and undeployed**.

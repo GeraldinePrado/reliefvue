@@ -1,13 +1,24 @@
-# ReliefVue product work
+# ReliefVue submission progress
 
-- [x] Brainstorm and Forge: clarified the household-relief MVP in [brief.md](brief.md). Production governance and grant valuation remain open.
-- [x] Design and plan: [spec.md](spec.md), [plan.md](plan.md).
-- [x] Typed local stack: TypeScript, Vite, Solana Kit, Wallet Standard; cross-platform commands and separate modules.
-- [x] Verification: typecheck, eight tests, both builds, root audit zero vulnerabilities; browser evidence review and empty-reserve rejection. No horizontal overflow in checked desktop/mobile views.
-- [x] Independent review: fixed uncertain-wallet resend guard, donation reconciliation, wallet selection and proxy origin handling.
-- [~] Reserve program: source/native tests supplied, no native compiler or deployment evidence. [Developer handoff](developer-handoff.md).
-- [ ] Confirm live Devnet donation/payout receipts and verify Vercel deployment.
-- [ ] Production custody, staff identities, governance, Thai basket/pricing, conversion and private eligibility validation.
-- [x] Source backup: `858b48d` pushed and remote verified. Reviewed source archive and developer handoff uploaded to the existing ReliefVue Drive folder; raw archive readback and handoff text confirmed. Mac local sync/offline state remains unverified.
+## Current task order
 
-100,000 households is illustrative, not a forecast. Test SOL values have no Thai purchasing-power equivalence.
+Scope: ideathon/hackathon concept plus explanatory prototype, seeking possible funding. [Submission scope](submission-scope.md) governs this list.
+
+- [x] Product direction and proposed safeguards recorded in [brief.md](brief.md).
+- [x] Existing typed prototype groundwork backed up on GitHub; simulated and live boundaries documented.
+- [x] Design documentation consolidated in [design-brief.md](design-brief.md); receiver/donor decisions and homepage requirements aligned. UI implementation and deployed revision remain pending.
+- [x] Scope review: production tasks separated from current submission work; no senior developer or operating team assumed.
+- [ ] Prepare concise pitch narrative: problem, solution, why Solana, differentiation and conditional funding roadmap.
+- [ ] Prepare one fictional flood demo storyboard and compare it with the current screens.
+- [ ] Make only the presentation changes needed for that story; distinguish simulated outcomes from real transactions.
+- [ ] Verify event submission requirements, deployed preview and submission assets.
+
+## Optional technical proof
+
+- [ ] If justified by the submission requirements: prove a small Devnet transaction flow and retain its real receipts. Reserve source is uncompiled/undeployed; full contract integration is not automatically a submission prerequisite.
+
+## Funded phase, not current build tasks
+
+Production custody/governance, staff hiring/authentication, KYC/appeals, live evidence AI, baht providers, wallet recovery, operational capacity and audited real-money launch.
+
+Prior verification: eight focused tests, typecheck, both builds and root audit passed during the stack upgrade; checked desktop/mobile views had no horizontal overflow. This does not establish production readiness. 100,000 households is an illustrative scenario, and test SOL has no Thai purchasing-power equivalence. Cloud source handoff was verified previously; Mac device sync remains unverified.

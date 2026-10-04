@@ -2,6 +2,10 @@
 
 Status: working brief from Geraldine's brainstorm, 2026-10-04. Product decisions below are intended direction, not claims that the public prototype implements them. This brief supplements the [recovery brief](recovery_brief_v02.md); code and deployment evidence determine what is demonstrable.
 
+## Current stage and work order
+
+Geraldine and Codex are preparing an ideathon/hackathon pitch and explanatory prototype. No users, relief reserve, investors or hired team exist yet. The immediate work is pitch narrative, one labelled demo flow and submission material. Production safeguards remain proposed requirements for a future funded service. [submission-scope.md](submission-scope.md) governs current priorities.
+
 ## Pitch in one paragraph
 
 ReliefVue is a Thailand-first, Solana-based emergency reserve funded before a disaster. When a national or local authority publishes an official affected-area announcement, ReliefVue's founder reviews the original source and approves a precisely defined event, one household grant benchmarked to Thai emergency-essential prices, and a capped SOL event budget. Households whose usual pre-disaster home is in that area can request help, with routine claims paid promptly after private verification and exceptions reviewed by people. Donors can inspect the SOL reserve, decisions, and confirmed transfers without seeing recipients' identities or documents. The first app serves recipients in Thailand and donors worldwide in Thai and English; other countries are a later expansion.

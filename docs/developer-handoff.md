@@ -16,12 +16,16 @@ The localhost token prevents casual cross-origin mutation; it is not staff ident
 - `npm audit --audit-level=low`: zero vulnerabilities in the root dependency tree. The separate native chain test dependencies have not been installed/audited.
 - Live official Devnet genesis/read-only balance verified. The initial shortened genesis constant was corrected to the full live value.
 - Browser: profiles load, observed fixture review and reviewer approval succeed; primary activation rejects an empty reserve. Claims stay unavailable. Mobile 390px and desktop 906px views checked for horizontal overflow.
-- No funded live wallet donation or payout was executed in this upgrade. Adapters have mocked tests; real donation/payout receipts remain a demo gate.
+- No funded live wallet donation or payout was executed in this upgrade. Adapters have mocked tests; real donation/payout receipts are required only if we present a transfer as actually executed. Their necessity for the submission depends on the event requirements.
 - No Rust, Cargo, Solana CLI, Anchor, Docker or installed WSL on this machine. **No reserve compilation, IDL generation, native integration tests or deployment evidence.** JavaScript checks do not validate Rust. The program ID is a placeholder.
 - No configured `prek` gate found. Repository-native checks were used.
 - Vercel deployment has not been verified for this revision.
 
-## Next engineering gates
+## Current next step
+
+Prepare the pitch outline and demo storyboard under [submission-scope.md](submission-scope.md). Do not treat the technical list below as the current task queue.
+
+## Optional hackathon technical proof and future funded engineering
 
 1. On suitable Mac/Linux tools, follow `chain/README.md`, compile, resolve Rust/IDL issues and run the native suite. Replace the placeholder program ID, deploy to Devnet and record address, authorities and transaction evidence.
 2. Wire program instructions into typed adapters after validation. Test signer failures, recipient binding, consumed entitlements, caps and existing commitments on the validator.

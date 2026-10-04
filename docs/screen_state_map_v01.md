@@ -1,3 +1,5 @@
+> Historical map. For the October 4 redesign, use [design-brief.md](design-brief.md) and the receiver/donor journey documents. Old test-profile UI and technical acceptance order below do not govern current submission priorities.
+
 # ReliefVue screen and state map
 
 Recorded 2026-10-02 after Geraldine confirmed the first AI feature: review a supplied official disaster notice, suggest affected area, and flag uncertainty for human approval. Shared client/colleague project. This is the working map for the next prototype, not approval of its visual design.

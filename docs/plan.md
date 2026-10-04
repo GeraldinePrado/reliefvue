@@ -8,6 +8,10 @@
 
 **Tech stack:** Node >=22.12, Vite 7, TypeScript 5.9, tsx, Solana Kit, Wallet Standard, Rust/Anchor.
 
+## Status and scope
+
+This is the record of the stack upgrade already performed, not an instruction to build the full platform next. Native program validation is deferred as an optional hackathon proof; production tasks belong to a funded phase. [submission-scope.md](submission-scope.md) is the current task order. Completed checkboxes describe prototype work only.
+
 ## Global Constraints
 
 - Devnet test SOL, fictional evidence, synthetic households only.
@@ -64,7 +68,7 @@ Files: Anchor workspace/program, native tests, program handoff.
 
 - [x] Implement two independent approvals, no general withdrawal, budget commitments, review hold, opaque household entitlements, and recipient-bound once-only claim.
 - [x] Add tests for failed signers, repeat claim, changed recipient, caps, and previous commitments.
-- [~] Build/test with supported native toolchain when available; otherwise record exact absent toolchain and preserve source as unverified.
+- [ ] Deferred optional proof: build/test with supported native toolchain when available; otherwise record exact absent toolchain and preserve source as unverified.
 - [x] Do not enable program mode without a compiled/deployed IDL and observed successful integration tests.
 
 ### 5. Verification and handoff

@@ -2,6 +2,10 @@
 
 Approved direction: Geraldine approved the program-plus-app design on 2026-10-04 and authorized implementation and stack corrections. This specification is for Devnet, fictional flood evidence, and synthetic households. Production policy and custody are separate work.
 
+## Scope correction
+
+This document records proposed technical architecture and prototype groundwork. It is not the current submission checklist or a requirement to finish a public app. Follow [submission-scope.md](submission-scope.md): pitch and demo story first; native reserve proof is optional until actual event requirements are checked, and production work is deferred.
+
 ## Objective
 
 Demonstrate Watching -> evidence review -> two-role event authorization -> fixed household grant -> confirmed SOL receipt, with caps, private household matching, and waiting claims. A public preview must identify simulated outcomes. A real payment is shown only with confirmed chain evidence.
@@ -68,6 +72,6 @@ All RPC endpoints are pinned to Devnet; reject mainnet configuration and verify 
 9. Chain tests cover independent signers, backup authorization, duplicate entitlement, recipient substitution, cap and hold accounting, and preservation of previous commitments.
 10. Typecheck, unit tests, local/public builds pass. Native program build/test and Devnet proof are reported separately with actual evidence.
 
-## Senior-developer handoff
+## Future technical proof and funded implementation
 
 Implement and verify chain compilation, IDL/client generation, program initialization, and frontend integration on a supported toolchain. Confirm one donation and payout in Explorer, then demonstrate rejected duplicate and over-budget instructions against that same deployed program. Preserve the current simulator as explicitly labelled rehearsal mode. Validate real Thai basket prices, source thresholds, custody/provider arrangements, identity policy, signer governance, review capacity, and privacy before real funds.
