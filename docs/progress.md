@@ -28,3 +28,8 @@ Prior verification: eight focused tests, typecheck, both builds and root audit p
 Receiver verification/request/tracking, donor checkout/receipt, reviewer sample queue and homepage public activity are implemented. All financial outcomes in the guided walkthrough are simulated. Example details stay in page memory and clear on reset/refresh. Existing stylesheet, palette and fonts were preserved.
 
 Verification: eleven tests, typecheck and both builds passed. Browser walkthrough checked receiver -> reviewer -> payout and donor -> receipt, public identity exclusion and reset/refresh. Narrow-screen homepage had no page overflow. Deployment must be checked after pushing.
+
+## Brandbook v03 — 2026-10-04
+
+Created docs/brandbook_v03/index.html with selected identity, local licensed fonts, original B logo source, imagery references, proposed application samples and decision register. Preserves prior guides. No app design change or publication in this step. Render verification recorded separately after inspection.
+

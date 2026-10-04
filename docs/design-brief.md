@@ -88,3 +88,16 @@ Current local UI source does not implement these revised guided journeys. Docume
 ## Implemented content handoff - 2026-10-04
 
 The current app now includes guided receiver, donor and reviewer routes, sample receipts and recent activity. Preserve their meaning and state transitions during UI design. Existing styles were reused; no final visual identity has been approved. Guided entries are transient in-memory examples, with no real database, KYC, fiat provider or payment execution. The previous technical interface is separately accessible through `#technical`. Read `src/main.ts`, `src/demo-state.ts`, the journey documents and README before changing presentation.
+
+## Current brand direction — 2026-10-04
+
+See [Brandbook v03](brandbook_v03/index.html) for the current review edition: selected B sculpted elephant, Alegreya Sans Bold wordmark, Gentle Ivory canvas, purple/coral accents, Fraunces / Literata / IBM Plex Sans with IBM Plex Sans Thai Looped. Earlier visual candidates remain historical. Imagery uses documentary humanitarian photography references, not synthetic victims. Flat logo exports, final contextual photography and fluent Thai review remain pending. The brandbook contains proposed static UI applications; the current app has not been redesigned by this branding step.
+
+
+## Positioning clarification — 2026-10-04
+
+Prepared SOL funds before disasters, human-approved household grants directly to verified wallets, and transparent public payout/fund records with personal information off-chain. Describe reducing unnecessary intermediaries, costs, misuse and delays as objectives to validate, not demonstrated outcomes. Do not publish personal claim evidence on-chain or promise wallet anonymity. Brandbook v03 application copy reflects this clarification.
+
+## Current imagery and copy handoff
+
+Lead with preparedness, direct approved household grants and traceable fund movements. Keep a short concept/demo notice separate. Use recent real Chiang Mai flood imagery (2024–2026). Brandbook v03 displays three October 2024 Thai Village photographs as remote visual references with source credits; public reuse permission remains pending. Getty and Adryel Talamantes are alternate researched sources. Earlier overseas volunteer, market, 2011 and Chiang Rai references are superseded. Do not imply ReliefVue participation or photographer endorsement.

@@ -74,3 +74,8 @@ The default static preview is a fully simulated guided walkthrough. The separate
 - Earlier recovery briefs and `docs/history/` are historical context; the current brief governs when they differ.
 
 Only reviewed source, configuration and project documents belong in this public repository. Keep dependencies, build output, real identities, secrets, keys and private workspace records out of Git and shared source archives. Optional operating support is simulated separately in the walkthrough; its real payment route remains future work.
+
+### Current brand direction
+
+[Brandbook v03](docs/brandbook_v03/index.html) is the current branding review edition. Prior numbered guides are history. This guide does not imply the app UI has been redesigned.
+
