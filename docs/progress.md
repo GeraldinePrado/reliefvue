@@ -8,6 +8,6 @@
 - [~] Reserve program: source/native tests supplied, no native compiler or deployment evidence. [Developer handoff](developer-handoff.md).
 - [ ] Confirm live Devnet donation/payout receipts and verify Vercel deployment.
 - [ ] Production custody, staff identities, governance, Thai basket/pricing, conversion and private eligibility validation.
-- [~] Git backup and Drive handoff: finalize after source review; Mac local sync/offline state requires device verification.
+- [x] Source backup: `858b48d` pushed and remote verified. Reviewed source archive and developer handoff uploaded to the existing ReliefVue Drive folder; raw archive readback and handoff text confirmed. Mac local sync/offline state remains unverified.
 
 100,000 households is illustrative, not a forecast. Test SOL values have no Thai purchasing-power equivalence.

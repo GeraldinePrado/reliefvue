@@ -72,5 +72,5 @@ Files: Anchor workspace/program, native tests, program handoff.
 - [x] Reconcile latest product locks in brief/progress and update README/run commands.
 - [x] Run typecheck/tests/both builds, inspect public bundle and staged files for secrets.
 - [x] Review complete change, record tests and remaining chain verification in developer handoff.
-- [ ] Commit only reviewed project files; push under Geraldine's existing backup authorization.
-- [ ] Update Drive source/docs and verify readback; Mac local download remains unverified until checked.
+- [x] Commit only reviewed project files; push under Geraldine's existing backup authorization.
+- [x] Update Drive source/docs and verify readback; Mac local download remains unverified until checked.
