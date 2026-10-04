@@ -1,0 +1,152 @@
+[
+  {
+    "path": "brandbook_v03/assets/alegreyasans-700.ttf",
+    "bytes": 266856,
+    "sha256": "a3055a1893759bdbd7504bb22abc583769e7974c49353176eac0b03792c9fb8e"
+  },
+  {
+    "path": "brandbook_v03/assets/alegreyasans-OFL.txt",
+    "bytes": 4405,
+    "sha256": "0677891e6a143f297350d260ad766ad33bfc18ed5fa4f213acf648d6b597ec1a"
+  },
+  {
+    "path": "brandbook_v03/assets/desktop.ini",
+    "bytes": 106,
+    "sha256": "08610ca6879c683ff30db24fee22b1040e6150db7ab0d0d92b51cb41ae415a3d"
+  },
+  {
+    "path": "brandbook_v03/assets/fraunces-400.ttf",
+    "bytes": 360440,
+    "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb"
+  },
+  {
+    "path": "brandbook_v03/assets/fraunces-OFL.txt",
+    "bytes": 4391,
+    "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+  },
+  {
+    "path": "brandbook_v03/assets/ibmplexsans-400.ttf",
+    "bytes": 537244,
+    "sha256": "3b031aa4216174205bd8471f88a49b91f093169e9e87bd5262242bc5967fe2e3"
+  },
+  {
+    "path": "brandbook_v03/assets/ibmplexsans-OFL.txt",
+    "bytes": 4456,
+    "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+  },
+  {
+    "path": "brandbook_v03/assets/ibmplexsansthailooped-400.ttf",
+    "bytes": 125080,
+    "sha256": "6d7910d13a7a9e33872d5501fd81a71f84ee532f729bfb72c6ffa94d1f13009e"
+  },
+  {
+    "path": "brandbook_v03/assets/ibmplexsansthailooped-600.ttf",
+    "bytes": 124760,
+    "sha256": "90535e0096a25940788473d2f51ca2dbe4a2404b9fad570b92dc80b792ab22d1"
+  },
+  {
+    "path": "brandbook_v03/assets/ibmplexsansthailooped-OFL.txt",
+    "bytes": 4456,
+    "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+  },
+  {
+    "path": "brandbook_v03/assets/literata-400.ttf",
+    "bytes": 955132,
+    "sha256": "b41138c9373112f32abb589cc22e8674b06ed4048b0c513be922bdd26f274440"
+  },
+  {
+    "path": "brandbook_v03/assets/literata-OFL.txt",
+    "bytes": 4389,
+    "sha256": "8742963604cd89dc81437811a850018fc03b2bfad686d7422c8235967c87614e"
+  },
+  {
+    "path": "brandbook_v03/assets/selected-3d-source.png",
+    "bytes": 1444878,
+    "sha256": "73ed97bda8f7844a562374336e0b0116134868eda41a26938e56202a15037471"
+  },
+  {
+    "path": "brandbook_v03/desktop.ini",
+    "bytes": 106,
+    "sha256": "08610ca6879c683ff30db24fee22b1040e6150db7ab0d0d92b51cb41ae415a3d"
+  },
+  {
+    "path": "brandbook_v03/index.html",
+    "bytes": 25482,
+    "sha256": "0d18d6d0d6853f0a09dd07b27567b29dc3b3fbd003a789896713cade013b871d"
+  },
+  {
+    "path": "brandbook_v03/verification.md",
+    "bytes": 1020,
+    "sha256": "0ab4f871914e91d486cf5d32a62d8b782ac6f061528ff224cf1ee89a035664c3"
+  },
+  {
+    "path": "index.html",
+    "bytes": 651,
+    "sha256": "5d354e5f3ecb40e1db2d0d0e851591ebd67331dc86967f84894833f813f373ef"
+  },
+  {
+    "path": "logo/alegreyasans-700.ttf",
+    "bytes": 266856,
+    "sha256": "a3055a1893759bdbd7504bb22abc583769e7974c49353176eac0b03792c9fb8e"
+  },
+  {
+    "path": "logo/alegreyasans-OFL.txt",
+    "bytes": 4405,
+    "sha256": "0677891e6a143f297350d260ad766ad33bfc18ed5fa4f213acf648d6b597ec1a"
+  },
+  {
+    "path": "logo/reliefvue-submission-768.jpg",
+    "bytes": 28639,
+    "sha256": "38c09cbdb5a4a1279fb7f6c622a52c744addef15b34ee191318be79c5e05959e"
+  },
+  {
+    "path": "logo/selected-source.png",
+    "bytes": 1444878,
+    "sha256": "73ed97bda8f7844a562374336e0b0116134868eda41a26938e56202a15037471"
+  },
+  {
+    "path": "logo/submission-render.html",
+    "bytes": 878,
+    "sha256": "2504d81462b70463fe21e0928cbcb167fbf24bf14244c1db415026121c703a48"
+  },
+  {
+    "path": "product-docs/brief.md",
+    "bytes": 41386,
+    "sha256": "cfca55e228e5dbcb96cdba0aa2011463663ab240afd9782291b5f42ab837b869"
+  },
+  {
+    "path": "product-docs/design-brief.md",
+    "bytes": 11625,
+    "sha256": "71f5b9f0a468079c8f1204f5675bac26086e64e3bd4bfdb5f8a08399d8d26835"
+  },
+  {
+    "path": "product-docs/developer-handoff.md",
+    "bytes": 4656,
+    "sha256": "30a1224fdf2073ca57d46dfab8bc9a16a1c8d039ed7875dc268ce2a75d038654"
+  },
+  {
+    "path": "product-docs/donor-journey.md",
+    "bytes": 4570,
+    "sha256": "c34e8a682f82d2fc8456cd8466a05b74296b02052f30469a2e5af5dfdaf7531d"
+  },
+  {
+    "path": "product-docs/receiver-journey.md",
+    "bytes": 9842,
+    "sha256": "f20b57b5fd2446d38c887d1ff14132fba2f82caf02a614d0c9c2555994c0b251"
+  },
+  {
+    "path": "product-docs/submission-scope.md",
+    "bytes": 4132,
+    "sha256": "539342488e247b85570f5d849d18ddfec19e5d6a42c369ef9ce9984f359d6c3a"
+  },
+  {
+    "path": "PROJECT-README.md",
+    "bytes": 6247,
+    "sha256": "2d64cc5832fb3755f5a6c51e9257ec2cf6377d35cb0410609b2a07ec07ce9311"
+  },
+  {
+    "path": "README.md",
+    "bytes": 2481,
+    "sha256": "8634ee103d6ee2a0c1389744e44b18fbf47055629ae0cd4d20b88a3f07770e88"
+  }
+]
