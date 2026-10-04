@@ -1,243 +1,77 @@
-import "../styles.css";
-import type { PublicStatus } from "../shared/types";
-import { api, getStatus, publicDemo, type Profile } from "./api";
-import { availableWallets, connectWallet, donate } from "./wallet";
-const root = document.querySelector<HTMLDivElement>("#app");
-if (!root) throw new Error("Missing application root.");
-const app = root;
-let data: PublicStatus | undefined;
-let profiles: Profile[] = [];
-let selected = "unit-a";
-let page = location.hash.slice(1) || "overview";
-let busy = false;
-let stale = true;
-let feedback = "";
-let walletAddress = "";
-let pendingSignature =
-  sessionStorage.getItem("reliefvue-pending-donation") || "";
-let unknownSubmission =
-  sessionStorage.getItem("reliefvue-unknown-donation") === "1";
-let previewStage = 0;
-const esc = (v: unknown) =>
-  String(v ?? "").replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ]!,
-  );
-const fmt = (v: number | null | undefined) => (v == null ? "—" : v.toFixed(3));
-const disabled = () => busy || stale || !data || Boolean(data.rpcError);
-const off = () => (disabled() ? "disabled" : "");
-const sampleChoices = [
-  ["unit-a", "Eligible unit A"],
-  ["duplicate-a", "Duplicate applicant for unit A"],
-  ["room-b", "Separate household in unit B"],
-  ["outside-area", "Outside the affected area"],
-  ["pending-room", "Waiting for human review"],
-];
-function intro(k: string, h: string, p: string) {
-  return `<section class="page-intro narrow"><p class="kicker">${k}</p><h1>${h}</h1><p>${p}</p></section>`;
+import '../styles.css';
+import {createDemo,submitClaim,decideClaim,completePayout,donateSample,totals,type ClaimStatus} from './demo-state';
+
+if(location.hash==='#technical') {
+ const exit=document.createElement('a');exit.href=location.pathname;exit.textContent='← Return to guided hackathon demo';exit.className='technical-return';document.body.prepend(exit);
+ void import('./technical');
+} else start();
+
+function start(){
+ const root=document.querySelector<HTMLDivElement>('#app');if(!root)throw Error('Application root missing');const app=root;
+ let state=createDemo();let page=location.hash.slice(1)||'home';let message='';let step=0;let entry='create';let edit=false;let decision='approve';let reviewCase='current';
+ let donor={route:'sol' as 'sol'|'local',amount:.03,support:0};
+ const esc=(v:unknown)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!));
+ const sol=(n:number)=>n.toLocaleString('en-US',{maximumFractionDigits:9});
+ const btn=(label:string,action:string,kind='primary',disabled=false)=>`<button class="button ${kind}" data-action="${action}" ${disabled?'disabled':''}>${label}</button>`;
+ const link=(label:string,target:string,kind='secondary')=>`<a class="button ${kind}" href="#${target}">${label}</a>`;
+ const badge=(label:string,kind='')=>`<span class="badge ${kind}">${esc(label)}</span>`;
+ const intro=(tag:string,title:string,text:string)=>`<div class="page-intro narrow"><p class="eyebrow">${tag}</p><h1 tabindex="-1">${title}</h1><p>${text}</p></div>`;
+ const privacy=()=>`<aside class="eligibility review"><strong>Demo only.</strong> Use made-up details. No account is created, and your entries are not saved. Do not enter real ID numbers or personal documents. Refresh or reset to clear this walkthrough.</aside>`;
+ const sample=()=>`<p class="field-note">Illustrative walkthrough · no funds transferred · no real verification</p>`;
+ const field=(id:string,label:string,value:string,placeholder='',required=true)=>`<label for="${id}">${label}</label><input id="${id}" name="${id}" maxlength="100" value="${esc(value)}" placeholder="${esc(placeholder)}" ${required?'required':''} autocomplete="off">`;
+ function go(next:string){message='';if(page===next){render(true);return;}location.hash=next;}
+ function summary(){const t=totals(state);return `<div class="stats"><div><span>Sample reserve available</span><strong>${sol(t.reserve)} <small>SOL</small></strong></div><div><span>Example event budget</span><strong>${sol(t.allocated)} <small>SOL</small></strong></div><div><span>Sample grants distributed</span><strong>${sol(t.distributed)} <small>SOL</small></strong></div><div><span>Event allocation remaining</span><strong>${sol(t.remainingAllocation)} <small>SOL</small></strong></div></div><p class="field-note">All values are illustrative. ${sol(t.received)} SOL contributed = ${sol(t.reserve)} available + ${sol(t.distributed)} distributed. Operating support (${sol(t.support)} SOL) is accounted for separately. Demo grant: 0.01 SOL, not a Thai purchasing-power estimate.</p>`;}
+ function activityTable(limit=99){return `<div class="activity-card"><div class="section-title"><div><p class="eyebrow">PUBLIC VISIBILITY · PRIVATE IDENTITIES</p><h2>Recent relief activity</h2></div>${badge('Sample activity')}</div><p>See the proposed path of funds. Household names, addresses and documents never appear here.</p><div class="table-scroll" style="overflow-x:auto" tabindex="0" role="region" aria-label="Sample relief activity"><table style="width:100%;text-align:left;border-spacing:0 16px"><caption>Illustrative records, not blockchain transactions. Sample references are not transaction signatures.</caption><thead><tr><th scope="col">Reference</th><th scope="col">Activity</th><th scope="col">Amount</th><th scope="col">Destination</th><th scope="col">Status</th></tr></thead><tbody>${state.activity.slice(0,limit).map(a=>`<tr><td><span class="reference">${esc(a.ref)}</span><small style="display:block">${esc(a.step)}</small></td><td>${esc(a.type)}<small style="display:block">${a.type==='Household grant'?'Fictional Khlong Sai flood':'Thailand-wide sample reserve'}</small></td><td class="number">${sol(a.amount)} SOL</td><td>${esc(a.destination)}</td><td><span class="status-dot" aria-hidden="true"></span>Simulated</td></tr>`).join('')}</tbody></table></div>${limit<99?'<a class="text-link" href="#activity">View all sample activity →</a>':''}</div>`;}
+ function home(){return `<section class="page-intro home-intro"><div><p class="eyebrow">THAILAND FIRST · A PROPOSED SOLANA RELIEF NETWORK</p><h1 tabindex="-1">Help prepared.<br>People supported.<br>Funds visible.</h1><p class="">ReliefVue proposes a reserve ready before disaster, fixed emergency grants for affected households, and a public record of where relief funds go.</p><div class="button-row">${link('Get help →','receiver','primary')}${link('Donate →','donate')}</div><p class="field-note">Hackathon prototype seeking funding. ReliefVue is a working name.</p></div><aside class="side-card"><p class="eyebrow">EXPLORE A FICTIONAL RESPONSE</p><h2>Khlong Sai flood</h2><p>A fictional Bangkok subdistrict helps explain the journey without using real victims or disasters.</p>${badge(state.event==='active'?'Approved demo response':state.event==='watching'?'Watching':state.event==='review'?'Evidence under review':'Prepared · no active response',state.event==='active'?'success':'')}<div class="response-rule"><strong>Evidence first. Human approval next.</strong><p>Rain forecasts start monitoring. Observed serious flooding and reviewed evidence can support a bounded response.</p></div>${link('Try the household journey','receiver','light')}<p class="field-note">No emergency service is operating through this prototype.</p></aside></section><section class="activity-card" id="how"><div class="section-title"><div><p class="eyebrow">WHO IT HELPS</p><h2>Direct help for one verified household.</h2></div><a class="text-link" href="#how">How it works →</a></div><p class="lead">The intended first service supports households legally living in an approved affected area in Thailand, including renters and foreign residents. Donors can contribute from anywhere.</p><div class="choice-grid"><article><span>01</span><h3>Prepare the reserve</h3><p>Donations build a shared SOL relief reserve. Optional operating support stays separate.</p></article><article><span>02</span><h3>Review the disaster</h3><p>Independent evidence review and event authorization define the area, fixed grant and budget.</p></article><article><span>03</span><h3>Support households</h3><p>Identity, usual residence and household checks support one grant per household per event.</p></article></div><p class="field-note">Proposed grant policy: a flat contribution benchmarked to three days of Thai essentials for a reference household of 3–5 people. The baht amount is not yet validated.</p></section><section class="activity-card"><h2>A reserve you can follow.</h2>${summary()}${activityTable(5)}</section><section class="activity-card"><h2>Built to explain the idea.<br>Funding would help test it.</h2><p>This prototype demonstrates the intended experience. A funded phase would validate household checks, reserve safeguards, qualified payment providers and a carefully scoped pilot.</p><div class="button-row">${link('Explore the reviewer demo','reviewer')}${link('What is real in this demo?','about','quiet')}</div></section>`;}
+ function how(){return `${intro('HOW IT WORKS','From prepared funds to household help.','Follow the proposed process. Every approval and payment in this walkthrough is simulated.')}<div class="flow-list">${[['A shared relief reserve','Donors support relief in Thailand rather than choosing a province or dividing a donation pot among applicants.'],['Observed impact and human authorization','Watching does not open claims. A reviewer checks evidence, and the primary or appointed backup approves the same event terms.'],['Private household checks','Identity is not enough: usual pre-disaster residence and one household entitlement also need verification. Separate rooms may be separate households.'],['A fixed contribution toward essentials','Recipients choose their actual needs. Closed nearby shops do not alone remove eligibility; cash cannot restore supplies or safe access.'],['Public fund activity','Show amounts, destinations and receipt evidence without publishing identities or private documents.']].map(([h,p],i)=>`<article><span>${i+1}</span><div><h2>${h}</h2><p>${p}</p></div></article>`).join('')}</div><div class="button-row">${link('Try the receiver journey','receiver','primary')}${link('Try donating','donate')}</div>`;}
+ function receiver(){return `${intro('GET HELP','Your household, ready for what comes next.','Register before an emergency or start during one. Both routes use the same eligibility rules.')} ${privacy()}<section class="work-card"><div class="button-row" aria-label="Demo account route">${btn('Create demo account','create',entry==='create'?'primary':'secondary')}${btn('Sign in to demo','signin',entry==='signin'?'primary':'secondary')}</div><h2>${entry==='create'?'Create your example profile':'Enter the demo household account'}</h2><p>No email, password or identity document is needed. This does not create a real account.</p><form id="entry-form">${field('name','Display name (made-up details recommended)',state.receiver.name,'Example name')}<div class="button-row"><button class="button primary">${entry==='create'?'Continue to household dashboard':'Open demo dashboard'}</button>${btn('Use sample profile','sample-profile','secondary')}</div></form><a class="text-link" href="#recovery">Can’t access your account?</a></section>`;}
+ function recovery(){return `${intro('ACCOUNT RECOVERY · FUTURE SERVICE','Help getting back into your account.','The planned real service would offer registered phone/email recovery, then human re-verification if those channels were lost.')}<section class="work-card"><p>Login recovery cannot recreate a lost self-custody wallet key. No real account or recovery service exists in this demo.</p>${link('Return to demo sign in','receiver','primary')}</section>`;}
+ function dashboard(){if(!state.receiver.name)return receiver();const verified=state.receiver.verified;return `${intro('HOUSEHOLD DASHBOARD',`Welcome, ${esc(state.receiver.name)}.`, 'Your private walkthrough. Your entries stay only in this open page.')} ${privacy()}<div class="work-grid"><section class="work-card"><div class="section-title"><h2>Household verification</h2>${badge(verified?'Demo verification complete':'Not complete',verified?'success':'')}</div><ul class="checklist">${['Identity','Usual residence','Household / rented unit'].map(t=>`<li><span aria-hidden="true">${verified?'✓':'○'}</span>${t}<small>${verified?'Sample check complete':'To complete'}</small></li>`).join('')}</ul>${verified?`<p>${esc(state.receiver.residence)} · ${esc(state.receiver.room)} <small>(private example details)</small></p>${btn('Edit example details','edit-details','secondary')}`:btn('Complete demo verification','verify-start')}<p class="field-note">Real KYC is not performed. Future service checks would include identity, residence and household uniqueness.</p></section><section class="work-card"><h2>Explore a situation</h2><p>These controls change your demo scenario, not a real disaster status.</p><div class="button-row">${btn('Before a disaster','before',state.receiver.scenario==='before'?'primary':'secondary',!!state.claim)}${btn('Affected by a fictional flood','flood',state.receiver.scenario==='flood'?'primary':'secondary',!!state.claim)}</div><div class="eligibility review">${state.receiver.scenario==='before'?'<strong>No approved response affecting this household.</strong><p>Complete your checks in advance. A forecast may put an area in Watching, but it does not open a relief claim.</p>':`<strong>Fictional Khlong Sai flood · approved demo response.</strong><p>Your example home is in the scripted affected area. Fixed illustrative grant: 0.01 SOL.</p>${state.claim?link('Track your request','tracking','primary'):btn('Request relief','request-start','primary',!verified)}`}</div>${!verified?'<p class="field-note">Complete demo verification before requesting a grant.</p>':''}</section></div>`;}
+ function verification(){if(!state.receiver.name)return receiver();const labels=['Identity','Residence','Household'];return `${intro('DEMO VERIFICATION',labels[step]+' check.', 'A guided example of the checks a future service would require.')} ${privacy()}<section class="work-card"><ol class="steps">${labels.map((l,i)=>`<li ${i===step?'aria-current="step"':''}><span>${i+1}</span>${l}</li>`).join('')}</ol><form id="verification-form">${step===0?`${field('name','Example display name',state.receiver.name)}<div class="document-sample"><strong>Sample identity evidence</strong><p>Fictional document placeholder. No real ID number or upload required.</p></div>`:step===1?`${field('residence','Usual residence before the event (example)',state.receiver.residence,'Fictional Khlong Sai, Bangkok')}<p class="field-note">Use the usual home, not current GPS. People evacuated elsewhere should not lose eligibility solely because they moved for safety.</p>${edit?'<label class="checkbox"><input type="checkbox" style="width:auto" name="changed" value="yes"> This example residence changed after the fictional event</label>':''}`:`${field('room','Household / room identifier (example)',state.receiver.room,'Room A')}<div class="document-sample"><strong>Sample monthly rent receipt</strong><p>Shows a fictional room and date. Real reviewers would check evidence privately; a shared building address alone is not a duplicate household.</p></div>`}<div class="button-row">${step>0?btn('Back','verify-back','secondary'):link('Dashboard','dashboard')}<button class="button primary">${step===2?'Complete demo verification':'Continue'}</button></div></form></section>`;}
+ function claimDetails(){return `${intro('REQUEST RELIEF','Confirm your household details.','Reuse your verification details. You can correct them before submitting.')}<section class="work-card"><h2>Fictional Khlong Sai flood</h2><dl class="review"><dt>Example claimant</dt><dd>${esc(state.receiver.name)}</dd><dt>Usual residence</dt><dd>${esc(state.receiver.residence)}</dd><dt>Household / room</dt><dd>${esc(state.receiver.room)}</dd><dt>Fixed illustrative grant</dt><dd>0.01 SOL</dd></dl>${btn('Edit details','edit-details','secondary')}<form id="details-form"><label class="checkbox"><input type="checkbox" style="width:auto" required> These example details are correct</label><button class="button primary">Continue to payout preference</button></form>${sample()}</section>`;}
+ function payment(){return `${intro('PAYOUT PREFERENCE','Choose how you would receive help.','These options explain the intended service. No money moves in this walkthrough.')}<section class="work-card"><form id="payment-form"><fieldset><legend>Preferred route</legend><label class="radio-card"><input type="radio" name="route" value="sol" ${state.receiver.route==='sol'?'checked':''}><span><strong>Keep SOL</strong><small>Illustrative delivery to your Solana wallet. Sample destination only.</small></span></label><label class="radio-card"><input type="radio" name="route" value="baht" ${state.receiver.route==='baht'?'checked':''}><span><strong>Convert to Thai baht</strong><small>Planned option · simulated. Provider, quote, fees and delivery still need investigation.</small></span></label></fieldset><p class="eligibility review">A future service could remember your explicit preference. This demo remembers it only until refresh/reset. Keeping SOL exposes its later value to price changes.</p><div class="button-row">${link('Back','claim-details')}<button class="button primary">Review request</button></div></form></section>`;}
+ function claimReview(){return `${intro('REVIEW REQUEST','One grant for your household.','Check the example response and payout preference before continuing.')}<section class="work-card"><dl class="review"><dt>Response</dt><dd>Fictional Khlong Sai flood</dd><dt>Grant</dt><dd>0.01 SOL · illustrative, not a baht benchmark</dd><dt>Payout preference</dt><dd>${state.receiver.route==='sol'?'Keep SOL · sample wallet':'Thai baht · planned, simulated'}</dd><dt>Household details</dt><dd>Confirmed privately${state.receiver.changedResidence?' · address change requires human review':''}</dd></dl><p>One household grant per event. A request is not approval, and available event allocation still applies.</p>${sample()}<div class="button-row">${link('Change preference','payment')}${btn('Submit demo request','submit-claim')}</div></section>`;}
+ const statusLabel=(s:ClaimStatus)=>({'submitted':'Submitted','review':'Under review','more':'More information needed','approved':'Approved','rejected':'Not approved','paid':'Demo payout complete'}[s]);
+ function tracking(){const c=state.claim;if(!c)return `${intro('REQUEST TRACKING','No request submitted yet.','Complete the household walkthrough to see request tracking.')}${link('Open dashboard','dashboard','primary')}`;return `${intro('YOUR REQUEST',statusLabel(c.status), 'Fictional Khlong Sai flood · sample request R-003')}<section class="work-grid"><div class="work-card"><h2>Request timeline</h2><ol class="timeline">${c.history.map(h=>`<li>${esc(h)}<small>Demonstration step · no real elapsed-time claim</small></li>`).join('')}</ol><p class="eligibility review">${esc(c.reason)}</p>${c.status==='submitted'?btn('Continue to review stage','under-review'):''}${['submitted','review','more'].includes(c.status)?`<p>The intended service would route this request to a human reviewer. Use the separate reviewer demo to explore that decision.</p>${link('Open reviewer demo','reviewer','primary')}`:''}${c.status==='more'?`${btn('Respond with sample clarification','clarify','secondary')}<p class="field-note">This represents an applicant response, not an actual document submission.</p>`:''}${c.status==='approved'?`${btn('Show demo payout outcome','complete-payout')}<p class="field-note">Completes an illustrative outcome only. No transfer or conversion is executed.</p>`:''}${c.status==='paid'?`<div class="receipt"><strong>Demo payout complete — no funds transferred</strong><p>Illustrative grant: 0.01 SOL</p><p>Route: ${c.route==='sol'?'Sample Solana wallet':'Future baht provider · simulated'}</p><p>Reference: SAMPLE-G003 · not a transaction signature.</p>${link('See sample public activity','activity','secondary')}</div>`:''}${c.status==='rejected'?'<p>In the intended service, the reason and an appeal path would be available. Reset to explore another fictional scenario; this is not a real eligibility decision.</p>':''}</div><aside class="work-card"><h2>What happens next?</h2><p>Human reviews handle uncertain residence or duplicate claims. A shared address alone does not establish a duplicate.</p><p>No guaranteed review time is demonstrated. The future 12–24 hour claim-to-payment goal remains a hypothesis to test.</p>${link('Household dashboard','dashboard')}${sample()}</aside></section>`;}
+ function donate(){return `${intro('DONATE','Help prepare the relief reserve.','No ReliefVue account required. Your contribution supports the shared Thailand relief reserve.')}<section class="work-grid"><div class="work-card"><form id="donor-form"><fieldset><legend>How would you contribute?</legend><label class="radio-card"><input type="radio" name="route" value="sol" ${donor.route==='sol'?'checked':''}><span><strong>Donate SOL</strong><small>Use a sample wallet for this walkthrough. No wallet connection required.</small></span></label><label class="radio-card"><input type="radio" name="route" value="local" ${donor.route==='local'?'checked':''}><span><strong>Pay in local currency</strong><small>Proposed future feature · simulated. A provider would convert the payment to SOL.</small></span></label></fieldset><label for="amount">Relief contribution (example SOL amount)</label><input id="amount" name="amount" type="number" min="0.001" max="10" step="0.001" value="${donor.amount}" required><p class="field-note">The local-currency route shows the intended choice only. No live exchange quote, fiat charge or conversion is offered.</p><h2 class="subhead">Optional operating support</h2><p>Help maintain the service through a separate contribution. Starts at zero; declining never reduces your relief contribution.</p><label for="support">Optional support (example SOL amount)</label><input id="support" name="support" type="number" min="0" max="1" step="0.001" value="${donor.support}" required><button class="button primary">Review demo contribution</button></form></div><aside class="work-card"><h2>Two destinations. Clear accounting.</h2><p><strong>Relief reserve:</strong> household grants only under the proposed event rules.</p><p><strong>Operating wallet:</strong> optional support, separate from the relief reserve.</p><p>This prototype does not hold real donated funds or prove production custody.</p>${sample()}<a class="text-link" href="#technical">Optional Devnet tools ↗</a></aside></section>`;}
+ function donorReview(){return `${intro('REVIEW CONTRIBUTION','See exactly what supports relief.','This is a simulated checkout. No payment details are collected.')}<section class="work-card"><dl class="review"><dt>Contribution route</dt><dd>${donor.route==='sol'?'SOL · sample wallet':'Local currency · proposed future integration'}</dd><dt>Relief reserve</dt><dd>${sol(donor.amount)} SOL</dd><dt>Separate operating wallet</dt><dd>${sol(donor.support)} SOL</dd><dt>Total sample contribution</dt><dd>${sol(Math.round((donor.amount+donor.support)*1e9)/1e9)} SOL</dd><dt>Network / provider fees</dt><dd>Not calculated in this demo; a real checkout would disclose applicable fees and net amounts.</dd></dl>${donor.route==='local'?'<p class="eligibility review">Future provider technology, exchange quote, fees and delivery remain to be validated. No equivalent local-currency amount is invented here.</p>':''}<div class="button-row">${link('Edit amounts','donate')}${btn('Confirm demo contribution','confirm-donation')}</div>${sample()}</section>`;}
+ function donorReceipt(){const r=state.donorReceipt;if(!r)return donate();return `${intro('DEMO RECEIPT','Thank you for exploring the idea.','Your sample contribution illustrates how the reserve and operating support are separated.')}<section class="form-panel receipt"><strong>Demo contribution complete — no funds transferred</strong><dl class="review"><dt>Sample reference</dt><dd>${esc(r.ref)} · not a blockchain signature</dd><dt>Relief reserve</dt><dd>${sol(r.amount)} SOL</dd><dt>Optional operating support</dt><dd>${sol(r.support)} SOL</dd><dt>Payment route</dt><dd>${r.route==='sol'?'Sample SOL wallet':'Local currency · future feature, simulated'}</dd></dl><p>No account was created. Sample activity exists only in this page until refresh/reset.</p><div class="button-row">${link('Follow sample fund activity','activity','primary')}${link('Back to home','home')}</div></section>`;}
+ function reviewer(){const current=state.claim;return `${intro('REVIEWER DEMO','Evidence and people behind the decision.','A separate simulated staff workspace. Seeded records are fictional; no real database or staff authentication is used.')}<div class="work-grid"><section class="work-card"><h2>Household request queue</h2><p>Entered visitor details are not copied here. The current walkthrough appears as an anonymous sample request.</p><div class="queue"><button data-action="case-current"><strong>R-003 · Current walkthrough</strong><span>${current?statusLabel(current.status):'Not submitted'}</span></button><button data-action="case-room"><strong>R-002 · Separate rented room</strong><span>Seeded example · residence review</span></button><button data-action="case-duplicate"><strong>R-004 · Possible duplicate</strong><span>Seeded example · human comparison needed</span></button></div><div class="review-detail"><h3>${reviewCase==='current'?'R-003 · Current sample request':reviewCase==='room'?'R-002 · Independent rented room':'R-004 · Possible household duplicate'}</h3><dl class="review"><dt>Identity evidence</dt><dd>Fictional sample · no real ID</dd><dt>Usual residence</dt><dd>Fictional Khlong Sai area</dd><dt>Household signal</dt><dd>${reviewCase==='duplicate'?'Room matches an existing seeded claim; investigate, do not auto-ban.':reviewCase==='room'?'Distinct rented room in a shared building; may be a separate household.':state.receiver.changedResidence?'Residence changed after the event; inspect the exception.':'Scripted household check'}</dd><dt>Evidence</dt><dd>Sample monthly rent receipt and example residence record. Not real documents.</dd></dl><form id="review-form"><label for="decision">Review decision</label><select id="decision" name="decision"><option value="approve" ${decision==='approve'?'selected':''}>Approve sample request</option><option value="more" ${decision==='more'?'selected':''}>Request more information</option><option value="reject" ${decision==='reject'?'selected':''}>Reject with reason</option></select><label for="reason">Reason (use example text only)</label><textarea id="reason" name="reason" maxlength="400" required placeholder="Explain the example evidence and decision"></textarea><button class="button primary" ${reviewCase==='current'&&(!current||!['submitted','review','more'].includes(current.status))?'disabled':''}>Record demo review</button></form></div></section><aside class="work-card"><h2>Disaster evidence review</h2><p><strong>Fictional observation:</strong> homes inundated and essential access cut in Khlong Sai. This is a fixture, not a scraped news report.</p><p>AI could gather leads in a future service. People must check authenticity, time, location, independent corroboration and conflicting evidence.</p><p>${badge(state.event)} Reviewer: ${state.reviewerApproved?'recommended':'waiting'} · Approver: ${state.approver||'waiting'}</p><div class="button-row">${btn('Start Watching','watch','secondary',!!state.claim)}${btn('Review observed flood fixture','evidence','secondary',!!state.claim)}${btn('Reviewer recommends response','recommend','secondary',state.event!=='review'||!!state.claim)}${btn('Primary approves event','authorize-primary','secondary',!state.reviewerApproved||!!state.claim)}${btn('Backup approves event','authorize-backup','secondary',!state.reviewerApproved||!!state.claim)}</div><p class="field-note">Independent review plus primary or formally appointed backup authorization of the same event terms. These controls simulate that separation; they do not sign a program transaction.</p>${link('Return to request tracking','tracking')}${sample()}</aside></div>`;}
+ function about(){return `${intro('PROTOTYPE BOUNDARIES','An idea you can experience.','A hackathon demonstration, with the future service separated from the prototype.')}<div class="work-grid"><section class="work-card"><h2>Working in this walkthrough</h2><ul><li>Guided receiver, donor and reviewer screens.</li><li>Temporary form entries and scripted request decisions.</li><li>Sample reserve accounting and public activity.</li><li>No wallet, account or network required to explore.</li></ul><h2>Proposed for a funded phase</h2><ul><li>Real identity, residence and household verification.</li><li>Qualified fiat/custody providers and recovery.</li><li>Live evidence gathering, staff roles and governance.</li><li>Security-reviewed reserve and controlled pilot.</li></ul></section><section class="work-card"><h2>Blockchain evidence</h2><p>The optional Devnet tools are separate from this walkthrough. An Explorer receipt is shown only after a real confirmed test transaction.</p><p>Reserve contract source exists but is not compiled or deployed. Local server transfer rules are not on-chain custody enforcement.</p><p>ReliefVue is a provisional name. Final identity and English/Thai localization are later design work; this walkthrough currently uses English.</p><a class="button secondary" href="#technical">Open optional Devnet tools</a></section></div>`;}
+ const pages:Record<string,()=>string>={home,overview:home,how,receiver,request:receiver,recovery,dashboard,verification,'claim-details':claimDetails,payment,'claim-review':claimReview,tracking,donate,'donor-review':donorReview,'donor-receipt':donorReceipt,reviewer,operator:reviewer,activity:()=>`${intro('FUND ACTIVITY','Follow the proposed path of relief.','Illustrative accounting for this walkthrough only. No household identities are public.')}${summary()}${activityTable()}`,about};
+ function render(focus=false){if(!pages[page])page='home';if(['verification','claim-details','payment','claim-review'].includes(page)&&!state.receiver.name)page='receiver';if(['claim-details','payment','claim-review'].includes(page)&&!state.receiver.verified)page='dashboard';
+ app.innerHTML=`<div class="demo-banner"><strong>HACKATHON DEMO</strong><span>Fictional events · temporary entries · no real payments</span><button data-action="reset">Reset demo</button></div><header class="header"><div class="header-inner"><a class="wordmark" href="#home"><span class="mark">◈</span>relief<span>vue</span></a><nav aria-label="Main"><button data-action="nav-how">How it works</button><button data-action="nav-activity">Fund activity</button><button data-action="nav-reviewer">Reviewer demo</button></nav><div class="header-actions"><a href="#receiver">Get help</a><a class="button primary" href="#donate">Donate</a></div></div></header><main id="main" class="container">${message?`<p class="feedback" role="status">${esc(message)}</p>`:''}${pages[page]!()}</main><footer class="footer"><div class="container"><p>ReliefVue · Thailand-first emergency relief concept</p><a href="#about">Demo details & future roadmap</a><p>Public transfers, private household identities.</p></div></footer>`;
+ bind();if(focus){app.querySelector<HTMLElement>('h1')?.focus();window.scrollTo({top:0,behavior:'instant'});}}
+ function action(work:()=>void){try{work();}catch(e){message=e instanceof Error?e.message:String(e);render();}}
+ function bind(){app.querySelectorAll<HTMLButtonElement>('[data-action]').forEach(b=>b.onclick=()=>action(()=>{
+ const a=b.dataset.action!;if(a.startsWith('nav-')){go(a.slice(4));return;}
+ if(a==='reset'){state=createDemo();donor={route:'sol',amount:.03,support:0};step=0;edit=false;entry='create';reviewCase='current';go('home');return;}
+ if(a==='create'||a==='signin'){entry=a;render();}
+ if(a==='sample-profile'){state.receiver.name='Demo neighbour';go('dashboard');}
+ if(a==='verify-start'){edit=false;step=0;go('verification');}
+ if(a==='edit-details'){if(state.claim)throw Error('A submitted request needs reviewer clarification; reset to explore a different household.');edit=true;step=1;go('verification');}
+ if(a==='verify-back'){step--;render(true);}
+ if(a==='before'||a==='flood'){if(state.claim)throw Error('Reset before changing a submitted scenario.');state.receiver.scenario=a;state.event=a==='flood'?'active':'prepared';state.reviewerApproved=a==='flood';state.approver=a==='flood'?'primary':null;render();}
+ if(a==='request-start'){if(!state.receiver.verified)throw Error('Complete demo verification first.');go('claim-details');}
+ if(a==='submit-claim'){submitClaim(state);go('tracking');}
+ if(a==='under-review'){if(state.claim?.status==='submitted'){state.claim.status='review';state.claim.history.push('Under review');state.claim.reason='A human reviewer would check the household evidence.';}render();}
+ if(a==='clarify'){if(state.claim?.status==='more'){state.claim.status='review';state.claim.history.push('Sample clarification received');state.claim.reason='Sample clarification ready for a human decision.';}render();}
+ if(a==='complete-payout'){completePayout(state);render(true);}
+ if(a==='confirm-donation'){donateSample(state,donor.amount,donor.support,donor.route);go('donor-receipt');}
+ if(a.startsWith('case-')){reviewCase=a.slice(5);render();}
+ if(['watch','evidence','recommend','authorize-primary','authorize-backup'].includes(a)){
+ if(state.claim)throw Error('Existing request preserves the example event terms. Reset for another evidence scenario.');
+ if(a==='watch'||a==='evidence'){state.event=a==='watch'?'watching':'review';state.reviewerApproved=false;state.approver=null;}
+ if(a==='recommend'){if(state.event!=='review')throw Error('Review the observed evidence first.');state.reviewerApproved=true;}
+ if(a.startsWith('authorize')){if(!state.reviewerApproved)throw Error('Independent reviewer recommendation required.');state.event='active';state.approver=a==='authorize-primary'?'primary':'backup';}
+ render();}
+ }));
+ app.querySelector<HTMLFormElement>('#entry-form')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget as HTMLFormElement);state.receiver.name=String(f.get('name')||'').trim();go('dashboard');});
+ app.querySelector<HTMLFormElement>('#verification-form')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget as HTMLFormElement);if(step===0)state.receiver.name=String(f.get('name')||'').trim();if(step===1){state.receiver.residence=String(f.get('residence')||'').trim();if(edit)state.receiver.changedResidence=f.has('changed');}if(step===2){state.receiver.room=String(f.get('room')||'').trim();state.receiver.verified=true;go('dashboard');}else{step++;render(true);}});
+ app.querySelector<HTMLFormElement>('#details-form')?.addEventListener('submit',e=>{e.preventDefault();go('payment');});
+ app.querySelector<HTMLFormElement>('#payment-form')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget as HTMLFormElement);state.receiver.route=f.get('route')==='baht'?'baht':'sol';go('claim-review');});
+ app.querySelector<HTMLFormElement>('#donor-form')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget as HTMLFormElement);donor={route:f.get('route')==='local'?'local':'sol',amount:Number(f.get('amount')),support:Number(f.get('support'))};go('donor-review');});
+ app.querySelector<HTMLFormElement>('#review-form')?.addEventListener('submit',e=>{e.preventDefault();const f=new FormData(e.currentTarget as HTMLFormElement);decision=String(f.get('decision'));action(()=>{if(reviewCase==='current'){decideClaim(state,decision as 'approve'|'more'|'reject',String(f.get('reason')||''));go('tracking');}else{message='Seeded example decision noted in this open page only; no live claim or user was affected.';render();}});});
+ }
+ window.addEventListener('hashchange',()=>{if(location.hash==='#technical'){location.reload();return;}page=location.hash.slice(1)||'home';message='';render(true);});render();
 }
-function stats() {
-  return `<div class="stats"><div><span>Reserve on Devnet</span><strong>${fmt(data?.balanceSol)}</strong><small>test SOL · live balance</small></div><div><span>Fixed household grant</span><strong>${fmt(data?.event.amountSol)}</strong><small>test SOL · no baht equivalence</small></div><div><span>Event budget</span><strong>${fmt(data?.event.budgetSol)}</strong><small>${fmt(data?.event.reviewHoldSol)} held for review</small></div><div><span>Paid</span><strong>${fmt(data?.event.paidSol)}</strong><small>confirmed local event payouts</small></div></div>`;
-}
-function overview() {
-  return `${intro("PREPARED RELIEF · DIRECT TO PEOPLE", "Help ready when a disaster begins.", "One fictional Bangkok subdistrict. Observed flooding requires independent review and event authorization.")}<section class="choice-grid"><article class="choice"><div class="choice-icon">↗</div><h2>I want to donate</h2><p>Fund the reserve with test SOL and follow a confirmed receipt.</p><button class="button primary" data-nav="donate">Donate test SOL →</button></article><article class="choice"><div class="choice-icon">⌂</div><h2>I need relief</h2><p>Explore a fixed grant for a synthetic household in the affected area.</p><button class="button dark" data-nav="request">Request relief →</button></article></section><section class="event-panel"><div class="event-top"><div><p class="eyebrow">CURRENT DEMO EVENT</p><h2>${esc(data?.event.name || "Fictional Khlong Sai flood")}</h2><p>Forecasts stay in Watching. Observed home inundation, evacuation, or blocked essential access may advance to review.</p></div><span class="badge ${data?.event.active ? "active" : ""}">${esc(data?.event.status || "Loading")}</span></div>${stats()}</section>`;
-}
-function donation() {
-  return `${intro("DONATE", "Fund the response reserve.", "Wallet Standard signs a Devnet transfer. ReliefVue never requests a seed phrase.")}<div class="work-grid"><section class="work-card"><h2>Connect a Devnet wallet</h2><label for="wallet">Installed compatible wallet</label><select id="wallet">${availableWallets()
-    .map((w) => `<option>${esc(w.name)}</option>`)
-    .join(
-      "",
-    )}</select><button id="connect" class="button secondary top-gap" ${busy ? "disabled" : ""}>Connect wallet</button><p class="field-note">${esc(walletAddress || "Enable a Wallet Standard wallet with Devnet support, then refresh.")}</p><form id="donate-form"><label for="amount">Amount in test SOL</label><input id="amount" name="amount" type="number" min="0.001" max="0.1" step="0.001" value="0.01" required><button class="button primary full top-gap" ${off() || (!walletAddress || pendingSignature || unknownSubmission ? "disabled" : "")}>Sign donation →</button></form>${!publicDemo ? `<button id="demo-fund" class="button secondary full top-gap" ${off()}>Demo donor sends 0.02 test SOL</button>` : ""}${unknownSubmission ? `<div class="eligibility review"><strong>Wallet submission outcome unknown</strong><p>Check the wallet transaction history before attempting another donation. Signing may have broadcast a transfer even when the wallet returned an error. Keep this session open for investigation.</p></div>` : ""}${pendingSignature ? `<div class="eligibility review"><strong>Submitted · confirmation pending</strong><code>${esc(pendingSignature)}</code><p>A signature alone is not a confirmed receipt. Retry verification without sending again.</p><button id="verify" class="button secondary" ${busy ? "disabled" : ""}>Verify existing signature</button></div>` : ""}</section><aside class="side-card"><p class="eyebrow">DEVNET TREASURY</p><code class="address">${esc(data?.treasury || "Loading")}</code><p>Test SOL only. Donations are recorded after chain verification.</p></aside></div>`;
-}
-function request() {
-  const profile = profiles.find((p) => p.id === selected);
-  return `${intro("REQUEST RELIEF", "A fixed grant for one household.", "Synthetic profiles demonstrate separate rented rooms, duplicate applications, and pending human review.")}<div class="work-grid"><section class="work-card"><label for="household">${publicDemo ? "Illustrative scenario" : "Synthetic household"}</label><select id="household">${(publicDemo ? sampleChoices : profiles.map((p) => [p.id, p.label])).map(([id, label]) => `<option value="${esc(id)}" ${id === selected ? "selected" : ""}>${esc(label)}</option>`).join("")}</select>${profile ? `<div class="profile-line"><strong>${esc(profile.label)}</strong><span>${esc(profile.reviewStatus)}</span><small>${esc(profile.home)} · synthetic local record</small></div><p>Assigned demo destination <code>${esc(profile.recipientAddress)}</code></p>` : ""}${!publicDemo && data?.claims[selected] ? `<div class="eligibility review"><strong>Claim: ${esc(data.claims[selected]?.status)}</strong>${data.claims[selected]?.signature ? `<code>${esc(data.claims[selected]?.signature)}</code><p>Only confirmed activity is a payment receipt. Submitted claims must not be sent again.</p>` : ""}</div>` : ""}<p>Event status: <strong>${esc(data?.event.status || "Loading")}</strong>. Approval alone does not establish household eligibility.</p>${publicDemo ? `<button id="preview" class="button primary full" ${off()}>Explore illustrative outcome</button>${previewStage ? `<div class="eligibility review"><strong>Illustrative only · no transfer</strong><p>${selected === "duplicate-a" ? "Same household: an illustrative second claim is blocked." : selected === "outside-area" ? "Outside the fictional response area." : selected === "pending-room" ? "Wait for a human to resolve the household review." : data?.event.active ? "An eligible separate household could receive one fixed grant, subject to budget and verification." : "Claims wait until both event roles authorize the response."}</p><small>BROWSER PREVIEW · NO CHAIN RECEIPT</small></div>` : ""}` : `<button id="claim" class="button primary full" ${off() || (!data?.event.active || !profile || Boolean(data?.claims[selected]) ? "disabled" : "")}>Submit local demo claim</button><p class="field-note">Server enforces household matching and caps. This is a server transfer demo; the reserve program is not deployed.</p>${profile?.reviewStatus === "pending" ? `<button id="review-claim" class="button secondary" ${off()}>Simulated staff resolves pending household</button>` : ""}`}<div class="divider"></div><p>Recoverable custodial wallets and Thai baht conversion are future investigations. They are unavailable here.</p></section><aside class="side-card"><h2>Review protects households</h2><p>One event grant per verified household. Names, wallet accounts, or a shared building address do not prove uniqueness. Separate rented units may qualify separately.</p><p>Pending cases use the approved review allocation only after human verification.</p></aside></div>`;
-}
-function activity() {
-  return `${intro("FUND ACTIVITY", "Receipts you can inspect.", publicDemo ? "Confirmed donations saved in this browser only. This is not a global ledger; recipient outcomes are illustrative." : "Confirmed Devnet transfers. Public receipts omit private household records.")}<section class="activity-card"><div class="section-title"><h2>Confirmed transfers</h2><button class="button secondary" id="refresh" ${busy ? "disabled" : ""}>Refresh</button></div>${data?.activity.length ? data.activity.map((a) => `<div class="activity-row"><div><span class="activity-icon">${a.type === "donation" ? "↗" : "⌂"}</span><strong>${esc(a.type)}</strong></div><div><strong>${fmt(a.amountSol)} test SOL</strong><small>${esc(new Date(a.at).toLocaleString())}</small><a href="https://explorer.solana.com/tx/${encodeURIComponent(a.signature)}?cluster=devnet" target="_blank" rel="noopener noreferrer">Confirmed transaction ↗</a></div></div>`).join("") : '<div class="empty-state">No confirmed receipts recorded.</div>'}</section>`;
-}
-function operator() {
-  return `${intro("SIMULATED LOCAL STAFF", "Review before authorizing.", publicDemo ? "Illustrative browser approvals saved locally. They cannot authorize payouts." : "Buttons simulate staff roles in the localhost service. They are not production multi-user authentication.")}<div class="work-grid"><section class="work-card"><h2>Fictional observed evidence</h2><p>Fixture: homes inundated and essential access cut in Khlong Sai, a fictional Bangkok subdistrict. This is synthetic evidence, not an official notice.</p><p>Live AI is unavailable. Human reviewers must verify real source, observation time, area, and impacts in any funded service.</p><p>Reviewer: ${data?.event.approvals.reviewer ? "approved" : "waiting"} · Approver: ${esc(data?.event.approvals.approver || "waiting")}</p><div class="button-row">${[
-    ["watch", "Watching"],
-    ["review", "Review observed fixture"],
-    ["approve-reviewer", "Reviewer approves"],
-    ["approve-primary", "Primary approves"],
-    ["approve-backup", "Backup approves"],
-  ]
-    .map(
-      ([action, label]) =>
-        `<button class="button secondary" data-action="${action}" ${action === "watch" || action === "review" ? (busy || stale || !data ? "disabled" : "") : off()}>${label}</button>`,
-    )
-    .join(
-      "",
-    )}</div></section><aside class="side-card"><h2>Limited event allocation</h2><p>Fixture budget: 0.05 test SOL. Human review hold: 0.01. Each verified household receives 0.01. These figures have no Thai purchasing-power equivalence.</p><p>Independent reviewer plus primary or backup approver must authorize the same terms.</p></aside></div>`;
-}
-async function refresh() {
-  stale = true;
-  render();
-  try {
-    data = await getStatus();
-    if (!publicDemo) {
-      profiles = (await api<{ profiles: Profile[] }>("profiles")).profiles;
-      if (!profiles.some((p) => p.id === selected))
-        selected = profiles[0]?.id || "";
-    }
-    stale = false;
-    if (data.rpcError)
-      feedback = `Devnet balance unavailable: ${data.rpcError}. Monetary actions are disabled.`;
-  } catch (e) {
-    feedback = errorText(e);
-  }
-  render();
-}
-function errorText(e: unknown) {
-  return e instanceof Error ? e.message : String(e);
-}
-async function run(action: () => Promise<void>) {
-  busy = true;
-  feedback = "Working…";
-  render();
-  try {
-    await action();
-    await refresh();
-  } catch (e) {
-    feedback = errorText(e);
-  } finally {
-    busy = false;
-    render();
-  }
-}
-function render() {
-  const pages: Record<string, () => string> = {
-    overview,
-    donate: donation,
-    request,
-    activity,
-    operator,
-  };
-  if (!pages[page]) page = "overview";
-  app.innerHTML = `<div class="demo-banner"><strong>${publicDemo ? "PUBLIC PREVIEW" : "LOCAL SERVER DEMO"} · SOLANA DEVNET</strong><span>Fictional disaster · synthetic households · ${publicDemo ? "browser outcomes are illustrative" : "server transfers; reserve program not deployed"}</span></div><header class="header"><div class="header-inner"><button class="wordmark" data-nav="overview"><span class="mark">◈</span> relief<span>vue</span></button><nav aria-label="Main navigation">${[
-    ["overview", "Overview"],
-    ["donate", "Donate"],
-    ["request", "Request Relief"],
-    ["activity", "Fund Activity"],
-  ]
-    .map(
-      ([id, label]) =>
-        `<button data-nav="${id}" class="${page === id ? "selected" : ""}" ${page === id ? 'aria-current="page"' : ""}>${label}</button>`,
-    )
-    .join(
-      "",
-    )}</nav><button class="operator-link" data-nav="operator">Staff demo</button></div></header><main class="container" aria-busy="${busy}"><div role="status" aria-live="polite">${feedback ? `<div class="message">${esc(feedback)}</div>` : ""}${stale ? '<p class="field-note">Loading or stale status · actions disabled.</p>' : ""}</div>${pages[page]!()}</main><footer class="footer"><div class="container"><span>ReliefVue · fictional disaster prototype</span><span>Devnet only · no real funds or identity data</span></div></footer>`;
-  app.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach(
-    (b) =>
-      (b.onclick = () => {
-        location.hash = b.dataset.nav!;
-        page = b.dataset.nav!;
-        render();
-      }),
-  );
-  app
-    .querySelector<HTMLSelectElement>("#household")
-    ?.addEventListener("change", (e) => {
-      selected = (e.currentTarget as HTMLSelectElement).value;
-      previewStage = 0;
-      render();
-    });
-  app.querySelector("#preview")?.addEventListener("click", () => {
-    previewStage++;
-    render();
-  });
-  app
-    .querySelector("#refresh")
-    ?.addEventListener("click", () => void refresh());
-  app.querySelector("#connect")?.addEventListener("click", () => {
-    const walletName =
-      app.querySelector<HTMLSelectElement>("#wallet")?.value || "";
-    void run(async () => {
-      walletAddress = await connectWallet(walletName);
-      feedback = `Wallet connected: ${walletAddress}`;
-    });
-  });
-  app.querySelector("#donate-form")?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const form = e.currentTarget as HTMLFormElement;
-    const amount = Number(new FormData(form).get("amount"));
-    void run(async () => {
-      if (stale || data?.rpcError || pendingSignature || unknownSubmission)
-        throw new Error(
-          "Refresh status or verify the pending signature before donating.",
-        );
-      if (!data) throw new Error("Status unavailable.");
-      pendingSignature = await donate(data.treasury, amount, () => {
-        unknownSubmission = true;
-        sessionStorage.setItem("reliefvue-unknown-donation", "1");
-      });
-      sessionStorage.setItem("reliefvue-pending-donation", pendingSignature);
-      unknownSubmission = false;
-      sessionStorage.removeItem("reliefvue-unknown-donation");
-      feedback = "Submitted signature received; checking confirmation…";
-      render();
-      await api("donation", { signature: pendingSignature });
-      pendingSignature = "";
-      sessionStorage.removeItem("reliefvue-pending-donation");
-      feedback = "Donation confirmed on Devnet. See Fund Activity.";
-    });
-  });
-  app.querySelector("#verify")?.addEventListener(
-    "click",
-    () =>
-      void run(async () => {
-        await api("donation", { signature: pendingSignature });
-        pendingSignature = "";
-        sessionStorage.removeItem("reliefvue-pending-donation");
-        feedback = "Donation confirmed on Devnet.";
-      }),
-  );
-  app.querySelector("#demo-fund")?.addEventListener(
-    "click",
-    () =>
-      void run(async () => {
-        await api("demo-fund", { amountSol: 0.02 });
-        feedback = "Demo donor request completed. See confirmed activity.";
-      }),
-  );
-  app.querySelector("#claim")?.addEventListener(
-    "click",
-    () =>
-      void run(async () => {
-        const result = await api<{ signature?: string; status?: string }>(
-          "claim",
-          { profileId: selected },
-        );
-        feedback = result.signature
-          ? `Claim response: ${result.status || "submitted"} · ${result.signature}. Check confirmed activity for a receipt.`
-          : "Claim request recorded; check its status.";
-      }),
-  );
-  app.querySelector("#review-claim")?.addEventListener(
-    "click",
-    () =>
-      void run(async () => {
-        await api("review-claim", { profileId: selected, approved: true });
-        feedback = "Simulated household review recorded.";
-      }),
-  );
-  app.querySelectorAll<HTMLButtonElement>("[data-action]").forEach(
-    (b) =>
-      (b.onclick = () =>
-        void run(async () => {
-          await api("event", { action: b.dataset.action });
-          feedback = "Simulated event action recorded.";
-        })),
-  );
-}
-window.addEventListener("hashchange", () => {
-  page = location.hash.slice(1) || "overview";
-  render();
-});
-render();
-void refresh();

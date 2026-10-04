@@ -4,7 +4,7 @@ Thailand-first household emergency relief using Solana Devnet. Fictional flood e
 
 ## UI redesign entry point
 
-For GIE design work, read [the current design brief](docs/design-brief.md) first. It consolidates the approved receiver/donor journeys, homepage activity, demo privacy rules and remaining visual decisions. These redesigned flows are documented requirements, not implemented/deployed features yet.
+For GIE design work, read [the current design brief](docs/design-brief.md) first. It consolidates the approved receiver/donor journeys, homepage activity, demo privacy rules and remaining visual decisions. The agreed content and guided flows are implemented using the existing stylesheet. Final identity and visual redesign remain next; fiat, KYC and payouts are simulated.
 
 ## Current priority
 
@@ -27,16 +27,26 @@ In a second terminal in this repository:
 npm run dev
 ```
 
-Open http://127.0.0.1:5173. The API binds localhost port 8787. Keep it local: staff buttons simulate roles and the session token is not production authentication.
+Open http://127.0.0.1:5173. The guided walkthrough needs no API or wallet. Optional Devnet tools are at `#technical`; their local API binds localhost port 8787. Keep it local: staff buttons simulate roles and the session token is not production authentication.
 
 ```sh
 npm run check
 npm audit
 ```
 
-`check` runs typecheck, eight focused tests and both builds. `build:web` is cross-platform and produces the static public preview selected by `vercel.json`. `build` produces the frontend for use with the local API. Both write `dist/`, so the last build determines its mode.
+`check` runs typecheck, eleven focused tests and both builds. `build:web` is cross-platform and produces the static public preview selected by `vercel.json`. `build` produces the frontend for use with the local API. Both write `dist/`, so the last build determines its mode.
 
-## Demonstration
+## Guided hackathon walkthrough
+
+1. Get help -> example profile -> identity/residence/household checks -> fictional flood -> fixed grant and payout preference -> submit.
+2. Reviewer demo -> enter an example reason -> approve, request clarification or reject -> track the result.
+3. Approved request -> simulated payout -> sample public activity.
+4. Donate -> example SOL amount -> separate optional support -> review -> simulated receipt.
+5. Reset or refresh clears entered details. They stay only in current-page memory; no account or database is created.
+
+The existing colors, fonts and stylesheet are retained. `src/main.ts` contains the guided screens, `src/demo-state.ts` their sample state and `src/technical.ts` the previous optional Devnet interface.
+
+## Optional technical demonstration
 
 1. Watching blocks payouts; review the fictional observed-impact fixture.
 2. Simulate reviewer and primary or backup authorization. Activation requires enough reserve for the event budget.
@@ -54,7 +64,7 @@ Wallet submission is marked uncertain before broadcasting. If a wallet may have 
 
 ## Public build and deployment
 
-The static preview reads a Devnet reserve and verifies donations, but its receipt list is browser-local. Its event approvals and recipient outcomes are illustrative; no public payout API is deployed. The public preview reserve differs from the new local v2 reserve. A Git push does not prove Vercel deployed this revision; inspect the deployment before presenting it.
+The default static preview is a fully simulated guided walkthrough. The separate optional Devnet interface reads a Devnet reserve and verifies donations, but its receipt list is browser-local. Its event approvals and recipient outcomes are illustrative; no public payout API is deployed. The public preview reserve differs from the new local v2 reserve. A Git push does not prove Vercel deployed this revision; inspect the deployment before presenting it.
 
 ## Documents
 
@@ -63,4 +73,4 @@ The static preview reads a Devnet reserve and verifies donations, but its receip
 - [Brandbook v02](docs/brandbook_v02/index.html) remains a review candidate, not the implemented identity.
 - Earlier recovery briefs and `docs/history/` are historical context; the current brief governs when they differ.
 
-Only reviewed source, configuration and project documents belong in this public repository. Keep dependencies, build output, real identities, secrets, keys and private workspace records out of Git and shared source archives. Optional operating support remains a future separate payment route.
+Only reviewed source, configuration and project documents belong in this public repository. Keep dependencies, build output, real identities, secrets, keys and private workspace records out of Git and shared source archives. Optional operating support is simulated separately in the walkthrough; its real payment route remains future work.

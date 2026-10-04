@@ -84,3 +84,7 @@ Separate sample activity from confirmed Devnet activity. No invented signatures,
 5. [spec.md](spec.md) and [developer-handoff.md](developer-handoff.md) for existing technical groundwork and limitations, not the current production task list.
 
 Current local UI source does not implement these revised guided journeys. Documentation aligned; design, implementation and deployment still pending. screen_state_map_v01.md is historical and must not override this brief.
+
+## Implemented content handoff - 2026-10-04
+
+The current app now includes guided receiver, donor and reviewer routes, sample receipts and recent activity. Preserve their meaning and state transitions during UI design. Existing styles were reused; no final visual identity has been approved. Guided entries are transient in-memory examples, with no real database, KYC, fiat provider or payment execution. The previous technical interface is separately accessible through `#technical`. Read `src/main.ts`, `src/demo-state.ts`, the journey documents and README before changing presentation.
