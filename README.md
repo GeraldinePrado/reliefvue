@@ -1,6 +1,6 @@
 # ReliefVue demo application
 
-This is the unapproved local application candidate for the shared ReliefVue project. It uses a fictional Bangkok event, synthetic households and Solana Devnet test SOL. The earlier presentation HTML remains in the parent session as a rejected attempt.
+This repository contains ReliefVue's ideathon prototype and current product brief. The application uses a fictional Bangkok event, synthetic households and Solana Devnet test SOL. It is a demonstration, not a live relief service.
 
 ## Run locally
 
@@ -40,7 +40,8 @@ The Vercel project URL and GitHub-to-Vercel integration must be confirmed separa
 
 ## Product and design documents
 
-- [Corrected ReliefVue brief](docs/recovery_brief_v02.md) and [screen/state map](docs/screen_state_map_v01.md) describe the current product direction.
+- [Current ReliefVue brief](docs/brief.md) records the active product decisions, open risks, and future safeguards. [Progress](docs/progress.md) tracks the MRI forge step. These decisions are not all implemented in the prototype.
+- [Earlier corrected brief](docs/recovery_brief_v02.md) and [screen/state map](docs/screen_state_map_v01.md) provide historical design context; use the current brief when they differ.
 - [Brandbook v02](docs/brandbook_v02/index.html) is the latest **review candidate** for identity and web design. It includes Geraldine's navy, purple, coral, mint, and off-white color direction; logo and typography options; and the requirement for real, consented impact photography. It is not implemented in this app.
 - [Brandbook v01](docs/brandbook_v01/index.html) preserves the earlier design review.
 - [Historical handover](docs/history/README.md) preserves the original ReadyFund requirements and build pack. Its early all-simulated ReliefVue brief is superseded by the corrected brief above.
