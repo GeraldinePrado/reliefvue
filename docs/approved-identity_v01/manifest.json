@@ -10,11 +10,6 @@
     "sha256": "0677891e6a143f297350d260ad766ad33bfc18ed5fa4f213acf648d6b597ec1a"
   },
   {
-    "path": "brandbook_v03/assets/desktop.ini",
-    "bytes": 106,
-    "sha256": "08610ca6879c683ff30db24fee22b1040e6150db7ab0d0d92b51cb41ae415a3d"
-  },
-  {
     "path": "brandbook_v03/assets/fraunces-400.ttf",
     "bytes": 360440,
     "sha256": "177ff6c0f14e5550a3c624247cd1189611d4eb65d000b14944c63d967958abbb"
@@ -63,11 +58,6 @@
     "path": "brandbook_v03/assets/selected-3d-source.png",
     "bytes": 1444878,
     "sha256": "73ed97bda8f7844a562374336e0b0116134868eda41a26938e56202a15037471"
-  },
-  {
-    "path": "brandbook_v03/desktop.ini",
-    "bytes": 106,
-    "sha256": "08610ca6879c683ff30db24fee22b1040e6150db7ab0d0d92b51cb41ae415a3d"
   },
   {
     "path": "brandbook_v03/index.html",
