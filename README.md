@@ -65,6 +65,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 ## Project documents
 
 - [Product brief](docs/brief.md), [submission scope](docs/submission-scope.md) and [design brief](docs/design-brief.md).
+- [Incident reporting and AI-to-human verification plan](docs/incident_reporting_v01.md).
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
 - [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
