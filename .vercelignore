@@ -8,3 +8,6 @@ server/
 tests/
 .sdd/
 *.png
+!src/assets/brand/reliefvue-elephant-selected.png
+!src/assets/editorial/chiang-mai-concept.png
+!src/assets/editorial/household-concept.png
