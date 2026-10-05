@@ -700,3 +700,14 @@ Object.assign(thai,{'When disaster strikes, help should':'เมื่อภั�
 Object.assign(thai,{'Relief prepared together.':'ร่วมเตรียมความช่วยเหลือ','Delivered household by household.':'ส่งถึงแต่ละครัวเรือน'});
 
 Object.assign(thai,{'Reviewer / Admin Dashboard':'แดชบอร์ดผู้ตรวจสอบ / ผู้ดูแล','Reviewer / Admin Dashboard · Demo':'แดชบอร์ดผู้ตรวจสอบ / ผู้ดูแล · เดโม'});
+
+Object.assign(thai, {
+ 'ON THE GROUND · THAILAND':'สถานการณ์ในพื้นที่ · ประเทศไทย',
+ 'INCIDENT SIMULATION · NOT LIVE':'สถานการณ์จำลอง · ไม่ใช่ข้อมูลสด',
+ 'Province':'จังหวัด','Chiang Rai':'เชียงราย','Lamphun':'ลำพูน','Phra Nakhon Si Ayutthaya':'พระนครศรีอยุธยา','Bangkok':'กรุงเทพมหานคร',
+ 'Five province scenarios · fictional reports':'สถานการณ์จำลองในห้าจังหวัด · รายงานสมมติ',
+ 'Choose a province to explore simulated incident reports and review outcomes. A community report starts a review; it does not automatically release a grant.':'เลือกจังหวัดเพื่อดูรายงานเหตุการณ์และผลการตรวจสอบจำลอง รายงานจากชุมชนเป็นจุดเริ่มต้นของการตรวจสอบ ไม่ได้ทำให้มีการจ่ายเงินโดยอัตโนมัติ',
+ 'Approximate area centres · simulated reports, not flood boundaries or live conditions.':'ตำแหน่งกลางพื้นที่โดยประมาณ · รายงานจำลอง ไม่ใช่ขอบเขตน้ำท่วมหรือสถานการณ์ปัจจุบัน',
+ 'Province selection changes the map only. Grant figures belong to the Chiang Mai response example.':'การเลือกจังหวัดเปลี่ยนเฉพาะแผนที่ ตัวเลขเงินช่วยเหลือเป็นตัวอย่างการตอบสนองในเชียงใหม่',
+ 'Household displacement':'ครัวเรือนย้ายที่พักชั่วคราว'
+});
