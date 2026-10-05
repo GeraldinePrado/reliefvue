@@ -57,6 +57,7 @@ const thai: Record<string,string> = {
   'Pause replay':'หยุดการจำลอง',
   'Resume replay':'เล่นการจำลองต่อ',
   'Received':'รับเข้า',
+  'Sent':'ส่งแล้ว',
   'Into relief reserve':'เข้าเงินสำรอง',
   'To household wallets':'ถึงวอลเล็ตครัวเรือน',
   'Reserve received':'รับเงินสำรอง',

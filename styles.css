@@ -396,3 +396,13 @@ main.container{max-width:1280px;padding:0 32px}
 }
 
 @media(max-width:450px){.header-actions>a:not(.button),html[lang="th"] .header-actions>a:not(.button){font-size:.72rem}.header nav button,html[lang="th"] .header nav button{font-size:.78rem}}
+
+/* Fund replay: a single entry advances while previous entries hold their place. */
+.movement-lane ul,.ledger-full .transfer-list{will-change:transform}
+.movement-lane ul.is-advancing .lane-row,.ledger-full .transfer-list.is-advancing .transfer-row{animation:none}
+.ledger-full .transfer-row{animation:none}
+.ledger-full .transfer-status{display:inline-flex;align-items:center;justify-content:center;width:max-content;min-width:72px;padding:5px 9px;border-radius:6px;border:1px solid #cfc0e3;background:#f0e9f9;color:#513287;font-size:.71rem;font-weight:700;line-height:1.2}
+.ledger-full .transfer-status.sent{border-color:#ebc7c2;background:#fff0ed;color:#8a3c39}
+.movement-lane-head strong{display:inline-flex;padding:5px 9px;border-radius:6px;border:1px solid #cfc0e3;background:#f0e9f9;color:#513287;line-height:1.1}
+.movement-lane[data-lane="sent"] .movement-lane-head strong{border-color:#ebc7c2;background:#fff0ed;color:#8a3c39}
+@media(prefers-reduced-motion:reduce){.movement-lane ul,.ledger-full .transfer-list{will-change:auto}}
