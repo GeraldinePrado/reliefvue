@@ -162,3 +162,29 @@
  .announcement-story[aria-hidden=true]{display:none}
 }
 @media(max-width:650px) and (prefers-reduced-motion:reduce){.announcement-inner{grid-template-columns:minmax(0,1fr)}.announcement-window{grid-column:1}}
+/* Centre each process number on its copy; mobile uses a central vertical spine. */
+.service-path{text-align:center}
+.service-path .timeline-heading{display:block;text-align:center}
+.service-path .timeline-heading h2{white-space:normal;max-width:100%;font-size:clamp(2rem,4vw,3.7rem);line-height:1.15}
+.timeline-heading h2>span{display:block}
+.service-path .timeline-rail{grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;max-width:1120px;margin:36px auto 24px;padding-inline:0}
+.service-path .timeline-step>span{justify-self:center;align-self:center}
+.service-path .timeline-copy,.service-path .timeline-step:nth-child(even) .timeline-copy{text-align:center;padding-inline:18px;align-self:end}
+.service-path .timeline-step:nth-child(odd) .timeline-copy{align-self:start}
+.service-path .timeline-copy::before{left:calc(50% - 1px)}
+.service-path .timeline-step p{max-width:250px;margin-inline:auto}
+.how-steps article>span{display:grid;place-items:center;align-self:center;text-align:center}
+@media(max-width:900px){
+ .service-path .timeline-rail{display:block;max-width:600px;padding:0;margin-top:36px}
+ .service-path .timeline-step{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);gap:0 14px;padding:0 0 38px;position:relative;min-width:0}
+ .service-path .timeline-step>span,.service-path .timeline-step:nth-child(even)>span{grid-column:2;grid-row:1;width:44px;height:44px;align-self:center}
+ .service-path .timeline-copy,.service-path .timeline-step:nth-child(even) .timeline-copy{grid-row:1;padding:16px 0;align-self:center;text-align:center}
+ .service-path .timeline-step:nth-child(odd) .timeline-copy{grid-column:1}
+ .service-path .timeline-step:nth-child(even) .timeline-copy{grid-column:3}
+ .service-path .timeline-copy::before{display:none}
+ .service-path .timeline-step h3{font-size:1.03rem;line-height:1.45;margin-bottom:10px}
+ .service-path .timeline-step p{font-size:.88rem;line-height:1.75;overflow-wrap:break-word}
+ .service-path .timeline-step:last-of-type{padding-bottom:0}
+}
+@media(max-width:400px){.service-path .timeline-step{gap:0 10px}.service-path .timeline-step p{font-size:.83rem}.service-path .timeline-heading h2{font-size:1.75rem}}
+@media(max-width:400px){.service-path .timeline-heading h2{font-size:clamp(1.4rem,7vw,1.75rem)}}

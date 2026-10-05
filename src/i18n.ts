@@ -633,3 +633,4 @@ Object.assign(thai,{
  '11:06 AM':'11:06 น.','10:42 AM':'10:42 น.','11:18 AM':'11:18 น.','11:31 AM':'11:31 น.',
  '· Flash news':'· ข่าวด่วน','· Weather':'· สภาพอากาศ','· Update':'· อัปเดต','· Relief':'· การช่วยเหลือ'
 });
+Object.assign(thai,{'From prepared funds':'จากเงินช่วยเหลือที่เตรียมพร้อม','to affected household help':'สู่ครัวเรือนที่ได้รับผลกระทบ'});
