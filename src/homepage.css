@@ -265,3 +265,9 @@
 .how-demo-note strong{font-size:1.15rem}.how-demo-note span{max-width:76ch}
 .how-actions{justify-content:center;text-align:center;margin-top:24px}
 @media(max-width:700px){.how-audiences article{padding:24px}.how-process-head{align-items:center}.how-page-intro h1{font-size:clamp(1.05rem,4.8vw,2.1rem)}}
+
+/* The alert and navigation share one sticky boundary; the demo bar scrolls away. */
+.public-header-stack{position:sticky;top:0;z-index:1100;background:#faf9f6}
+.public-header-stack>.site-chrome,.public-header-stack .header,.public-header-stack>.announcement{position:relative;top:auto}
+.staff-mode>.public-header-stack{display:none}
+.demo-banner .demo-staff-link{font-weight:600;text-underline-offset:3px}
