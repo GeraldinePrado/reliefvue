@@ -507,3 +507,20 @@ Object.assign(thai,{
   "How is platform support used?": "เงินสนับสนุนแพลตฟอร์มใช้ทำอะไร?",
   "Optional support is intended for building and operating ReliefVue. It is recorded separately from the relief reserve and is never required to contribute.": "เงินสนับสนุนตามความสมัครใจมีไว้พัฒนาและดำเนินงาน ReliefVue บันทึกแยกจากเงินสำรองช่วยเหลือ และไม่บังคับให้เพิ่มเงินนี้"
 });
+
+Object.assign(thai,{
+  "Help starts before disaster strikes.": "ความช่วยเหลือเริ่มก่อนภัยพิบัติ",
+  "ReliefVue brings donors and households together around one mission: prepare relief before disaster, deliver grants directly, and make every fund movement traceable on Solana.": "ReliefVue เชื่อมผู้บริจาคและครัวเรือนด้วยพันธกิจเดียวกัน เตรียมความช่วยเหลือก่อนภัยพิบัติ ส่งเงินช่วยเหลือโดยตรง และให้ทุกความเคลื่อนไหวของเงินตรวจสอบได้บน Solana",
+  "RELIEF READY · THAILAND FIRST": "พร้อมช่วยเหลือ · เริ่มที่ประเทศไทย",
+  "DISASTER-READY RELIEF · FICTIONAL EXAMPLE": "พร้อมรับภัยพิบัติ · สถานการณ์สมมติ",
+  "Flooding reported": "มีรายงานน้ำท่วม",
+  "Heavy rain watch": "เฝ้าระวังฝนตกหนัก",
+  "Road access limited": "ถนนสัญจรได้จำกัด",
+  "Relief review underway": "กำลังพิจารณาการช่วยเหลือ",
+  "11:06 AM · Flash news": "11:06 น. · ข่าวด่วน",
+  "10:42 AM · Weather": "10:42 น. · สภาพอากาศ",
+  "11:18 AM · Update": "11:18 น. · อัปเดต",
+  "11:31 AM · Relief": "11:31 น. · การช่วยเหลือ",
+  "Explore ten sample entries in each list. Contributions arrive, grants go out, and every amount has a destination. Scroll a list to pause its replay.": "สำรวจรายการตัวอย่างสิบรายการในแต่ละรายการ เงินสนับสนุนเข้า เงินช่วยเหลือออก ทุกจำนวนมีปลายทาง เลื่อนรายการเพื่อหยุดภาพจำลองชั่วคราว",
+  "Scroll to explore 10 sample entries ↓": "เลื่อนดูรายการตัวอย่าง 10 รายการ ↓"
+});
