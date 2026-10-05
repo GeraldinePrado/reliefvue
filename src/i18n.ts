@@ -431,7 +431,8 @@ Object.assign(thai,{
   'First households':'ครัวเรือนกลุ่มแรก',
   'More households':'ครัวเรือนเพิ่มเติม',
   'Current replay':'สถานการณ์ปัจจุบัน',
-  'Mae Rim response budget':'งบช่วยเหลือแม่ริม',
+  'Disaster response budget':'งบตอบสนองภัยพิบัติ',
+  'Grant allocation for fictional Mae Rim':'การจัดสรรเงินช่วยเหลือสำหรับแม่ริมในตัวอย่าง',
   'Grant allocation in this fictional event':'การจัดสรรเงินในเหตุการณ์สมมติ',
   'Event budget':'งบเหตุการณ์',
   'Grants sent':'จ่ายช่วยเหลือแล้ว',
@@ -461,4 +462,4 @@ export function localize(root: HTMLElement, locale: Locale){
   });
 }
 
-Object.assign(thai,{'Fictional Mae Rim fund overview':'ภาพรวมเงินช่วยเหลือแม่ริมในตัวอย่าง','Relief reserve':'เงินสำรองช่วยเหลือ','Still available after sample household grants.':'ยอดคงเหลือหลังจ่ายเงินช่วยเหลือตัวอย่าง','Share of all funds received':'สัดส่วนของเงินที่ได้รับทั้งหมด','Share of received funds still in reserve':'สัดส่วนเงินรับเข้าที่ยังอยู่ในเงินสำรอง','Set aside for this fictional flood response.':'จัดสรรไว้สำหรับสถานการณ์น้ำท่วมสมมติ','Budget sent as grants':'สัดส่วนงบที่จ่ายเป็นเงินช่วยเหลือ','Share of Mae Rim budget sent as grants':'สัดส่วนงบแม่ริมที่จ่ายเป็นเงินช่วยเหลือ','One household grant':'เงินช่วยเหลือต่อครัวเรือน','Fixed amount per approved household in this example.':'จำนวนเงินคงที่ต่อครัวเรือนที่ได้รับอนุมัติในตัวอย่าง','example households supported':'ครัวเรือนที่ได้รับความช่วยเหลือในตัวอย่าง'});
+Object.assign(thai,{'Fictional Mae Rim fund overview':'ภาพรวมเงินช่วยเหลือแม่ริมในตัวอย่าง','Relief reserve':'เงินสำรองช่วยเหลือ','Still available after sample household grants.':'ยอดคงเหลือหลังจ่ายเงินช่วยเหลือตัวอย่าง','Share of all funds received':'สัดส่วนของเงินที่ได้รับทั้งหมด','Share of received funds still in reserve':'สัดส่วนเงินรับเข้าที่ยังอยู่ในเงินสำรอง','Set aside for the fictional Mae Rim flood response.':'จัดสรรไว้สำหรับสถานการณ์น้ำท่วมแม่ริมสมมติ','Budget sent as grants':'สัดส่วนงบที่จ่ายเป็นเงินช่วยเหลือ','Share of Mae Rim budget sent as grants':'สัดส่วนงบแม่ริมที่จ่ายเป็นเงินช่วยเหลือ','One household grant':'เงินช่วยเหลือต่อครัวเรือน','Fixed amount per approved household in this example.':'จำนวนเงินคงที่ต่อครัวเรือนที่ได้รับอนุมัติในตัวอย่าง','example households supported by grants sent':'ครัวเรือนตัวอย่างที่ได้รับเงินช่วยเหลือแล้ว'});

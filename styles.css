@@ -408,7 +408,7 @@ main.container{max-width:1280px;padding:0 32px}
 @media(prefers-reduced-motion:reduce){.movement-lane ul,.ledger-full .transfer-list{will-change:auto}}
 
 /* Homepage fund monitor: the status-card idea applied to reserve accounting. */
-.fund-monitor{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr) minmax(0,.82fr);gap:14px;margin:0 0 14px}
+.fund-monitor{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:14px;margin:0 0 14px}
 .monitor-card{min-width:0;min-height:282px;padding:25px 26px 22px;border:1px solid #ded7e5;border-radius:17px;background:#fffefa;display:flex;flex-direction:column;box-shadow:0 9px 24px rgba(17,29,45,.055)}
 .monitor-reserve{background:var(--rv-navy);border-color:var(--rv-navy);color:#fff}
 .monitor-response{background:#f1ebf8;border-color:#d9cbe9}
@@ -443,5 +443,5 @@ main.container{max-width:1280px;padding:0 32px}
 .monitor-household-count strong{font:600 1.7rem/1.08 'IBM Plex Sans',sans-serif;color:var(--rv-navy);font-variant-numeric:tabular-nums}
 .monitor-household-count span{font-size:.72rem;color:#5c6070}
 .rv-home .fund-reconcile{max-width:950px;margin:0 0 24px;color:#596171;font-size:.78rem;line-height:1.6}
-@media(max-width:1000px){.fund-monitor{grid-template-columns:repeat(2,minmax(0,1fr))}.monitor-household{grid-column:1/-1;min-height:0}.monitor-household-count{margin-top:10px}}
+@media(max-width:1000px){.fund-monitor{grid-template-columns:1fr}.monitor-card{min-height:0}.monitor-household-count{margin-top:10px}}
 @media(max-width:650px){.fund-monitor{grid-template-columns:1fr}.monitor-household{grid-column:auto}.monitor-card{min-height:0;padding:21px 20px}.monitor-value{font-size:2.35rem;margin-top:17px}.monitor-card>p{margin-bottom:19px}.monitor-household-count{margin-top:15px}}
