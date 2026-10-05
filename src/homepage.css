@@ -239,3 +239,8 @@
 .how-step-number::before{display:none}
 .how-timeline-step::before{content:'';grid-row:2;grid-column:1;align-self:center;height:2px;background:#cbb6df;margin:0 -12px;z-index:0}
 .how-timeline-step:first-child::before{margin-left:50%}.how-timeline-step:last-child::before{margin-right:50%}
+
+/* Draw a brand-gradient underline without moving or hiding the headline. */
+.hero-ready-line{background-image:linear-gradient(90deg,#9945ff 0%,#be65da 55%,#ff5a5f 100%);background-repeat:no-repeat;background-position:left 96%;background-size:0% .065em;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding-bottom:.07em;animation:heroUnderlineDraw 5.5s cubic-bezier(.22,1,.36,1) infinite}
+@keyframes heroUnderlineDraw{0%,10%{background-size:0% .065em}42%,78%{background-size:100% .065em}95%,100%{background-size:0% .065em}}
+@media(prefers-reduced-motion:reduce){.hero-ready-line{animation:none;background-size:100% .065em}}

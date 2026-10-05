@@ -694,3 +694,5 @@ Object.assign(thai, {
 });
 
 Object.assign(thai,{'Enter your preferred amount in SOL, or leave this at zero. Up to 9 decimal places.':'ระบุจำนวน SOL ที่ต้องการ หรือเว้นไว้ที่ศูนย์ รองรับทศนิยมสูงสุด 9 ตำแหน่ง'});
+
+Object.assign(thai,{'When disaster strikes, help should':'เมื่อภัยพิบัติเกิดขึ้น ความช่วยเหลือควร','already be ready.':'พร้อมแล้ว'});
