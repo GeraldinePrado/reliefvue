@@ -406,3 +406,42 @@ main.container{max-width:1280px;padding:0 32px}
 .movement-lane-head strong{display:inline-flex;padding:5px 9px;border-radius:6px;border:1px solid #cfc0e3;background:#f0e9f9;color:#513287;line-height:1.1}
 .movement-lane[data-lane="sent"] .movement-lane-head strong{border-color:#ebc7c2;background:#fff0ed;color:#8a3c39}
 @media(prefers-reduced-motion:reduce){.movement-lane ul,.ledger-full .transfer-list{will-change:auto}}
+
+/* Homepage fund monitor: the status-card idea applied to reserve accounting. */
+.fund-monitor{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.1fr) minmax(0,.82fr);gap:14px;margin:0 0 14px}
+.monitor-card{min-width:0;min-height:282px;padding:25px 26px 22px;border:1px solid #ded7e5;border-radius:17px;background:#fffefa;display:flex;flex-direction:column;box-shadow:0 9px 24px rgba(17,29,45,.055)}
+.monitor-reserve{background:var(--rv-navy);border-color:var(--rv-navy);color:#fff}
+.monitor-response{background:#f1ebf8;border-color:#d9cbe9}
+.monitor-household{background:#fffaf4;border-color:#ecd8d5}
+.monitor-card-head{display:flex;align-items:center;gap:10px;color:#4b4260;font-size:.79rem;font-weight:700}
+.monitor-reserve .monitor-card-head{color:#e8dcff}
+.monitor-icon{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:10px;background:#e7dbf5;color:#583492}
+.monitor-icon svg{width:21px;height:21px}
+.monitor-reserve .monitor-icon{background:#4b3a70;color:#f1e8ff}
+.monitor-household .monitor-icon{background:#ffe9e4;color:#984e4b}
+.monitor-value{display:block;margin:22px 0 5px;font:600 clamp(2rem,3.1vw,2.8rem)/1.05 'IBM Plex Sans',sans-serif;letter-spacing:-.055em;font-variant-numeric:tabular-nums;color:var(--rv-navy);white-space:nowrap}
+.monitor-reserve .monitor-value{color:#fff}
+.monitor-value small{font-size:.43em;letter-spacing:0}
+.monitor-card>p{margin:0 0 22px;color:#5c6070;font-size:.8rem;line-height:1.5}
+.monitor-reserve>p{color:#d8d9e6}
+.monitor-progress-label{display:flex;justify-content:space-between;gap:12px;margin-top:auto;color:#5c6070;font-size:.72rem}
+.monitor-progress-label strong{color:var(--rv-navy);font-variant-numeric:tabular-nums}
+.monitor-reserve .monitor-progress-label,.monitor-reserve .monitor-progress-label strong{color:#e8dcff}
+.monitor-card progress{appearance:none;-webkit-appearance:none;display:block;width:100%;height:8px;margin:9px 0 15px;border:0;border-radius:99px;overflow:hidden;background:#ddd4e8;accent-color:var(--rv-purple)}
+.monitor-card progress::-webkit-progress-bar{background:#ddd4e8;border-radius:99px}
+.monitor-card progress::-webkit-progress-value{background:var(--rv-purple);border-radius:99px}
+.monitor-card progress::-moz-progress-bar{background:var(--rv-purple);border-radius:99px}
+.monitor-reserve progress{background:#5a536e;accent-color:var(--rv-lavender)}
+.monitor-reserve progress::-webkit-progress-bar{background:#5a536e}
+.monitor-reserve progress::-webkit-progress-value{background:var(--rv-lavender)}
+.monitor-reserve progress::-moz-progress-bar{background:var(--rv-lavender)}
+.monitor-card-foot{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #5a536e;padding-top:12px;color:#d8d9e6;font-size:.73rem}
+.monitor-card-foot strong{color:#fff;font-variant-numeric:tabular-nums}
+.monitor-budget-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;border-top:1px solid #d7cce3;padding-top:12px}
+.monitor-budget-split>div{display:grid;gap:4px}.monitor-budget-split span{font-size:.7rem;color:#5c6070}.monitor-budget-split strong{font-size:.92rem;color:var(--rv-navy);font-variant-numeric:tabular-nums}
+.monitor-household-count{display:grid;gap:2px;margin-top:auto;padding-top:15px;border-top:1px solid #efdcd7}
+.monitor-household-count strong{font:600 1.7rem/1.08 'IBM Plex Sans',sans-serif;color:var(--rv-navy);font-variant-numeric:tabular-nums}
+.monitor-household-count span{font-size:.72rem;color:#5c6070}
+.rv-home .fund-reconcile{max-width:950px;margin:0 0 24px;color:#596171;font-size:.78rem;line-height:1.6}
+@media(max-width:1000px){.fund-monitor{grid-template-columns:repeat(2,minmax(0,1fr))}.monitor-household{grid-column:1/-1;min-height:0}.monitor-household-count{margin-top:10px}}
+@media(max-width:650px){.fund-monitor{grid-template-columns:1fr}.monitor-household{grid-column:auto}.monitor-card{min-height:0;padding:21px 20px}.monitor-value{font-size:2.35rem;margin-top:17px}.monitor-card>p{margin-bottom:19px}.monitor-household-count{margin-top:15px}}

@@ -28,7 +28,34 @@ function start(){
  const transfers=[['RV–09421','Household grant',.8,'7L8c…G4p2','Mae Rim'],['RV–09420','Household grant',.8,'3Mqa…8Vn6','Mae Rim'],['RV–09419','Reserve donation',120,'Relief reserve','Thailand'],['RV–09418','Household grant',.8,'9Pxt…2Jf7','Mae Rim'],['RV–09417','Household grant',.8,'5Hrn…4Qy8','Mae Rim'],['RV–09416','Reserve donation',45,'Relief reserve','Thailand'],['RV–09415','Household grant',.8,'6Buv…3Ks9','Mae Rim'],['RV–09414','Household grant',.8,'8Fje…7Xp1','Mae Rim'],['RV–09413','Reserve donation',88,'Relief reserve','Thailand'],['RV–09412','Reserve donation',21,'Relief reserve','Thailand']] as const;
  let ledgerFilter:'all'|'grants'|'donations'='all';let replayCursor=3;let replayPaused=false;
  const scenarioAlerts=[['STORM WATCH','Heavy storm watch near Mae Rim','Today · 09:42 · Example bulletin'],['FLOOD REPORT','Homes inundated in Mae Rim','Today · 10:06 · Example local report'],['LANDSLIDE WATCH','Access road at risk north of Chiang Mai','Today · 10:18 · Example area advisory'],['RESPONSE REVIEW','Mae Rim household response under review','Today · 10:31 · Demo response update']] as const;let alertsPaused=false;
- function summary(){return `<div class="fund-metrics"><div><span>Relief reserve</span><strong>${sol(publicResponse.reserve)} <small>SOL</small></strong></div><div><span>Mae Rim budget</span><strong>${sol(publicResponse.budget)} <small>SOL</small></strong></div><div><span>Per household</span><strong>${sol(publicResponse.grant)} <small>SOL</small></strong></div><div><span>Grants sent</span><strong>${sol(publicResponse.paid)} <small>SOL</small></strong><em>${publicResponse.households.toLocaleString('en-US')} <span>households</span></em></div><div><span>Allocation left</span><strong>${sol(publicResponse.left)} <small>SOL</small></strong></div></div><p class="fund-reconcile">Sample accounting: ${sol(publicResponse.received)} SOL received = ${sol(publicResponse.reserve)} in reserve + ${sol(publicResponse.paid)} distributed. The ${sol(publicResponse.budget)} SOL response budget includes ${sol(publicResponse.left)} SOL still allocated.</p>`;}
+ function summary(){
+  const reserveShare=Math.round(publicResponse.reserve/publicResponse.received*100);
+  const budgetShare=Math.round(publicResponse.paid/publicResponse.budget*100);
+  return `<div class="fund-monitor" aria-label="Fictional Mae Rim fund overview">
+    <article class="monitor-card monitor-reserve">
+      <div class="monitor-card-head"><span class="monitor-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 10h16M6 10V6h12v4M6 10v8h12v-8M10 14h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Relief reserve</span></div>
+      <strong class="monitor-value">${sol(publicResponse.reserve)} <small>SOL</small></strong>
+      <p>Still available after sample household grants.</p>
+      <div class="monitor-progress-label"><span>Share of all funds received</span><strong>${reserveShare}%</strong></div>
+      <progress value="${publicResponse.reserve}" max="${publicResponse.received}" aria-label="Share of received funds still in reserve">${reserveShare}%</progress>
+      <div class="monitor-card-foot"><span>Total received</span><strong>${sol(publicResponse.received)} SOL</strong></div>
+    </article>
+    <article class="monitor-card monitor-response">
+      <div class="monitor-card-head"><span class="monitor-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.4" stroke="currentColor" stroke-width="1.8"/></svg></span><span>Mae Rim response budget</span></div>
+      <strong class="monitor-value">${sol(publicResponse.budget)} <small>SOL</small></strong>
+      <p>Set aside for this fictional flood response.</p>
+      <div class="monitor-progress-label"><span>Budget sent as grants</span><strong>${budgetShare}%</strong></div>
+      <progress value="${publicResponse.paid}" max="${publicResponse.budget}" aria-label="Share of Mae Rim budget sent as grants">${budgetShare}%</progress>
+      <div class="monitor-budget-split"><div><span>Grants sent</span><strong>${sol(publicResponse.paid)} SOL</strong></div><div><span>Still allocated</span><strong>${sol(publicResponse.left)} SOL</strong></div></div>
+    </article>
+    <article class="monitor-card monitor-household">
+      <div class="monitor-card-head"><span class="monitor-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m3 11 9-7 9 7M5 10v10h14V10M10 20v-6h4v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>One household grant</span></div>
+      <strong class="monitor-value">${sol(publicResponse.grant)} <small>SOL</small></strong>
+      <p>Fixed amount per approved household in this example.</p>
+      <div class="monitor-household-count"><strong>${publicResponse.households.toLocaleString('en-US')}</strong><span>example households supported</span></div>
+    </article>
+  </div><p class="fund-reconcile">${locale==='th'?`จากยอดรับเข้า ${sol(publicResponse.received)} SOL มีการจ่ายเงินช่วยเหลือตัวอย่าง ${sol(publicResponse.paid)} SOL และเหลือในเงินสำรอง ${sol(publicResponse.reserve)} SOL โดย ${sol(publicResponse.left)} SOL ที่ยังจัดสรรให้แม่ริมรวมอยู่ในเงินสำรองนี้`:`Of ${sol(publicResponse.received)} SOL received, ${sol(publicResponse.paid)} SOL has gone to example households and ${sol(publicResponse.reserve)} SOL remains in the reserve. The ${sol(publicResponse.left)} SOL still allocated to Mae Rim is included in that reserve.`}</p>`;
+ }
  function transferMarkup([ref,type,amount,wallet,area]:readonly [string,string,number,string,string],fresh=false){return `<li class="transfer-row ${fresh?'new':''}"><span class="transfer-kind ${type==='Household grant'?'grant':'donation'}" aria-hidden="true">${type==='Household grant'?'↗':'＋'}</span><span class="transfer-context"><strong>${esc(type)}</strong><small>${esc(area)} · ${esc(ref)}</small></span><span class="transfer-destination"><small>To</small><strong>${esc(wallet)}</strong></span><span class="transfer-amount">${sol(amount)} <small>SOL</small></span><span class="transfer-status ${type==='Household grant'?'sent':'received'}">${type==='Household grant'?'Sent':'Received'}</span></li>`;}
  function laneMarkup([ref,type,amount,wallet,area]:readonly [string,string,number,string,string]){return `<li class="lane-row"><div class="lane-main"><strong>${type==='Household grant'?'Grant sent':'Reserve received'}</strong><small>${esc(area)} · ${esc(ref)}</small></div><div class="lane-route"><span>${type==='Household grant'?'To wallet':'To reserve'}</span><strong>${esc(wallet)}</strong></div><div class="lane-amount">${sol(amount)} <small>SOL</small></div></li>`;}
  function replayRows(){const demoRows=state.activity.filter(a=>a.step==='Your demo contribution'||a.step==='Walkthrough outcome').map(a=>[a.ref,a.type==='Donation'?'Reserve donation':a.type,a.amount,a.type==='Donation'?'Relief reserve':'Example wallet','Your session'] as const);return [...demoRows,...transfers];}

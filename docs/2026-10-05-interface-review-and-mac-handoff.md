@@ -62,3 +62,10 @@ The Drive folder is `2-projects/12_solana_hackaton`. This file and a dated sourc
 - The full fund record now has compact tinted **Received** and **Sent** labels. They indicate money entering the reserve or a sample grant leaving for a wallet. The home page lane headings use the same quiet emphasis.
 - Instead of rebuilding and fading every row at once, the replay inserts one sample entry and shifts the existing list together every 2.6 seconds. The full record can pause and filter; filtered views show unique sample references. Reduced-motion users see a static list.
 - Browser checks covered the local mobile-sized English and Thai layouts, one-row progression, pause, Grants, and Donations filters. `npm run check` passed TypeScript, 11 tests, standard build, and public build. Production still requires post-push verification.
+
+## Later update — homepage fund overview cards
+
+- Replaced the flat five-figure grid on the homepage with three brand-colored cards: remaining reserve, Mae Rim response budget, and one household grant. The first two cards have accessible progress bars and the response card separates grants sent from the amount still allocated.
+- Kept the fictional numbers and accounting: 55,920 SOL received; 7,680 SOL in sample grants to 9,600 example households; 48,240 SOL in reserve; 12,000 SOL Mae Rim budget with 4,320 SOL still allocated inside the reserve. No live funds or transactions are implied.
+- Added English and Thai labels and a Thai accounting explanation. Local narrow-screen browser inspection showed all cards without horizontal overflow. `npm run check` passed TypeScript, 11 tests, normal build, and public Vercel build.
+- This adopts the supplied status-dashboard card and progress-bar treatment only. ReliefVue has no WooCommerce order or revenue metrics.
