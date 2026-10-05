@@ -64,7 +64,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 ## Pitch preparation memory
 
-Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v09.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v10.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
 ## Project documents
 
@@ -79,4 +79,6 @@ The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a sep
 
 Only reviewed project source, assets and documentation belong in this public repository. Do not publish real identities, secrets, generated keys, dependencies or private workspace records. A GitHub push alone does not establish that Vercel has deployed the same revision.
 
-Reviewer operations: [dashboard design, role walkthrough and prototype boundaries](docs/reviewer_dashboard_v03.md).
+Reviewer operations: [dashboard design, role walkthrough and prototype boundaries](docs/reviewer_dashboard_v04.md).
+
+Pitch next: [readiness, narrative and time plan](docs/pitch_readiness_v01.md).
