@@ -371,3 +371,28 @@ main.container{max-width:1280px;padding:0 32px}
 @media(prefers-reduced-motion:reduce){.activity-trend-line,.activity-point,.allocation-donut{animation:none;transition:none}}
 
 @media(max-width:450px){html[lang="th"] .header-inner{grid-template-columns:1fr}html[lang="th"] .wordmark{grid-column:1;grid-row:1}html[lang="th"] .header-actions{grid-column:1;grid-row:2;justify-self:start}html[lang="th"] .header nav{grid-column:1;grid-row:3}}
+
+/* Keep the navigation and fictional alert visible together while scrolling. */
+.site-chrome{position:sticky;top:0;z-index:100;isolation:isolate;background:var(--rv-ivory);box-shadow:0 5px 18px rgba(17,29,45,.08)}
+.site-chrome .header{position:relative;top:auto;z-index:auto;box-shadow:none}
+.site-chrome .alert-strip{position:relative;z-index:1}
+/* Pulse the alert words as well as the icon; keep the label legible throughout. */
+.alert-flag .alert-label{display:inline-block;padding:3px 6px;border-radius:4px;background:#fbe7e3;color:#813a38;animation:alertWordSignal 1.7s ease-in-out infinite}
+@keyframes alertWordSignal{0%,100%{background:#fbe7e3;color:#813a38;box-shadow:0 0 0 rgba(219,75,80,0);text-shadow:none}50%{background:#ffd2cf;color:#972b35;box-shadow:0 0 0 2px rgba(219,75,80,.23),0 0 17px rgba(219,75,80,.44);text-shadow:0 0 8px rgba(219,75,80,.28)}}
+@media(prefers-reduced-motion:reduce){.alert-flag .alert-label{animation:none;text-shadow:none}}
+
+@media(max-width:650px){.alert-flag .alert-label{width:auto;justify-self:start}}
+
+@media(max-width:450px){
+  .header-inner,html[lang="th"] .header-inner{grid-template-columns:auto minmax(0,1fr);gap:3px 6px;padding:6px 10px;min-height:0}
+  .wordmark,html[lang="th"] .wordmark{grid-column:1;grid-row:1;font-size:1.19rem;gap:1px}
+  .wordmark .brand-symbol{width:31px;height:29px}
+  .header-actions,html[lang="th"] .header-actions{grid-column:2;grid-row:1;justify-self:end;gap:3px}
+  .header-actions>a:not(.button),html[lang="th"] .header-actions>a:not(.button){font-size:.66rem}
+  .header-actions .button{min-height:34px;padding:5px 8px;font-size:.7rem}
+  .language-switch{padding:1px;gap:0}.language-switch button{min-width:23px;padding:3px 5px;font-size:.62rem}
+  .header nav,html[lang="th"] .header nav{grid-column:1/-1;grid-row:2;padding:0;gap:13px}
+  .header nav button,html[lang="th"] .header nav button{padding:2px 0;font-size:.72rem}
+}
+
+@media(max-width:450px){.header-actions>a:not(.button),html[lang="th"] .header-actions>a:not(.button){font-size:.72rem}.header nav button,html[lang="th"] .header nav button{font-size:.78rem}}

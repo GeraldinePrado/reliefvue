@@ -437,6 +437,8 @@ Object.assign(thai,{
   'Still allocated':'ยังจัดสรรไว้'
 });
 
+Object.assign(thai,{'When disaster strikes, help should already be ready.':'เมื่อภัยพิบัติเกิดขึ้น ความช่วยเหลือควรพร้อมแล้ว','Fund activity':'ความเคลื่อนไหวของเงิน','FUND ACTIVITY':'ความเคลื่อนไหวของเงิน'});
+
 export function localize(root: HTMLElement, locale: Locale){
   document.documentElement.lang=locale;
   if(locale==='en')return;
