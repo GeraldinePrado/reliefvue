@@ -405,6 +405,8 @@ Object.assign(thai,{'Choose a relief contribution':'เลือกจำนว�
 
 Object.assign(thai,{"ReliefVue proposes a SOL reserve funded before disaster. After a serious flood, households could request one fixed grant. People review eligibility; Solana makes every fund movement visible.":"ReliefVue เสนอเงินสำรอง SOL ที่เตรียมก่อนเกิดภัย หลังน้ำท่วมรุนแรง ครัวเรือนสามารถขอเงินช่วยเหลือตามจำนวนที่กำหนด เจ้าหน้าที่ตรวจสอบสิทธิ และ Solana แสดงทุกการเคลื่อนไหวของเงิน"});
 
+Object.assign(thai,{'EXAMPLE · NOT LIVE':'ตัวอย่าง · ไม่ใช่ข้อมูลสด','Today · 09:42 · Example bulletin':'วันนี้ · 09:42 · ประกาศตัวอย่าง','Today · 10:06 · Example local report':'วันนี้ · 10:06 · รายงานท้องถิ่นตัวอย่าง','Today · 10:18 · Example area advisory':'วันนี้ · 10:18 · ประกาศพื้นที่ตัวอย่าง','Today · 10:31 · Demo response update':'วันนี้ · 10:31 · อัปเดตการสาธิต','Four fictional alerts moving left':'การแจ้งเตือนสมมติสี่รายการเลื่อนไปทางซ้าย'});
+
 export function localize(root: HTMLElement, locale: Locale){
   document.documentElement.lang=locale;
   if(locale==='en')return;

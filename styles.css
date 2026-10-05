@@ -315,3 +315,20 @@ main.container{max-width:1280px;padding:0 32px}
 @media(max-width:520px){.ledger-full .transfer-row{grid-template-columns:28px minmax(0,1fr) auto;grid-template-rows:auto auto;gap:5px 9px}.ledger-full .transfer-kind{grid-column:1;grid-row:1/3}.ledger-full .transfer-context{grid-column:2;grid-row:1}.ledger-full .transfer-destination{display:block;grid-column:2;grid-row:2}.ledger-full .transfer-amount{grid-column:3;grid-row:1}.ledger-full .transfer-status{grid-column:3;grid-row:2}}
 @media(max-width:400px){.movement-lane .lane-row{grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;min-height:96px}.movement-lane .lane-main{grid-column:1;grid-row:1}.movement-lane .lane-route{display:block;grid-column:1;grid-row:2}.movement-lane .lane-amount{grid-column:2;grid-row:1/3}.lane-window{height:384px}}
 @media(prefers-reduced-motion:reduce){.movement-lane ul.is-advancing .lane-row,.ledger-full .transfer-list.is-advancing .transfer-row{animation:none!important}}
+
+/* Continuous fictional alert ticker; the flag and controls stay still. */
+.alert-inner{grid-template-columns:auto minmax(0,1fr) auto auto}
+.alert-ticker-window{min-width:0;overflow:hidden;mask-image:linear-gradient(to right,transparent,#000 2%,#000 98%,transparent)}
+.alert-ticker-track{display:flex;width:max-content;animation:alertTicker 28s linear infinite}
+.alert-ticker-track.is-paused{animation-play-state:paused}
+.alert-ticker-group{display:flex;align-items:center;flex:none;gap:24px;padding-right:24px}
+.alert-story{display:grid;grid-template-columns:auto minmax(190px,max-content);column-gap:9px;flex:none;min-width:330px;border-right:1px solid #e5c5c1;padding-right:24px}
+.alert-type{grid-row:1/3;align-self:center}
+.alert-source{grid-column:2;font-size:.72rem;white-space:nowrap}
+.alert-flag{white-space:nowrap}
+.alert-icon{animation:alertSignal 1.5s ease-in-out infinite}
+@keyframes alertTicker{to{transform:translateX(-50%)}}
+@keyframes alertSignal{0%,46%,100%{opacity:1}50%,64%{opacity:.35}}
+@media(max-width:1000px){.alert-inner{grid-template-columns:auto minmax(0,1fr) auto}.alert-link{display:none}}
+@media(max-width:650px){.alert-inner{grid-template-columns:minmax(0,1fr) auto;gap:7px 10px}.alert-flag{grid-column:1/-1}.alert-ticker-window{grid-column:1;grid-row:2}.alert-actions{grid-column:2;grid-row:2}.alert-story{display:grid;grid-template-columns:1fr;gap:2px;min-width:260px}.alert-type{grid-row:auto;justify-self:start;display:inline-block}.alert-source{grid-column:1;white-space:nowrap}}
+@media(prefers-reduced-motion:reduce){.alert-ticker-track,.alert-icon{animation:none}.alert-ticker-window{overflow:auto;mask-image:none}.alert-ticker-track{width:auto}.alert-ticker-group[aria-hidden="true"]{display:none}}
