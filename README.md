@@ -62,10 +62,14 @@ The check command runs type checking, focused tests and both build modes. `npm r
 
 For optional technical tools, start `npm run server` in another terminal and open `#technical`. The API binds localhost port 8787; simulated staff roles and its session token are not production authentication. See [technical operating notes](docs/technical-demo-notes.md) before funding any Devnet fixture.
 
+## Pitch preparation memory
+
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v01.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+
 ## Project documents
 
 - [Product brief](docs/brief.md), [submission scope](docs/submission-scope.md) and [design brief](docs/design-brief.md).
-- [Incident reporting and AI-to-human verification plan](docs/incident_reporting_v01.md).
+- [Incident reporting and AI-to-human verification plan](docs/incident_reporting_v02.md).
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
 - [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
