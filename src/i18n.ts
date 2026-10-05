@@ -407,6 +407,36 @@ Object.assign(thai,{"ReliefVue proposes a SOL reserve funded before disaster. Af
 
 Object.assign(thai,{'EXAMPLE · NOT LIVE':'ตัวอย่าง · ไม่ใช่ข้อมูลสด','Today · 09:42 · Example bulletin':'วันนี้ · 09:42 · ประกาศตัวอย่าง','Today · 10:06 · Example local report':'วันนี้ · 10:06 · รายงานท้องถิ่นตัวอย่าง','Today · 10:18 · Example area advisory':'วันนี้ · 10:18 · ประกาศพื้นที่ตัวอย่าง','Today · 10:31 · Demo response update':'วันนี้ · 10:31 · อัปเดตการสาธิต','Four fictional alerts moving left':'การแจ้งเตือนสมมติสี่รายการเลื่อนไปทางซ้าย'});
 
+Object.assign(thai,{
+  'Illustrative fund charts':'กราฟเงินช่วยเหลือตัวอย่าง',
+  'THE RESPONSE IN NUMBERS':'ภาพรวมการช่วยเหลือ',
+  'See the reserve, the grants, and what remains.':'ดูเงินสำรอง เงินช่วยเหลือ และยอดที่เหลือ',
+  'Fictional Mae Rim response. These charts explain the example figures; they do not depict live Solana transactions.':'เหตุการณ์สมมติที่แม่ริม กราฟเหล่านี้อธิบายตัวเลขตัวอย่าง ไม่ใช่ธุรกรรมสดบน Solana',
+  'Total received':'รับเข้าทั้งหมด',
+  'Into the relief reserve in this scenario':'เข้าสู่เงินสำรองช่วยเหลือในสถานการณ์นี้',
+  'Household grants sent':'จ่ายให้ครัวเรือนแล้ว',
+  'Reserve available':'เงินสำรองคงเหลือ',
+  'After the example grants':'หลังจ่ายเงินช่วยเหลือตัวอย่าง',
+  'Grants reached households':'เงินช่วยเหลือถึงครัวเรือน',
+  'Illustrative cumulative progress · SOL':'ยอดสะสมตัวอย่าง · SOL',
+  'Opened':'เปิดการช่วยเหลือ',
+  'First grants':'เริ่มจ่าย',
+  'More verified':'ตรวจสอบเพิ่ม',
+  'Current':'ปัจจุบัน',
+  'Illustrative cumulative grants by response stage, in SOL':'เงินช่วยเหลือสะสมตามช่วงการตอบสนอง (SOL) ในตัวอย่าง',
+  'Stage':'ช่วง',
+  'Grants sent (SOL)':'จ่ายช่วยเหลือแล้ว (SOL)',
+  'Response opened':'เปิดการช่วยเหลือ',
+  'First households':'ครัวเรือนกลุ่มแรก',
+  'More households':'ครัวเรือนเพิ่มเติม',
+  'Current replay':'สถานการณ์ปัจจุบัน',
+  'Mae Rim response budget':'งบช่วยเหลือแม่ริม',
+  'Grant allocation in this fictional event':'การจัดสรรเงินในเหตุการณ์สมมติ',
+  'Event budget':'งบเหตุการณ์',
+  'Grants sent':'จ่ายช่วยเหลือแล้ว',
+  'Still allocated':'ยังจัดสรรไว้'
+});
+
 export function localize(root: HTMLElement, locale: Locale){
   document.documentElement.lang=locale;
   if(locale==='en')return;
