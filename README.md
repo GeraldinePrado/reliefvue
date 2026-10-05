@@ -6,7 +6,7 @@ ReliefVue is a Thailand-first concept for household emergency grants on Solana. 
 
 **Current stage: ideathon concept and hackathon prototype.** The public walkthrough uses fictional households and simulated verification, donations and payouts. There are no live aid recipients, donated reserve or operating partners.
 
-[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brandbook](docs/brandbook_v04/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
+[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brandbook](docs/brandbook_v05/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
 
 ## The problem we want to address
 
@@ -64,7 +64,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 ## Pitch preparation memory
 
-Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v15.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v16.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
 ## Project documents
 
@@ -73,7 +73,7 @@ Start with [the feature inventory and pitch preparation record](docs/pitch_prepa
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
 - [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
-- [Brandbook v04](docs/brandbook_v04/index.html): current direction; earlier guides are historical.
+- [Brandbook v05](docs/brandbook_v05/index.html): current direction; earlier guides are historical.
 
 The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a separate local policy/persistence/chain API. Production authentication, KYC, custody, fiat conversion and a public payout backend are outside this submission's scope.
 
@@ -81,10 +81,10 @@ Only reviewed project source, assets and documentation belong in this public rep
 
 Reviewer operations: [dashboard design, role walkthrough and prototype boundaries](docs/reviewer_dashboard_v05.md).
 
-Pitch next: [readiness, narrative and time plan](docs/pitch_readiness_v02.md).
+Pitch next: [readiness, narrative and time plan](docs/pitch_readiness_v03.md).
 
-Longer-term direction: [access, geography and organization roadmap](docs/expansion_roadmap_v02.md).
+Longer-term direction: [access, geography and organization roadmap](docs/expansion_roadmap_v03.md).
 
 Reviewer financial analytics: [scenario accounting and controls](docs/reviewer_analytics_v02.md).
 
-Current review: [application, brand and pitch-readiness findings](docs/review_report_v01.md).
+Current review: [application, brand and pitch-readiness findings](docs/review_report_v02.md).
