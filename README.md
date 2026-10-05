@@ -6,7 +6,7 @@ ReliefVue is a Thailand-first concept for household emergency grants on Solana. 
 
 **Current stage: ideathon concept and hackathon prototype.** The public walkthrough uses fictional households and simulated verification, donations and payouts. There are no live aid recipients, donated reserve or operating partners.
 
-[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brandbook](docs/brandbook_v05/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
+[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brand guide](docs/brandbook_v06/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
 
 ## The problem we want to address
 
@@ -73,7 +73,7 @@ Start with [the feature inventory and pitch preparation record](docs/pitch_prepa
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
 - [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
-- [Brandbook v05](docs/brandbook_v05/index.html): current direction; earlier guides are historical.
+- [Brand guide v06](docs/brandbook_v06/index.html): current direction; earlier guides are historical. The deployed website serves it at `/brand-guide/`.
 
 The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a separate local policy/persistence/chain API. Production authentication, KYC, custody, fiat conversion and a public payout backend are outside this submission's scope.
 

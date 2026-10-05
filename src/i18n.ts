@@ -7,6 +7,7 @@ const thai: Record<string,string> = {
   'Reviewer view':'มุมมองผู้ตรวจสอบ',
   'Reset demo':'เริ่มสาธิตใหม่',
   'How it works':'ขั้นตอนการทำงาน',
+  'Brand guide':'คู่มือแบรนด์',
   'Transparency':'ความโปร่งใส',
   'Get help':'ขอความช่วยเหลือ',
   'Donate':'บริจาค',

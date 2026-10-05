@@ -7,7 +7,7 @@
     "dev": "vite",
     "server": "tsx server/index.ts",
     "build": "tsc --noEmit && vite build",
-    "build:web": "tsc --noEmit && vite build --mode public",
+    "build:web": "tsc --noEmit && vite build --mode public && node scripts/copy-brandbook.mjs",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "check": "npm run typecheck && npm test && npm run build && npm run build:web",

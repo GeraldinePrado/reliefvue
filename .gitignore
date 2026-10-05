@@ -1,10 +1,13 @@
 node_modules/
 dist/
+.DS_Store
+Icon?
 data/
 browser_profile/
 faucet_profile/
 live_profile/
 *.png
+!docs/brandbook_v05/assets/pastel_wavescape_v02.png
 .vercel/
 .env
 .env.*
@@ -20,3 +23,5 @@ chain/target/
 chain/.anchor/
 chain/node_modules/
 *-keypair.json
+!docs/brandbook_v06/assets/pastel_wavescape_v02.png
+!docs/brandbook_v06/assets/reliefvue_elephant_selected.png
