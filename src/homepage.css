@@ -208,3 +208,34 @@
 .map-legend a{color:#654087;text-decoration:underline}
 @media(max-width:700px){.scenario-map{min-height:450px}.map-status-filters{bottom:30px}.map-status-filters button{font-size:.75rem;padding:8px}.map-modes button{flex:1}}
 @media(prefers-reduced-motion:reduce){.scenario-pin svg{animation:none!important}.flow-bridge.is-tracing i::before{animation:none!important}}
+
+/* Dedicated How it works explainer, independent of the homepage timeline. */
+.how-audiences{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:16px 0 64px}
+.how-audiences article{border-top:2px solid #d9cce8;padding-top:24px}
+.how-audiences h2{font-size:1.7rem;margin:12px 0}.how-audiences p{max-width:55ch;line-height:1.75}
+.how-process-head{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:24px}
+.how-process-head h2{font-size:clamp(1.8rem,3vw,2.6rem);margin:10px 0}
+.how-timeline-controls{display:flex;gap:8px;flex-shrink:0}.how-timeline-controls[hidden]{display:none}
+.how-timeline-controls button{min-height:44px;padding:10px 15px;background:#fff;border:1px solid #cdbbdf;border-radius:8px;color:#50357a;font:inherit;cursor:pointer;transition:background .2s}
+.how-timeline-controls button:hover:not(:disabled){background:#f0e9f8}.how-timeline-controls button:disabled{opacity:.4;cursor:default}
+.how-timeline-scroll{overflow-x:auto;scroll-snap-type:x proximity;padding:12px 0 20px;scrollbar-color:#a38bc4 #eee8f4;scrollbar-width:thin}
+.how-timeline-track{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:24px;position:relative;min-width:1196px}
+.how-timeline-track::before{content:'';position:absolute;top:267px;left:110px;right:110px;height:2px;background:#cbb6df}
+.how-timeline-step{display:grid;grid-template-rows:240px 56px 240px;position:relative;text-align:center;scroll-snap-align:center;min-width:0}
+.how-step-number{grid-row:2;grid-column:1;align-self:center;justify-self:center;display:grid;place-items:center;border-radius:50%;width:56px;height:56px;background:#6840ac;color:white;border:6px solid #faf9f6;font-weight:700;font-size:1.1rem;z-index:1}
+.how-step-copy{grid-row:3;grid-column:1;padding:24px 8px 0;position:relative}.how-step-copy::before{content:'';position:absolute;width:2px;height:18px;top:0;left:calc(50% - 1px);background:#cbb6df}
+.how-timeline-step:nth-child(even) .how-step-copy{grid-row:1;align-self:end;padding:0 8px 24px}.how-timeline-step:nth-child(even) .how-step-copy::before{top:auto;bottom:0}
+.how-step-copy .eyebrow{font-size:.65rem;letter-spacing:.06em;margin:0 0 10px}.how-step-copy h3{font-size:1.4rem;line-height:1.2;margin:0 0 12px}.how-step-copy>p:last-child{font-size:.9rem;line-height:1.65;margin:0;color:#554b61}
+.how-demo-note{display:flex;gap:28px;padding:24px 0;border-top:1px solid #ded5e5;line-height:1.7}.how-demo-note strong{min-width:190px;color:#342640}.how-demo-note span{max-width:80ch}.how-actions{display:flex;gap:12px;flex-wrap:wrap;margin:32px 0 60px}
+@media(max-width:700px){.how-audiences{grid-template-columns:1fr;gap:22px;margin-bottom:40px}.how-process-head{align-items:flex-start;flex-direction:column;gap:12px}.how-timeline-track{grid-template-columns:repeat(5,260px);min-width:1396px}.how-timeline-track::before{left:130px;right:130px}.how-demo-note{flex-direction:column;gap:8px}.how-timeline-step{grid-template-rows:240px 56px 240px}}
+@media(prefers-reduced-motion:reduce){.how-timeline-controls button{transition:none}}
+
+.how-timeline-track{grid-template-rows:minmax(260px,auto) 56px minmax(260px,auto)}
+.how-timeline-step{grid-row:1 / 4;grid-template-rows:subgrid}
+.how-timeline-track::before{display:none}
+.how-step-number::before{content:'';position:absolute;left:-12px;right:-12px;height:2px;background:#cbb6df;z-index:-1}
+.how-timeline-step:first-child .how-step-number::before{left:50%}.how-timeline-step:last-child .how-step-number::before{right:50%}
+.how-timeline-track{row-gap:0}
+.how-step-number::before{display:none}
+.how-timeline-step::before{content:'';grid-row:2;grid-column:1;align-self:center;height:2px;background:#cbb6df;margin:0 -12px;z-index:0}
+.how-timeline-step:first-child::before{margin-left:50%}.how-timeline-step:last-child::before{margin-right:50%}
