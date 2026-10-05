@@ -121,9 +121,9 @@
 .flow-bridge i{height:2px;min-width:20px;background:#c2accf}
 .flow-bridge i::after{content:'';width:7px;height:7px;border-top:2px solid #a487bc;border-right:2px solid #a487bc;position:absolute;right:0;top:50%;transform:translateY(-50%) rotate(45deg)}
 .flow-bridge i::before{content:'';position:absolute;top:50%;left:0;width:16px;height:3px;border-radius:8px;background:#9945ff;box-shadow:0 0 8px #9945ff88;opacity:0;transform:translateY(-50%)}
-.flow-bridge.is-tracing i::before{animation:fundLight 1.7s ease-in-out .2s 1 both}
-.flow-bridge.is-tracing i:nth-of-type(2)::before{animation-delay:2s}
-@keyframes fundLight{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 16px);opacity:0}}
+.flow-bridge.is-tracing i::before{animation:fundLight 4.8s ease-in-out infinite}
+.flow-bridge.is-tracing i:nth-of-type(2)::before{animation-delay:2.4s}
+@keyframes fundLight{0%{left:0;opacity:0}8%{opacity:1}38%{opacity:1}48%,100%{left:calc(100% - 16px);opacity:0}}
 .timeline-heading h2{max-width:none;font-size:clamp(2rem,3.5vw,3.15rem)}
 @media(min-width:1100px){.timeline-heading h2{white-space:nowrap}.timeline-heading{gap:24px}.timeline-controls{flex-shrink:0}}
 .timeline-rail.has-journey-track::before,.has-journey-track .timeline-step::before,.has-journey-track .timeline-step::after{display:none}
@@ -188,3 +188,23 @@
 }
 @media(max-width:400px){.service-path .timeline-step{gap:0 10px}.service-path .timeline-step p{font-size:.83rem}.service-path .timeline-heading h2{font-size:1.75rem}}
 @media(max-width:400px){.service-path .timeline-heading h2{font-size:clamp(1.4rem,7vw,1.75rem)}}
+
+/* Source-labelled historic map and larger, recognisable location markers. */
+.rv-impact .impact-metric::after{display:none}
+.impact-metric [data-count]{font-variant-numeric:tabular-nums}
+.map-modes{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}
+.map-modes button,.map-status-filters button{min-height:44px;padding:10px 16px;border:1px solid #d7cedf;border-radius:8px;background:white;color:#342b40;font:inherit;font-weight:600;cursor:pointer}
+.map-modes button[aria-pressed=true],.map-status-filters button[aria-pressed=true]{background:#0e1626;color:#fff;border-color:#0e1626}
+.map-status-filters{position:absolute;z-index:500;bottom:30px;left:12px;right:12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center;pointer-events:none}
+.map-status-filters button{pointer-events:auto;box-shadow:0 2px 9px #0e162622;font-size:.8rem;padding:8px 11px}
+.map-status-filters button span{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#b93240;color:white;margin-right:6px}
+.map-status-filters button[data-status="Resolved example"] span{background:#16756a}
+.scenario-pin svg{width:40px;height:48px;overflow:visible;filter:drop-shadow(0 3px 4px #0e162644)}
+.scenario-pin svg path{fill:#c53343;stroke:#fff;stroke-width:2.5}
+.scenario-pin svg text{fill:white;font:bold 24px sans-serif}
+.scenario-pin.resolved svg path{fill:#16756a}
+.scenario-pin:not(.resolved) svg{animation:locationPulse 2.8s ease-in-out infinite}
+@keyframes locationPulse{50%{filter:drop-shadow(0 0 7px #ff5a5faa);transform:translateY(-3px)}}
+.map-legend a{color:#654087;text-decoration:underline}
+@media(max-width:700px){.scenario-map{min-height:450px}.map-status-filters{bottom:30px}.map-status-filters button{font-size:.75rem;padding:8px}.map-modes button{flex:1}}
+@media(prefers-reduced-motion:reduce){.scenario-pin svg{animation:none!important}.flow-bridge.is-tracing i::before{animation:none!important}}

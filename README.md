@@ -64,7 +64,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 ## Pitch preparation memory
 
-Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v04.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v05.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
 ## Project documents
 

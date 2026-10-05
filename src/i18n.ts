@@ -634,3 +634,15 @@ Object.assign(thai,{
  '· Flash news':'· ข่าวด่วน','· Weather':'· สภาพอากาศ','· Update':'· อัปเดต','· Relief':'· การช่วยเหลือ'
 });
 Object.assign(thai,{'From prepared funds':'จากเงินช่วยเหลือที่เตรียมพร้อม','to affected household help':'สู่ครัวเรือนที่ได้รับผลกระทบ'});
+
+Object.assign(thai, {
+ '2024 flood record':'บันทึกน้ำท่วมปี 2024',
+ 'Report workflow demo':'ตัวอย่างขั้นตอนรายงาน',
+ 'Flood reported':'รายงานน้ำท่วม',
+ 'Warning issued':'มีประกาศเตือน',
+ 'ON THE GROUND · CHIANG MAI':'สถานการณ์ในพื้นที่ · เชียงใหม่',
+ 'HISTORICAL RECORD + DEMO · NOT LIVE':'บันทึกในอดีตและตัวอย่าง · ไม่ใช่ข้อมูลสด',
+ 'Follow the funds. See where relief goes.':'ติดตามเงินทุน เห็นความช่วยเหลือถึงปลายทาง',
+ 'Approximate area centres · selected records, not flood boundaries or live conditions.':'ตำแหน่งกลางพื้นที่โดยประมาณ · บันทึกบางส่วน ไม่ใช่ขอบเขตน้ำท่วมหรือสถานการณ์ปัจจุบัน',
+ 'View UNOSAT satellite flood map · 5–10 Oct 2024 ↗':'ดูแผนที่น้ำท่วมจากดาวเทียม UNOSAT · 5–10 ต.ค. 2024 ↗',
+});
