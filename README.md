@@ -64,7 +64,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 ## Pitch preparation memory
 
-Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v10.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v11.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
 ## Project documents
 
@@ -82,3 +82,5 @@ Only reviewed project source, assets and documentation belong in this public rep
 Reviewer operations: [dashboard design, role walkthrough and prototype boundaries](docs/reviewer_dashboard_v04.md).
 
 Pitch next: [readiness, narrative and time plan](docs/pitch_readiness_v01.md).
+
+Longer-term direction: [access, geography and organization roadmap](docs/expansion_roadmap_v01.md).
