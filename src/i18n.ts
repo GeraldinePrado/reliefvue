@@ -698,3 +698,5 @@ Object.assign(thai,{'Enter your preferred amount in SOL, or leave this at zero. 
 Object.assign(thai,{'When disaster strikes, help should':'เมื่อภัยพิบัติเกิดขึ้น ความช่วยเหลือควร','already be ready.':'พร้อมแล้ว'});
 
 Object.assign(thai,{'Relief prepared together.':'ร่วมเตรียมความช่วยเหลือ','Delivered household by household.':'ส่งถึงแต่ละครัวเรือน'});
+
+Object.assign(thai,{'Reviewer / Admin Dashboard':'แดชบอร์ดผู้ตรวจสอบ / ผู้ดูแล','Reviewer / Admin Dashboard · Demo':'แดชบอร์ดผู้ตรวจสอบ / ผู้ดูแล · เดโม'});
