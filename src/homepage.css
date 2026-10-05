@@ -240,7 +240,12 @@
 .how-timeline-step::before{content:'';grid-row:2;grid-column:1;align-self:center;height:2px;background:#cbb6df;margin:0 -12px;z-index:0}
 .how-timeline-step:first-child::before{margin-left:50%}.how-timeline-step:last-child::before{margin-right:50%}
 
-/* Draw a brand-gradient underline without moving or hiding the headline. */
-.hero-ready-line{background-image:linear-gradient(90deg,#9945ff 0%,#be65da 55%,#ff5a5f 100%);background-repeat:no-repeat;background-position:left 96%;background-size:0% .065em;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding-bottom:.07em;animation:heroUnderlineDraw 5.5s cubic-bezier(.22,1,.36,1) infinite}
-@keyframes heroUnderlineDraw{0%,10%{background-size:0% .065em}42%,78%{background-size:100% .065em}95%,100%{background-size:0% .065em}}
-@media(prefers-reduced-motion:reduce){.hero-ready-line{animation:none;background-size:100% .065em}}
+/* A lightly irregular double pencil stroke, drawn left to right. */
+.hero-ready-line{display:inline-block;position:relative;white-space:nowrap;padding-bottom:.12em}
+.hero-pencil{position:absolute;left:0;bottom:-.03em;width:100%;height:.32em;overflow:visible;pointer-events:none}
+.hero-pencil path{fill:none;stroke:url(#hero-pencil-gradient);stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:pencilWrite 5.8s ease-in-out infinite}
+.hero-pencil .pencil-main{stroke-width:2.8}.hero-pencil .pencil-grain{stroke-width:.8;opacity:.45;animation-delay:.08s}.hero-pencil .pencil-return{stroke-width:1.3;opacity:.65;animation-name:pencilReturn}
+@keyframes pencilWrite{0%,8%{stroke-dashoffset:1;opacity:0}12%{opacity:1}40%,78%{stroke-dashoffset:0;opacity:1}94%,100%{stroke-dashoffset:0;opacity:0}}
+@keyframes pencilReturn{0%,37%{stroke-dashoffset:1;opacity:0}40%{opacity:.65}58%,78%{stroke-dashoffset:0;opacity:.65}94%,100%{stroke-dashoffset:0;opacity:0}}
+@media(max-width:360px){.rv-hero h1{font-size:2.25rem}}
+@media(prefers-reduced-motion:reduce){.hero-pencil path{animation:none;stroke-dashoffset:0}.hero-pencil .pencil-grain{opacity:.45}.hero-pencil .pencil-return{opacity:.65}}
