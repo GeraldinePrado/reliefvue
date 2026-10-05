@@ -249,3 +249,19 @@
 @keyframes pencilReturn{0%,37%{stroke-dashoffset:1;opacity:0}40%{opacity:.65}58%,78%{stroke-dashoffset:0;opacity:.65}94%,100%{stroke-dashoffset:0;opacity:0}}
 @media(max-width:360px){.rv-hero h1{font-size:2.25rem}}
 @media(prefers-reduced-motion:reduce){.hero-pencil path{animation:none;stroke-dashoffset:0}.hero-pencil .pencil-grain{opacity:.45}.hero-pencil .pencil-return{opacity:.65}}
+
+/* How it works: roomy heading, paired audience cards, centered section anchors. */
+.how-page-intro{width:100%;max-width:none!important}
+.how-page-intro h1{width:100%;max-width:none;font-size:clamp(1.15rem,4.8vw,3.6rem);line-height:1.2}
+.how-page-intro h1>span{display:block}
+.how-page-intro>p:last-child{max-width:75ch;line-height:1.75}
+.how-audiences{gap:24px;align-items:stretch}
+.how-audiences article{background:#fff;border:1px solid #ded5e7;border-top:3px solid #9470c7;border-radius:14px;padding:30px 32px}
+.how-audiences article:last-child{border-top-color:#6840b5}
+.how-audiences article>p:last-child{margin-bottom:0;color:#5d6471}
+.how-process-head{flex-direction:column;align-items:center;text-align:center;justify-content:center;gap:16px}
+.how-process-head>div:first-child{width:100%}
+.how-demo-note{flex-direction:column;align-items:center;text-align:center;gap:12px;padding:32px 16px 0}
+.how-demo-note strong{font-size:1.15rem}.how-demo-note span{max-width:76ch}
+.how-actions{justify-content:center;text-align:center;margin-top:24px}
+@media(max-width:700px){.how-audiences article{padding:24px}.how-process-head{align-items:center}.how-page-intro h1{font-size:clamp(1.05rem,4.8vw,2.1rem)}}
