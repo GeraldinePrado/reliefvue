@@ -273,3 +273,8 @@
 .demo-banner .demo-staff-link{font-weight:600;text-underline-offset:3px}
 
 .province-filter{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}.province-filter label{font-weight:600}.province-filter select{min-height:46px;max-width:100%;padding:10px 36px 10px 14px;border:1px solid #b9afc7;border-radius:8px;background:#fff;color:#0e1626;font:inherit}.province-filter>span{font-size:.85rem;color:#59616e}@media(max-width:700px){.province-filter{gap:8px}.province-filter select{flex:1;min-width:0}.province-filter>span{width:100%}}
+
+/* Keep the demo notice and staff entry readable above the sticky header. */
+.demo-banner{font-size:1rem;line-height:1.45;padding:10px 24px;gap:8px 16px}
+.demo-banner button,.demo-banner .demo-staff-link{font-size:inherit}
+@media(max-width:520px){.demo-banner{font-size:.875rem;padding:8px 12px;gap:2px 16px}.demo-banner .demo-staff-link{order:1;flex-basis:100%}}
