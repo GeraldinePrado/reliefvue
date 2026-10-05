@@ -117,3 +117,18 @@
  .timeline-step:last-child::before,.timeline-step:last-child::after{display:none}
  .timeline-step p{max-width:none;font-size:.94rem;line-height:1.75}
 }
+/* Aligned arrowheads and a short light sequence explain the direction of funds. */
+.flow-bridge i{height:2px;min-width:20px;background:#c2accf}
+.flow-bridge i::after{content:'';width:7px;height:7px;border-top:2px solid #a487bc;border-right:2px solid #a487bc;position:absolute;right:0;top:50%;transform:translateY(-50%) rotate(45deg)}
+.flow-bridge i::before{content:'';position:absolute;top:50%;left:0;width:16px;height:3px;border-radius:8px;background:#9945ff;box-shadow:0 0 8px #9945ff88;opacity:0;transform:translateY(-50%)}
+.flow-bridge.is-tracing i::before{animation:fundLight 1.7s ease-in-out .2s 1 both}
+.flow-bridge.is-tracing i:nth-of-type(2)::before{animation-delay:2s}
+@keyframes fundLight{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:calc(100% - 16px);opacity:0}}
+.timeline-heading h2{max-width:none;font-size:clamp(2rem,3.5vw,3.15rem)}
+@media(min-width:1100px){.timeline-heading h2{white-space:nowrap}.timeline-heading{gap:24px}.timeline-controls{flex-shrink:0}}
+.timeline-rail.has-journey-track::before,.has-journey-track .timeline-step::before,.has-journey-track .timeline-step::after{display:none}
+.journey-track{position:absolute;top:0;left:0;pointer-events:none;z-index:0;overflow:visible}
+.journey-base{fill:none;stroke:#cab8dc;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.journey-light{fill:none;stroke:#9945ff;stroke-width:4;stroke-linecap:round;opacity:0;filter:drop-shadow(0 0 3px #9945ff66)}
+.timeline-copy{z-index:1}.timeline-step>span{z-index:2}
+@media(prefers-reduced-motion:reduce){.flow-bridge i::before{animation:none!important;opacity:0!important}.journey-light{display:none}}

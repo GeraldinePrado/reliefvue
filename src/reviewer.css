@@ -1,0 +1,21 @@
+.header nav a{font-family:'IBM Plex Sans',sans-serif;font-size:.9rem;color:#0e1626;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;white-space:nowrap}
+.header nav a:hover{color:#6840b5}.header nav a:focus-visible{outline:3px solid #9272be;outline-offset:4px}
+.event-review{margin:0 0 40px;border:1px solid #dcd3e6;border-radius:18px;background:#fff;overflow:hidden}
+.event-review-heading{display:flex;justify-content:space-between;align-items:start;gap:24px;padding:30px 32px;border-bottom:1px solid #e6dfea}
+.event-review-heading h2{font:400 clamp(1.8rem,3vw,2.5rem)/1.2 Fraunces,serif;letter-spacing:-.03em;margin:0 0 12px}
+.event-review-heading p:last-child{max-width:740px;color:#5b6370;line-height:1.65;margin:0}
+.event-stage-badge{flex-shrink:0;padding:9px 13px;background:#eee6f7;color:#553483;border:1px solid #d1bfeb;border-radius:99px;font-size:.8rem;font-weight:600}
+.event-explainer{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:30px 32px;background:#faf7fc;align-items:start}
+.event-next>h3{font:600 1.25rem 'IBM Plex Sans',sans-serif;letter-spacing:-.02em;margin:10px 0}
+.event-next>p,.event-evidence p,.event-evidence li{font-size:.92rem;line-height:1.7;color:#545b69}
+.event-next dl,.event-evidence dl{margin:20px 0 0}.event-next dl>div,.event-evidence dl>div{display:grid;grid-template-columns:1fr 1.2fr;gap:10px;padding:10px 0;border-top:1px solid #e4dbe9;font-size:.8rem;line-height:1.5}.event-next dd,.event-evidence dd{margin:0;font-weight:600;color:#583888}.event-next dt,.event-evidence dt{color:#606674}
+.event-evidence{background:white;border:1px solid #dcd3e6;border-radius:10px;padding:18px 20px}.event-evidence summary{font-weight:600;color:#583888;line-height:1.5;cursor:pointer}.event-evidence>p:first-of-type{margin-top:18px}.event-evidence h3{font:600 1rem 'IBM Plex Sans',sans-serif;letter-spacing:0;margin:20px 0 10px}.event-evidence ul{padding-left:20px}
+.event-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:30px 32px;gap:24px;margin:0}
+.event-steps>li{display:flex;flex-direction:column;min-width:0}.event-step-number{width:38px;height:38px;border:1px solid #bca4d6;border-radius:50%;display:grid;place-items:center;font-size:.78rem;color:#6840b5;margin-bottom:17px;background:#f8f3fc}.is-complete .event-step-number{background:#6840b5;color:white}
+.event-steps h3{font:600 1rem/1.45 'IBM Plex Sans',sans-serif;letter-spacing:0;margin:0 0 12px}.event-steps li>p:first-of-type{font-size:.85rem;line-height:1.7;color:#59616f;margin-bottom:20px;flex:1}
+.event-steps .button{justify-content:center;text-align:center;font-size:.8rem;line-height:1.5;border-radius:9px;padding:11px 12px;min-height:48px;white-space:normal}
+.event-steps .button:disabled{opacity:1;background:#f2eff5;color:#71697b;border-color:#dfd8e7}
+.event-action-note{font-size:.75rem!important;line-height:1.6!important;color:#685c75!important;margin:10px 0 14px}
+.event-review-foot{display:flex;justify-content:space-between;align-items:center;gap:25px;padding:20px 32px;border-top:1px solid #e6dfea;background:#fcfafc}.event-review-foot p{font-size:.82rem;line-height:1.65;color:#62606b;margin:0;max-width:760px}.event-review-foot a{color:#6840b5;font-size:.85rem;font-weight:600;flex-shrink:0}.event-review>.link-button{margin:8px 24px 18px;text-align:left;color:#6840b5}.event-blocked{padding:12px;background:#fff4df;border-left:3px solid #b98227}
+@media(max-width:1000px){.event-steps{grid-template-columns:1fr 1fr}.event-review-foot{display:block}.event-review-foot a{display:inline-block;margin-top:15px}}
+@media(max-width:650px){.event-review-heading{flex-direction:column;padding:24px 20px;gap:16px}.event-explainer{grid-template-columns:1fr;padding:24px 20px;gap:20px}.event-steps{grid-template-columns:1fr;padding:24px 20px;gap:26px}.event-steps>li{padding-bottom:22px;border-bottom:1px solid #e5dfea}.event-steps>li:last-child{border:0;padding-bottom:0}.event-review-foot{padding:20px}.event-next dl>div,.event-evidence dl>div{grid-template-columns:1fr;gap:4px}.header nav a{font-size:.78rem}}

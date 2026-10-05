@@ -41,7 +41,7 @@ The guided demo creates no real account or database record. Entered details stay
 
 The selected identity combines the **B 3D elephant**, Alegreya Sans wordmark, a gentle ivory canvas, navy text, purple actions and lavender/coral logo accents. English and Thai typography directions are documented in the current guide.
 
-Use [the approved identity package](docs/approved-identity_v01/README.md) and [design brief](docs/design-brief.md) when redesigning the interface. The existing app has the agreed guided content, but its visual redesign is still next. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
+Use [the approved identity package](docs/approved-identity_v01/README.md) and [design brief](docs/design-brief.md) when redesigning the interface. The guided app and optional Devnet workspace share the selected identity and navigation; their explanatory and technical datasets remain separate. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
 
 ## Run locally — Windows or Mac
 
@@ -64,7 +64,7 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 ## Pitch preparation memory
 
-Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v01.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
+Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v02.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
 ## Project documents
 

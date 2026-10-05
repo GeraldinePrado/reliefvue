@@ -1,4 +1,8 @@
-import "../styles.css";
+import "./technical.css";
+import {siteHeader} from "./site-shell";
+import {eventReviewPanel} from "./event-review";
+import {localize,type Locale} from "./i18n";
+let locale:Locale="en";
 import type { PublicStatus } from "../shared/types";
 import { api, getStatus, publicDemo, type Profile } from "./api";
 import { availableWallets, connectWallet, donate } from "./wallet";
@@ -8,7 +12,7 @@ const app = root;
 let data: PublicStatus | undefined;
 let profiles: Profile[] = [];
 let selected = "unit-a";
-let page = location.hash.slice(1) || "overview";
+let page = location.hash.split("/")[1] || "overview";
 let busy = false;
 let stale = true;
 let feedback = "";
@@ -43,14 +47,15 @@ function stats() {
   return `<div class="stats"><div><span>Reserve on Devnet</span><strong>${fmt(data?.balanceSol)}</strong><small>test SOL · live balance</small></div><div><span>Fixed household grant</span><strong>${fmt(data?.event.amountSol)}</strong><small>test SOL · no baht equivalence</small></div><div><span>Event budget</span><strong>${fmt(data?.event.budgetSol)}</strong><small>${fmt(data?.event.reviewHoldSol)} held for review</small></div><div><span>Paid</span><strong>${fmt(data?.event.paidSol)}</strong><small>confirmed local event payouts</small></div></div>`;
 }
 function overview() {
-  return `${intro("PREPARED RELIEF · DIRECT TO PEOPLE", "Help ready when a disaster begins.", "One fictional Bangkok subdistrict. Observed flooding requires independent review and event authorization.")}<section class="choice-grid"><article class="choice"><div class="choice-icon">↗</div><h2>I want to donate</h2><p>Fund the reserve with test SOL and follow a confirmed receipt.</p><button class="button primary" data-nav="donate">Donate test SOL →</button></article><article class="choice"><div class="choice-icon">⌂</div><h2>I need relief</h2><p>Explore a fixed grant for a synthetic household in the affected area.</p><button class="button dark" data-nav="request">Request relief →</button></article></section><section class="event-panel"><div class="event-top"><div><p class="eyebrow">CURRENT DEMO EVENT</p><h2>${esc(data?.event.name || "Fictional Khlong Sai flood")}</h2><p>Forecasts stay in Watching. Observed home inundation, evacuation, or blocked essential access may advance to review.</p></div><span class="badge ${data?.event.active ? "active" : ""}">${esc(data?.event.status || "Loading")}</span></div>${stats()}</section>`;
+  return `${intro("RELIEFVUE · DEVNET WORKSPACE", "Explore the technology behind relief.", "Optional test tools for donations, event approvals and receipts. This workspace uses a separate technical fixture; it does not move the guided demo’s fictional funds.")}<details class="technical-explanation"><summary>How this relates to the guided demo</summary><p>The guided experience explains ReliefVue with fictional Chiang Mai amounts. These tools use a separate Devnet test fixture and real test-network balances where available. They share the same interface and review sequence; approvals and balances are not copied between the two.</p><p>No real-money relief reserve or production payout service is connected.</p></details><section class="choice-grid"><article class="choice"><div class="choice-icon">↗</div><h2>Test a donation</h2><p>Fund the reserve with test SOL and follow a confirmed receipt.</p><button class="button primary" data-nav="donate">Donate test SOL →</button></article><article class="choice"><div class="choice-icon">⌂</div><h2>Explore a household test</h2><p>Explore a fixed grant for a synthetic household in the affected area.</p><button class="button dark" data-nav="request">Request relief →</button></article></section><section class="event-panel"><div class="event-top"><div><p class="eyebrow">CURRENT DEMO EVENT</p><h2>${esc(data?.event.name || "Fictional Khlong Sai flood")}</h2><p>Forecasts stay in Watching. Observed home inundation, evacuation, or blocked essential access may advance to review.</p></div><span class="badge ${data?.event.active ? "active" : ""}">${esc(data?.event.status || "Loading")}</span></div>${stats()}</section>`;
 }
 function donation() {
-  return `${intro("DONATE", "Fund the response reserve.", "Wallet Standard signs a Devnet transfer. ReliefVue never requests a seed phrase.")}<div class="work-grid"><section class="work-card"><h2>Connect a Devnet wallet</h2><label for="wallet">Installed compatible wallet</label><select id="wallet">${availableWallets()
+  const wallets=availableWallets();
+  return `${intro("DONATE", "Fund the response reserve.", "Wallet Standard signs a Devnet transfer. ReliefVue never requests a seed phrase.")}<div class="work-grid"><section class="work-card"><h2>Connect a Devnet wallet</h2><label for="wallet">Installed compatible wallet</label><select id="wallet">${wallets.length?wallets
     .map((w) => `<option>${esc(w.name)}</option>`)
     .join(
       "",
-    )}</select><button id="connect" class="button secondary top-gap" ${busy ? "disabled" : ""}>Connect wallet</button><p class="field-note">${esc(walletAddress || "Enable a Wallet Standard wallet with Devnet support, then refresh.")}</p><form id="donate-form"><label for="amount">Amount in test SOL</label><input id="amount" name="amount" type="number" min="0.001" max="0.1" step="0.001" value="0.01" required><button class="button primary full top-gap" ${off() || (!walletAddress || pendingSignature || unknownSubmission ? "disabled" : "")}>Sign donation →</button></form>${!publicDemo ? `<button id="demo-fund" class="button secondary full top-gap" ${off()}>Demo donor sends 0.02 test SOL</button>` : ""}${unknownSubmission ? `<div class="eligibility review"><strong>Wallet submission outcome unknown</strong><p>Check the wallet transaction history before attempting another donation. Signing may have broadcast a transfer even when the wallet returned an error. Keep this session open for investigation.</p></div>` : ""}${pendingSignature ? `<div class="eligibility review"><strong>Submitted · confirmation pending</strong><code>${esc(pendingSignature)}</code><p>A signature alone is not a confirmed receipt. Retry verification without sending again.</p><button id="verify" class="button secondary" ${busy ? "disabled" : ""}>Verify existing signature</button></div>` : ""}</section><aside class="side-card"><p class="eyebrow">DEVNET TREASURY</p><code class="address">${esc(data?.treasury || "Loading")}</code><p>Test SOL only. Donations are recorded after chain verification.</p></aside></div>`;
+    ):'<option value="">No compatible wallet detected</option>'}</select><button id="connect" class="button secondary top-gap" ${busy||!wallets.length ? "disabled" : ""}>Connect wallet</button><p class="field-note">${esc(walletAddress || "Enable a Wallet Standard wallet with Devnet support, then refresh.")}</p><form id="donate-form"><label for="amount">Amount in test SOL</label><input id="amount" name="amount" type="number" min="0.001" max="0.1" step="0.001" value="0.01" required><button class="button primary full top-gap" ${off() || (!walletAddress || pendingSignature || unknownSubmission ? "disabled" : "")}>Sign donation →</button></form>${!publicDemo ? `<button id="demo-fund" class="button secondary full top-gap" ${off()}>Demo donor sends 0.02 test SOL</button>` : ""}${unknownSubmission ? `<div class="eligibility review"><strong>Wallet submission outcome unknown</strong><p>Check the wallet transaction history before attempting another donation. Signing may have broadcast a transfer even when the wallet returned an error. Keep this session open for investigation.</p></div>` : ""}${pendingSignature ? `<div class="eligibility review"><strong>Submitted · confirmation pending</strong><code>${esc(pendingSignature)}</code><p>A signature alone is not a confirmed receipt. Retry verification without sending again.</p><button id="verify" class="button secondary" ${busy ? "disabled" : ""}>Verify existing signature</button></div>` : ""}</section><aside class="side-card"><p class="eyebrow">DEVNET TREASURY</p><code class="address">${esc(data?.treasury || "Loading")}</code><p>Test SOL only. Donations are recorded after chain verification.</p></aside></div>`;
 }
 function request() {
   const profile = profiles.find((p) => p.id === selected);
@@ -60,20 +65,8 @@ function activity() {
   return `${intro("FUND ACTIVITY", "Receipts you can inspect.", publicDemo ? "Confirmed donations saved in this browser only. This is not a global ledger; recipient outcomes are illustrative." : "Confirmed Devnet transfers. Public receipts omit private household records.")}<section class="activity-card"><div class="section-title"><h2>Confirmed transfers</h2><button class="button secondary" id="refresh" ${busy ? "disabled" : ""}>Refresh</button></div>${data?.activity.length ? data.activity.map((a) => `<div class="activity-row"><div><span class="activity-icon">${a.type === "donation" ? "↗" : "⌂"}</span><strong>${esc(a.type)}</strong></div><div><strong>${fmt(a.amountSol)} test SOL</strong><small>${esc(new Date(a.at).toLocaleString())}</small><a href="https://explorer.solana.com/tx/${encodeURIComponent(a.signature)}?cluster=devnet" target="_blank" rel="noopener noreferrer">Confirmed transaction ↗</a></div></div>`).join("") : '<div class="empty-state">No confirmed receipts recorded.</div>'}</section>`;
 }
 function operator() {
-  return `${intro("SIMULATED LOCAL STAFF", "Review before authorizing.", publicDemo ? "Illustrative browser approvals saved locally. They cannot authorize payouts." : "Buttons simulate staff roles in the localhost service. They are not production multi-user authentication.")}<div class="work-grid"><section class="work-card"><h2>Fictional observed evidence</h2><p>Fixture: homes inundated and essential access cut in Khlong Sai, a fictional Bangkok subdistrict. This is synthetic evidence, not an official notice.</p><p>Live AI is unavailable. Human reviewers must verify real source, observation time, area, and impacts in any funded service.</p><p>Reviewer: ${data?.event.approvals.reviewer ? "approved" : "waiting"} · Approver: ${esc(data?.event.approvals.approver || "waiting")}</p><div class="button-row">${[
-    ["watch", "Watching"],
-    ["review", "Review observed fixture"],
-    ["approve-reviewer", "Reviewer approves"],
-    ["approve-primary", "Primary approves"],
-    ["approve-backup", "Backup approves"],
-  ]
-    .map(
-      ([action, label]) =>
-        `<button class="button secondary" data-action="${action}" ${action === "watch" || action === "review" ? (busy || stale || !data ? "disabled" : "") : off()}>${label}</button>`,
-    )
-    .join(
-      "",
-    )}</div></section><aside class="side-card"><h2>Limited event allocation</h2><p>Fixture budget: 0.05 test SOL. Human review hold: 0.01. Each verified household receives 0.01. These figures have no Thai purchasing-power equivalence.</p><p>Independent reviewer plus primary or backup approver must authorize the same terms.</p></aside></div>`;
+ const blocked=busy?"An action is processing. Please wait.":stale||!data?"Refresh the connection before continuing.":data.rpcError?"Devnet balance unavailable. Refresh before authorizing a funded test response.":undefined;
+ return `${intro("DEVNET · SIMULATED REVIEW", "Review before authorizing.", "The same evidence-to-approval sequence as the guided app, using separate test data. No live AI or production staff authentication is connected.")}${eventReviewPanel({status:data?.event.status||'prepared',recommended:!!data?.event.approvals.reviewer,approver:data?.event.approvals.approver||null,area:data?.event.area||'Fictional technical test area',technical:true,locked:!!data&&Object.keys(data.claims).length>0,blocked})}<section class="work-card technical-terms"><h2>Technical test terms</h2><p>The amounts below belong to the Devnet fixture. They are not the homepage’s 0.8 SOL household example.</p>${stats()}<p>Review hold is part of the event budget. Local server rules are not a deployed reserve contract.</p></section>`;
 }
 async function refresh() {
   stale = true;
@@ -119,23 +112,14 @@ function render() {
     operator,
   };
   if (!pages[page]) page = "overview";
-  app.innerHTML = `<div class="demo-banner"><strong>${publicDemo ? "PUBLIC PREVIEW" : "LOCAL SERVER DEMO"} · SOLANA DEVNET</strong><span>Fictional disaster · synthetic households · ${publicDemo ? "browser outcomes are illustrative" : "server transfers; reserve program not deployed"}</span></div><header class="header"><div class="header-inner"><button class="wordmark" data-nav="overview"><span class="mark">◈</span> relief<span>vue</span></button><nav aria-label="Main navigation">${[
-    ["overview", "Overview"],
-    ["donate", "Donate"],
-    ["request", "Request Relief"],
-    ["activity", "Fund Activity"],
-  ]
-    .map(
-      ([id, label]) =>
-        `<button data-nav="${id}" class="${page === id ? "selected" : ""}" ${page === id ? 'aria-current="page"' : ""}>${label}</button>`,
-    )
-    .join(
-      "",
-    )}</nav><button class="operator-link" data-nav="operator">Staff demo</button></div></header><main class="container" aria-busy="${busy}"><div role="status" aria-live="polite">${feedback ? `<div class="message">${esc(feedback)}</div>` : ""}${stale ? '<p class="field-note">Loading or stale status · actions disabled.</p>' : ""}</div>${pages[page]!()}</main><footer class="footer"><div class="container"><span>ReliefVue · fictional disaster prototype</span><span>Devnet only · no real funds or identity data</span></div></footer>`;
+  app.innerHTML = `<div class="technical-app"><div class="demo-banner"><strong>TECHNICAL DEMO · SOLANA DEVNET</strong><span>Test SOL only · separate from the guided walkthrough</span><a href="#home">Return to ReliefVue</a></div>${siteHeader(locale)}<main id="main" class="container" aria-busy="${busy}"><div class="technical-context"><span>${publicDemo?'PUBLIC DEVNET PREVIEW':'LOCAL SERVER WORKSPACE'}</span><a href="#about">What works today ↗</a></div><nav class="technical-tabs" aria-label="Devnet tools">${[['overview','Overview'],['donate','Test donation'],['request','Household test'],['activity','Confirmed receipts'],['operator','Evidence review']].map(([id,label])=>`<button type="button" data-nav="${id}" ${page===id?'aria-current="page"':''}>${label}</button>`).join('')}</nav><div role="status" aria-live="polite">${feedback?`<div class="message">${esc(feedback)}</div>`:''}${stale?'<p class="field-note">Status unavailable or refreshing. Transaction actions wait for a valid connection.</p>':''}</div>${stale||data?.rpcError?`<button type="button" class="button secondary" id="retry-status" ${busy?'disabled':''}>Retry connection</button>`:''}${pages[page]!()}</main><footer class="footer"><div class="container technical-footer"><div><h2>Prepared relief.<br>Accountable fund movements.</h2><p>Technical proof uses test SOL. Community reports, household verification and production reserve governance remain separate responsibilities.</p></div><a class="button secondary" href="#home">Return to the guided experience →</a></div></footer></div>`;
+  localize(app,locale);
+  app.querySelectorAll<HTMLButtonElement>('[data-action^="lang-"]').forEach(b=>b.onclick=()=>{locale=b.dataset.action==='lang-th'?'th':'en';render();});
+  app.querySelector('#retry-status')?.addEventListener('click',()=>void refresh());
   app.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach(
     (b) =>
       (b.onclick = () => {
-        location.hash = b.dataset.nav!;
+        location.hash = "technical/"+b.dataset.nav!;
         page = b.dataset.nav!;
         render();
       }),
@@ -226,7 +210,7 @@ function render() {
         feedback = "Simulated household review recorded.";
       }),
   );
-  app.querySelectorAll<HTMLButtonElement>("[data-action]").forEach(
+  app.querySelectorAll<HTMLButtonElement>(".event-review [data-action]").forEach(
     (b) =>
       (b.onclick = () =>
         void run(async () => {
@@ -236,7 +220,8 @@ function render() {
   );
 }
 window.addEventListener("hashchange", () => {
-  page = location.hash.slice(1) || "overview";
+  if(!location.hash.startsWith("#technical")){location.reload();return;}
+  page = location.hash.split("/")[1] || "overview";
   render();
 });
 render();
