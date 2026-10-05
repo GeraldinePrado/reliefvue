@@ -324,6 +324,87 @@ Object.assign(thai,{
   'Are my details public?':'ข้อมูลของฉันเปิดเผยต่อสาธารณะหรือไม่?'
 });
 
+
+Object.assign(thai,{
+  "A CHIANG MAI RESPONSE · INTERACTIVE DEMO": "เหตุการณ์ตัวอย่างเชียงใหม่ · ทดลองใช้งาน",
+  "Relief should be ready before the water rises.": "ความช่วยเหลือควรพร้อมก่อนน้ำมา",
+  "ReliefVue keeps a public SOL reserve ready. When a serious flood affects your area, your household can request one grant. People review the evidence; Solana shows where the funds go.": "ReliefVue เตรียมเงินสำรอง SOL ที่ตรวจสอบได้ เมื่อเกิดน้ำท่วมรุนแรงในพื้นที่ ครัวเรือนสามารถขอเงินช่วยเหลือหนึ่งครั้ง เจ้าหน้าที่ตรวจหลักฐาน และ Solana แสดงเส้นทางเงิน",
+  "Help for households. A record anyone can check.": "ช่วยเหลือครัวเรือน พร้อมบันทึกที่ทุกคนตรวจสอบได้",
+  "households helped in this sample": "ครัวเรือนที่ได้รับความช่วยเหลือในตัวอย่าง",
+  "sample payout per household": "เงินช่วยเหลือตัวอย่างต่อครัวเรือน",
+  "Explore the public record ↗": "ดูบันทึกสาธารณะ ↗",
+  "IN THIS FICTIONAL MAE RIM RESPONSE": "ในเหตุการณ์สมมติที่แม่ริม",
+  "See the scale of one prepared reserve.": "เห็นภาพเงินสำรองที่เตรียมไว้",
+  "households helped": "ครัวเรือนที่ได้รับความช่วยเหลือ",
+  "per household in this demo": "ต่อครัวเรือนในตัวอย่าง",
+  "Trace the example grants": "ติดตามเงินช่วยเหลือตัวอย่าง",
+  "A little freedom when plans change overnight.": "ให้ครัวเรือนเลือกสิ่งจำเป็นเมื่อชีวิตเปลี่ยนในชั่วข้ามคืน",
+  "A household may need drinking water today, transport tomorrow, or materials for a damaged home. A cash grant lets them decide what is urgent, when it is safe to buy it.": "วันนี้อาจต้องซื้อน้ำดื่ม พรุ่งนี้อาจต้องใช้ค่าเดินทางหรือซ่อมบ้าน เงินช่วยเหลือให้ครัวเรือนเลือกสิ่งเร่งด่วนได้เมื่อซื้อหาได้อย่างปลอดภัย",
+  "Every transfer visible. Household details private.": "เห็นทุกการโอน ข้อมูลครัวเรือนยังเป็นส่วนตัว",
+  "See a sample reserve, response budget and household payouts side by side.": "ดูเงินสำรอง งบช่วยเหลือ และการจ่ายให้ครัวเรือนในตัวอย่างเดียวกัน",
+  "From donations to household wallets.": "จากเงินบริจาคสู่วอลเล็ตครัวเรือน",
+  "Watch eight example movements turn over below: contributions arrive, approved grants leave, and each amount has a destination.": "ดูรายการตัวอย่างแปดรายการที่เปลี่ยนไปด้านล่าง เงินบริจาคเข้า เงินช่วยเหลือที่อนุมัติออก และทุกรายการมีปลายทาง",
+  "The public fund record": "บันทึกการเคลื่อนไหวของเงิน",
+  "Browse the sample response as it unfolds. Filter contributions and grants; amounts and destinations remain visible without household names.": "ดูเหตุการณ์ตัวอย่างที่ดำเนินไป กรองเงินบริจาคและเงินช่วยเหลือ โดยเห็นจำนวนเงินและปลายทางโดยไม่แสดงชื่อครัวเรือน",
+  "EXAMPLE · NOT LIVE": "ตัวอย่าง · ไม่ใช่ข้อมูลสด",
+  "How a response opens ↗": "ดูขั้นตอนเปิดการช่วยเหลือ ↗",
+  "WHEN A CLAIM IS APPROVED": "เมื่อคำขอได้รับอนุมัติ",
+  "Where would your grant go?": "เงินช่วยเหลือจะไปที่ใด?",
+  "Choose a preference now. In a real service, you would connect a wallet or use a qualified conversion provider after approval. This demo connects neither.": "เลือกวิธีรับเงินที่ต้องการ ในบริการจริง คุณจะเชื่อมต่อวอลเล็ตหรือใช้ผู้ให้บริการแปลงสกุลเงินหลังอนุมัติ ตัวอย่างนี้ยังไม่เชื่อมต่อทั้งสองทาง",
+  "DEMO ONLY": "ตัวอย่างเท่านั้น",
+  "Keep SOL": "เก็บเป็น SOL",
+  "Send to a verified Solana wallet. Its baht value can change.": "ส่งไปยังวอลเล็ต Solana ที่ตรวจสอบแล้ว มูลค่าเป็นบาทอาจเปลี่ยนแปลง",
+  "Convert to baht": "แปลงเป็นบาท",
+  "Future provider route; the quote, fees and delivery would be shown first.": "บริการในอนาคต โดยจะแสดงอัตราแลกเปลี่ยน ค่าธรรมเนียม และวิธีรับเงินก่อน",
+  "Sample wallet preview ready": "พร้อมดูตัวอย่างวอลเล็ต",
+  "No wallet connected": "ยังไม่ได้เชื่อมต่อวอลเล็ต",
+  "This is only an example destination. No key, wallet or funds are held here.": "นี่เป็นเพียงปลายทางตัวอย่าง ไม่มีการเก็บกุญแจ วอลเล็ต หรือเงินไว้ที่นี่",
+  "You can preview the connection step without installing a wallet.": "ดูตัวอย่างขั้นตอนเชื่อมต่อได้โดยไม่ต้องติดตั้งวอลเล็ต",
+  "Hide wallet preview": "ซ่อนตัวอย่างวอลเล็ต",
+  "Preview wallet connection": "ดูตัวอย่างการเชื่อมต่อวอลเล็ต",
+  "Your gift joins the relief reserve.": "เงินบริจาคของคุณเข้าสู่เงินสำรองช่วยเหลือ",
+  "In the planned service, donations fill a dedicated SOL reserve before an emergency. Approved household grants leave that reserve, with each movement visible in the public record.": "ในบริการที่วางแผนไว้ เงินบริจาคจะเติมเงินสำรอง SOL ก่อนเกิดเหตุ เงินช่วยเหลือที่อนุมัติจะจ่ายจากเงินสำรอง โดยทุกการเคลื่อนไหวแสดงในบันทึกสาธารณะ",
+  "Keep funds ready": "เตรียมเงินให้พร้อม",
+  "Contributions enter the dedicated relief reserve.": "เงินบริจาคเข้าสู่เงินสำรองช่วยเหลือโดยเฉพาะ",
+  "Review a response": "ตรวจสอบการช่วยเหลือ",
+  "People approve an affected area, household checks and a fixed grant.": "เจ้าหน้าที่อนุมัติพื้นที่ ตรวจสอบครัวเรือน และกำหนดเงินช่วยเหลือ",
+  "Show every movement": "แสดงทุกการเคลื่อนไหว",
+  "Start here": "เริ่มต้น",
+  "A little more": "เพิ่มอีกนิด",
+  "Give more": "ช่วยเพิ่ม",
+  "Give generously": "ร่วมช่วยเต็มที่",
+  "Choose any sample amount. You can review it before the demo receipt; no wallet or payment is connected.": "เลือกจำนวนเงินตัวอย่างได้ คุณจะตรวจสอบก่อนรับใบเสร็จสาธิต ยังไม่มีการเชื่อมต่อวอลเล็ตหรือจ่ายเงินจริง",
+  "Ready before the flood.": "พร้อมก่อนน้ำท่วม",
+  "Accountable after every grant.": "ตรวจสอบได้หลังทุกการจ่าย",
+  "ReliefVue is a proposed Thailand-first way to prepare a SOL reserve, review household requests privately, and show every grant movement publicly.": "ReliefVue เป็นแนวคิดสำหรับประเทศไทยในการเตรียมเงินสำรอง SOL ตรวจสอบคำขอครัวเรือนอย่างเป็นส่วนตัว และแสดงการจ่ายเงินช่วยเหลือต่อสาธารณะ",
+  "See the journey as a household or donor.": "ลองดูขั้นตอนในฐานะครัวเรือนหรือผู้บริจาค",
+});
+
+
+Object.assign(thai,{
+  "RESPONSE PROGRESSION": "ลำดับการช่วยเหลือ",
+  "Support moves as households are approved.": "การช่วยเหลือดำเนินไปเมื่อครัวเรือนได้รับอนุมัติ",
+  "Example sequence for this fictional response. Each bar shows cumulative grants sent, while the remaining allocation stays visible above.": "ลำดับตัวอย่างในเหตุการณ์สมมติ แต่ละแถบแสดงเงินช่วยเหลือที่จ่ายสะสม และงบคงเหลือแสดงด้านบน",
+  "Early response": "ช่วงเริ่มช่วยเหลือ",
+  "More households verified": "ตรวจสอบครัวเรือนเพิ่ม",
+  "Current example": "ตัวอย่างปัจจุบัน",
+  "Household grant": "เงินช่วยเหลือครัวเรือน",
+  "Reserve donation": "เงินบริจาคเข้าเงินสำรอง",
+  "Sent": "ส่งแล้ว",
+  "Thailand": "ประเทศไทย",
+  "Mae Rim": "แม่ริม",
+  "Illustrative scene · no real ReliefVue recipient": "ภาพประกอบสมมติ · ไม่ใช่ผู้รับเงินจริงของ ReliefVue",
+  "One fixed example grant of 0.8 SOL per verified household. A request still goes through review.": "เงินช่วยเหลือตัวอย่าง 0.8 SOL ต่อครัวเรือนที่ผ่านการตรวจสอบ คำขอยังต้องผ่านการพิจารณา",
+  "This fictional response shows 0.8 SOL per household. A real event amount would be based on Thai essentials prices, then reviewed before requests open.": "เหตุการณ์สมมตินี้แสดง 0.8 SOL ต่อครัวเรือน จำนวนเงินจริงจะอิงราคาสิ่งจำเป็นในไทยและผ่านการพิจารณาก่อนเปิดรับคำขอ",
+  "0.8 SOL · fictional example, not the final Thai-baht benchmark": "0.8 SOL · ตัวอย่างสมมติ ไม่ใช่เกณฑ์เงินบาทสุดท้าย",
+  "The Chiang Mai response is fictional. A real household grant would be set from Thai essentials prices; conversion and payment providers are not connected.": "เหตุการณ์เชียงใหม่เป็นเรื่องสมมติ เงินช่วยเหลือจริงจะอิงราคาสิ่งจำเป็นในไทย ยังไม่มีการเชื่อมต่อผู้ให้บริการแปลงสกุลเงินหรือจ่ายเงิน",
+  "Example grants of 0.8 SOL leave for verified wallets.": "เงินช่วยเหลือตัวอย่าง 0.8 SOL ส่งไปยังวอลเล็ตที่ตรวจสอบแล้ว",
+});
+
+Object.assign(thai,{'Choose a relief contribution':'เลือกจำนวนเงินบริจาคเพื่อช่วยเหลือ'});
+
+Object.assign(thai,{"ReliefVue proposes a SOL reserve funded before disaster. After a serious flood, households could request one fixed grant. People review eligibility; Solana makes every fund movement visible.":"ReliefVue เสนอเงินสำรอง SOL ที่เตรียมก่อนเกิดภัย หลังน้ำท่วมรุนแรง ครัวเรือนสามารถขอเงินช่วยเหลือตามจำนวนที่กำหนด เจ้าหน้าที่ตรวจสอบสิทธิ และ Solana แสดงทุกการเคลื่อนไหวของเงิน"});
+
 export function localize(root: HTMLElement, locale: Locale){
   document.documentElement.lang=locale;
   if(locale==='en')return;

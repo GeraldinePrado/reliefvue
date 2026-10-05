@@ -12,6 +12,8 @@ Prepare a SOL relief reserve before disasters. Use documented observed disaster 
 
 The future grant benchmark uses Thai prices for three days of ready-to-eat essentials for a reference household of 3-5; it is not the pot divided by applicants. The exact baht amount is unvalidated. SOL retention or future baht conversion is the recipient's choice; conversion and recoverable wallets are future capabilities.
 
+**Current fictional demo fixture (5 October 2026):** Geraldine selected 0.8 SOL per household for the Mae Rim walkthrough. The replay shows 9,600 sample households, 7,680 SOL in sample grants, a 12,000 SOL response budget, and 4,320 SOL still allocated. These figures are internally consistent examples, not a validated Thai essentials basket, government benefit equivalent, real reserve, or transfer history. A funded pilot would set a baht benchmark from dated local prices and determine the SOL amount near each payout.
+
 ## Current submission priorities, in order
 
 1. **Pitch narrative:** problem, affected household, proposed solution, why Solana, defensible differentiation, and what funding would validate/build. Avoid claims of adoption, proven speed, audited custody or unique technology without evidence.
