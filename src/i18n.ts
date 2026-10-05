@@ -646,3 +646,13 @@ Object.assign(thai, {
  'Approximate area centres · selected records, not flood boundaries or live conditions.':'ตำแหน่งกลางพื้นที่โดยประมาณ · บันทึกบางส่วน ไม่ใช่ขอบเขตน้ำท่วมหรือสถานการณ์ปัจจุบัน',
  'View UNOSAT satellite flood map · 5–10 Oct 2024 ↗':'ดูแผนที่น้ำท่วมจากดาวเทียม UNOSAT · 5–10 ต.ค. 2024 ↗',
 });
+
+Object.assign(thai, {
+ 'Flooding reported in Mae Rim':'มีรายงานน้ำท่วมในแม่ริม',
+ 'Heavy rain watch in Chiang Mai':'เฝ้าระวังฝนตกหนักในเชียงใหม่',
+ 'Road access limited in Saraphi':'ถนนในสารภีสัญจรได้จำกัด',
+ 'Relief review underway in Chang Phueak':'กำลังพิจารณาการช่วยเหลือในช้างเผือก',
+ 'Every household has different needs.':'แต่ละครัวเรือนมีความจำเป็นต่างกัน',
+ 'Help should meet theirs.':'ความช่วยเหลือควรตรงกับสิ่งที่จำเป็น',
+ 'One household may need medicine; another may need drinking water, baby supplies or transport. A direct cash grant lets each household buy what it needs most, where essentials are available and safe to access. Relief can respond to different needs, helping avoid supplies that go unused.':'ครัวเรือนหนึ่งอาจต้องการยา อีกครัวเรือนอาจต้องการน้ำดื่ม ของใช้สำหรับทารก หรือค่าเดินทาง เงินช่วยเหลือโดยตรงทำให้แต่ละครัวเรือนซื้อสิ่งที่จำเป็นที่สุดได้ เมื่อมีสินค้าและสามารถเข้าถึงได้อย่างปลอดภัย ความช่วยเหลือจึงตอบสนองความต้องการที่แตกต่างกัน และช่วยลดสิ่งของที่ไม่ได้ใช้',
+});
