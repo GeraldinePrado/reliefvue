@@ -1,3 +1,5 @@
+> Product update — 7 October 2026: [ReliefVue PRD](prd.md) records the planned recipient mobile app, web donations to country reserves, Thailand-first rollout and evacuation eligibility. Its latest confirmed decisions supersede conflicting older access/geography statements below. Current web journeys remain prototypes.
+
 <!-- Current consolidated design requirements: design-brief.md. Later approved sections supersede earlier prompts. -->
 
 # Receiver journey - hackathon redesign

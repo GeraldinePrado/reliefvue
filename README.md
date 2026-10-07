@@ -66,6 +66,10 @@ For optional technical tools, start `npm run server` in another terminal and ope
 
 Start with [the feature inventory and pitch preparation record](docs/pitch_preparation_v16.md) when Geraldine asks to build the deck. It records the current demo, planned features, incident source strategy and unresolved claims. Deck creation is deferred until Geraldine and Codex agree the UI is ready; this is documentation, not presentation approval.
 
+## Product direction — 7 October 2026
+
+The planned mobile app is the recipient route for private household verification and grant requests; the website supports donors and public fund tracking. Start with Thailand, then expand country by country with separate reserves. Broader cryptocurrency donations and partner network capabilities are future stages. The current web household flow remains a prototype, and the mobile preview is Coming soon. See the [working PRD](docs/prd.md) for confirmed decisions and open questions.
+
 ## Project documents
 
 - [Product brief](docs/brief.md), [submission scope](docs/submission-scope.md) and [design brief](docs/design-brief.md).
