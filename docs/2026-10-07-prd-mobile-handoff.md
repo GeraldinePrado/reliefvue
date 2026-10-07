@@ -4,7 +4,7 @@
 
 - Current source fetched from GitHub revision `0944e06` before changes; preserved the latest Mac-created screens and brandbook v06.
 - Planned recipient product is a mobile app; the web household flow remains a prototype. Website donors can choose a country reserve as countries become operational; Thailand is first.
-- Verified usual home in the activated affected area is the eligibility basis; lawful foreign residents can qualify; domestic evacuation does not cancel eligibility.
+- Verified usual home in the activated affected area is the eligibility basis; lawful foreign residents can qualify; domestic evacuation does not cancel eligibility. Temporary cross-border evacuation can qualify after human review of event-time home and disaster connection.
 - Registration/verification can happen before or during a disaster. Claims require active affected-area eligibility. Preregistration does not reserve aid.
 - Guest donors do not complete household KYC; optional accounts can provide history. Payment-provider requirements are separate.
 - Global lifetime donations and country histories are distinct from available reserves, commitments and paid aid. Multi-asset settlement/valuation remains open.
@@ -33,4 +33,4 @@ Use the latest GitHub main checkout (`git pull`, then `npm ci` and `npm run dev`
 
 ## Next discussion
 
-Cross-border evacuation eligibility is being clarified. Other decisions include the first mobile platform, custody/recovery provider, multi-crypto conversion model, country-earmarked refunds and exceptions, validated Thai grant benchmark and pilot governance. These are production decisions, not requirements to build the entire network immediately.
+Cross-border evacuation eligibility is confirmed, with evidence standards still to define. Other decisions include the first mobile platform, custody/recovery provider, multi-crypto conversion model, country-earmarked refunds and exceptions, validated Thai grant benchmark and pilot governance. These are production decisions, not requirements to build the entire network immediately.

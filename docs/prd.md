@@ -23,11 +23,12 @@ Confirmed on 7 October:
 - The intended public overview shows lifetime donations globally and by country, separately from current reserves, commitments and payouts. Asset conversion/valuation remains open.
 - Households may register and verify before a disaster, and new applicants can still register during a response. Claims open only for activated affected areas.
 - Donors may contribute as guests; a ReliefVue account is optional for history and receipts.
+- A household temporarily evacuated across a border can remain eligible after human review of its verified event-time home and disaster connection.
 - The mobile download section presently says Coming soon and shows a proposed login screen. There is no published app or store listing.
 
 Pending discussion:
 - Multi-cryptocurrency conversion versus separately held assets in country reserves.
-- Treatment of temporary cross-border evacuation/absence. Domestic evacuation is allowed; do not turn GPS absence into automatic rejection.
+- Exact evidence for temporary absence that is unrelated to disaster remains to be defined; do not turn GPS absence into automatic rejection.
 
 ## 3. Problem and intended outcomes
 
@@ -77,7 +78,7 @@ R-05: Preserve address history, event-time home and temporary evacuation locatio
 
 R-06: One entitlement per verified household per activated response, not per person or wallet. Independent rented units may share a building address. A rent receipt with date/unit details is supporting evidence, not automatic proof. Group suspected duplicates for human review; same address alone is insufficient rejection.
 
-R-07: A household's verified usual home must be inside the specifically approved affected boundary and connected to the event. Lawful foreign residents are treated under the same household rules. Domestic evacuation does not cancel eligibility.
+R-07: A household's verified usual home must be inside the specifically approved affected boundary and connected to the event. Lawful foreign residents are treated under the same household rules. Domestic evacuation does not cancel eligibility. Temporary cross-border evacuation may also qualify after human review of the event-time home and disaster connection; physical absence alone is not rejection.
 
 R-08: The dashboard shows verification status, applicable response, published fixed grant, claim status and what action is needed. With no active response it explains preparation; Watching is not permission to claim or pay.
 
@@ -186,7 +187,7 @@ Pilot measures: complete-claim-to-confirmed-payment time, delivery success, revi
 1. First mobile platform/order and shared/native technology.
 2. Wallet custody/recovery provider and local-currency payment provider.
 3. Multi-crypto reserve conversion model and supported assets/networks.
-4. Cross-border absence/evacuation policy and lawful-residence evidence alternatives.
+4. Evidence standards for cross-border evacuation, unrelated absence and lawful-residence alternatives.
 5. Country-earmarked refunds/exceptional transfer rules and donor consent.
 6. Verified disaster boundary/evidence thresholds, appeals and emergency caps.
 7. Validated Thai grant benchmark, quote timing and SOL exposure policy.
