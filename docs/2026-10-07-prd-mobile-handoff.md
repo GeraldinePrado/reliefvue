@@ -13,7 +13,7 @@
 
 `docs/prd.md` is the new working PRD. It consolidates journeys, country reserve accounting, privacy, human approval, payout/recovery, network stages, acceptance criteria and unresolved decisions. The README and older brief/journey/roadmap files link to it rather than silently retaining conflicting mobile-access descriptions.
 
-`src/mobile-app-preview.ts` and `.css` add the homepage section immediately above the footer. It uses the selected elephant, wordmark, fonts, ivory/lavender/purple palette, a proposed mobile login screen, iOS/Android Coming soon status and a working household web-demo link. No actual app download, login, real verification or new payment route is implemented.
+`src/mobile-app-preview.ts` and `.css` add the homepage section immediately above the footer. It uses the selected elephant, wordmark, fonts, ivory/lavender/purple palette, a proposed mobile login screen, iOS/Android Coming soon status and a working household web-demo link. Following Geraldine's supplied composition reference, the complete phone has a subtle metallic edge and angle, extending across the section boundary into reserved footer space. The reference informs placement and depth, not financial dashboard content or branding. No actual app download, login, real verification or new payment route is implemented.
 
 ## Verification
 
