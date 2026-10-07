@@ -11,3 +11,17 @@ html[lang=th] .mobile-app-copy h2,html[lang=th] .mobile-app-screen h3{font-famil
 /* The device crosses the section boundary; reserve footer space for readable links. */
 .mobile-app-section+.footer{padding-top:146px}
 @media(max-width:700px){.mobile-app-section+.footer{padding-top:116px}.mobile-app-figure:before{width:min(310px,calc(100vw - 32px))}}
+/* Compact editorial app invitation: one band, one device, one clear next step. */
+.mobile-app-section{background:#fdfbf7;border:0;padding:42px 0 0}
+.mobile-app-layout{background:#eee6f5;border:1px solid #ded2e9;border-radius:24px;grid-template-columns:minmax(0,1fr) 340px;gap:36px;padding:36px 48px;position:relative;max-width:1160px}
+.mobile-app-copy{max-width:570px}.mobile-app-copy h2{font-size:clamp(2rem,3.1vw,3rem);margin:10px 0 14px;max-width:14ch}.mobile-app-copy .mobile-app-lead{font-size:1rem;line-height:1.65;max-width:46ch}.mobile-app-copy .eyebrow{font-size:.68rem;letter-spacing:.12em;color:#6840b5}
+.mobile-app-steps{display:none}.mobile-app-platforms{gap:8px;margin-top:20px}.mobile-app-platforms>div{min-width:110px;padding:9px 16px;border-radius:9px;background:#fdfbf7}.mobile-app-platforms strong{font-size:.88rem}.mobile-app-platforms span{font-size:.72rem}.mobile-app-copy .mobile-app-availability{font-size:.74rem;margin:12px 0 8px;max-width:48ch}.mobile-app-demo-link{font-size:.85rem;gap:12px}
+.mobile-app-figure{top:45px;width:340px;height:380px;align-self:center}.mobile-app-figure:before{width:260px;height:260px;top:60px;background:#e0cfee}.mobile-app-phone{width:314px;zoom:.67;transform:rotate(-8deg);box-shadow:inset 0 0 0 2px #f8f4fc,0 28px 44px #39244726,9px 6px 0 -3px #aea0c0}.mobile-app-figure figcaption{font-size:.65rem;max-width:240px;margin-top:12px}.mobile-app-section+.footer{padding-top:90px;margin-top:0}
+@media(max-width:900px){.mobile-app-layout{grid-template-columns:minmax(0,1fr) 270px;padding:30px;gap:20px;width:calc(100% - 40px)}.mobile-app-figure{width:270px}.mobile-app-copy h2{font-size:2.3rem}}
+@media(max-width:700px){.mobile-app-section{padding-top:28px}.mobile-app-layout{grid-template-columns:1fr;padding:28px 24px 0;gap:0;border-radius:20px;width:calc(100% - 32px)}.mobile-app-copy h2{font-size:2.15rem;max-width:17ch}.mobile-app-copy .mobile-app-lead{font-size:.95rem}.mobile-app-platforms>div{flex:0 1 auto}.mobile-app-figure{width:100%;height:365px;top:35px;margin-top:0}.mobile-app-phone{zoom:.63;transform:rotate(-6deg);width:314px}.mobile-app-figure:before{width:240px;height:240px;top:45px}.mobile-app-section+.footer{padding-top:78px}.mobile-app-figure figcaption{margin-top:10px}}
+.mobile-app-section .mobile-app-layout{max-width:1160px;width:calc(100% - 64px);padding:30px 44px}
+.mobile-app-figure{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;height:400px;top:36px}
+.mobile-app-phone{flex:none}.mobile-app-figure figcaption{flex:none}.mobile-app-screen{min-height:584px}
+@media(max-width:900px){.mobile-app-section .mobile-app-layout{width:calc(100% - 40px);padding:28px}}
+@media(max-width:700px){.mobile-app-section .mobile-app-layout{width:calc(100% - 32px);padding:26px 24px 0}.mobile-app-figure{height:400px;top:25px}.mobile-app-section+.footer{padding-top:80px}}
+@media(max-width:700px){.mobile-app-figure{height:460px}.mobile-app-section+.footer{padding-top:85px}}
