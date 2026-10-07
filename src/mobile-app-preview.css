@@ -3,3 +3,4 @@
 @media(max-width:700px){.mobile-app-section .mobile-app-layout{width:calc(100% - 24px);padding:16px 12px}.mobile-app-copy h2{font-size:2rem}.app-device-group{width:600px;left:50%;transform:translateX(-50%) scale(.54);transform-origin:50% 0;height:450px;margin-bottom:-190px}.mobile-app-figure{top:20px}.mobile-app-figure figcaption{font-size:.6rem;margin-top:6px}.mobile-app-section+.footer{padding-top:70px}.mobile-app-copy>p{font-size:.95rem}}
 .app-device-group{height:560px}.mobile-app-figure figcaption{position:relative;margin-top:10px}
 @media(max-width:700px){.app-device-group{height:560px;margin-bottom:-245px}}
+@media(max-width:700px){.mobile-app-section{overflow-x:clip}.mobile-app-figure{min-width:0;width:100%}.app-device-group{left:calc(50% - 300px);transform:scale(.54)}}
