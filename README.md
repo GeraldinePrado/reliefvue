@@ -1,3 +1,5 @@
+> **Development direction — 24 October 2026:** ReliefVue is a global network with a recipient mobile app, starting operational exploration in Southeast Asia country by country. Thailand-first and unrestricted-payout descriptions below describe the earlier prototype. Start with the [consolidated PRD v0.4](docs/prd_v04.md) and [development sequence](docs/development_sequence_v01.md). PromptPay is a Thailand-specific feasibility requirement; no live payment integration is claimed. The existing demo and historical notes remain preserved below.
+
 # ReliefVue
 
 ## Prepare before disaster. Trace every relief payment.
