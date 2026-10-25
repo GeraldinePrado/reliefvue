@@ -1,4 +1,10 @@
+> **Development direction — 24 October 2026:** ReliefVue is a global network with a recipient mobile app, starting operational exploration in Southeast Asia country by country. Thailand-first and unrestricted-payout descriptions below describe the earlier prototype. Start with the [consolidated PRD v0.4](docs/prd_v04.md) and [development sequence](docs/development_sequence_v01.md). PromptPay is a Thailand-specific feasibility requirement; no live payment integration is claimed. The existing demo and historical notes remain preserved below.
+
 # ReliefVue
+
+Development work follows the [checkpoint workflow](docs/checkpoint_workflow_v01.md): one task at a time, verified implementation, a clear completed/next update, and a push to the GitHub development branch.
+
+Current development checkpoint: [Task 2 local reserve proof](docs/development_checkpoint_v01.md). Next: Task 3 generated client and signed-transaction validation.
 
 ## Prepare before disaster. Trace every relief payment.
 
@@ -76,7 +82,7 @@ The planned mobile app is the recipient route for private household verification
 - [Incident reporting and AI-to-human verification plan](docs/incident_reporting_v03.md).
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
-- [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
+- [Reserve program handoff](chain/README.md): Anchor program compiled and tested on a local validator; Devnet deployment and application integration remain pending.
 - [Brand guide v06](docs/brandbook_v06/index.html): current direction; earlier guides are historical. The deployed website serves it at `/brand-guide/`.
 
 The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a separate local policy/persistence/chain API. Production authentication, KYC, custody, fiat conversion and a public payout backend are outside this submission's scope.
