@@ -2,6 +2,10 @@
 
 # ReliefVue
 
+Development work follows the [checkpoint workflow](docs/checkpoint_workflow_v01.md): one task at a time, verified implementation, a clear completed/next update, and a push to the GitHub development branch.
+
+Current development checkpoint: [Task 2 local reserve proof](docs/development_checkpoint_v01.md). Next: Task 3 generated client and signed-transaction validation.
+
 ## Prepare before disaster. Trace every relief payment.
 
 ReliefVue is a Thailand-first concept for household emergency grants on Solana. It proposes keeping a donated reserve ready before disasters strike, reviewing requests when real impact is confirmed, and sending approved aid directly to verified household wallets. Public payment records would show how funds move; personal information would stay off-chain.
@@ -78,7 +82,7 @@ The planned mobile app is the recipient route for private household verification
 - [Incident reporting and AI-to-human verification plan](docs/incident_reporting_v03.md).
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
-- [Reserve program handoff](chain/README.md): Anchor source is currently uncompiled and undeployed.
+- [Reserve program handoff](chain/README.md): Anchor program compiled and tested on a local validator; Devnet deployment and application integration remain pending.
 - [Brand guide v06](docs/brandbook_v06/index.html): current direction; earlier guides are historical. The deployed website serves it at `/brand-guide/`.
 
 The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a separate local policy/persistence/chain API. Production authentication, KYC, custody, fiat conversion and a public payout backend are outside this submission's scope.
