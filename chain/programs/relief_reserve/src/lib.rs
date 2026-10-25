@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-declare_id!("Fg6PaFpoGXkYsidMpWxTWqkZ7FEfcYkgMQhgN3tR9Y4");
+declare_id!("BUJsC4HatdecjXB5YnpHU55SL3wr74Wbh1mgzkZXG4pL");
 
 #[program]
 pub mod relief_reserve {

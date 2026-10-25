@@ -1,6 +1,6 @@
-# ReliefVue reserve program — uncompiled source
+# ReliefVue reserve program — local native proof
 
-This is a separate Anchor workspace. The current ReliefVue app does **not** use this program. It remains in its labelled server-enforced or static rehearsal mode. No binary, generated IDL, deployment, or native passing test evidence exists for this source on 2026-10-04.
+This is a separate Anchor workspace. The current ReliefVue app does **not** use this program. It remains in its labelled server-enforced or static rehearsal mode. On 2026-10-25, the program compiled to SBF, generated its IDL and passed four Rust unit tests plus eleven instruction tests on a fresh local Agave 2.3.0 validator. It has not been deployed to Devnet or integrated into the application.
 
 ## Contract
 
@@ -14,40 +14,32 @@ One public household token represents one verified household for this event. Nev
 
 The program upgrade authority can replace all these rules. It is not decentralized or audited custody. Record its identity and check it with 'solana program show' before each demo. A separate reserve namespace can be created with other roles: the app must pin the intended reserve and program addresses and never select them by a public label alone. Rent and transaction/account-creation fees are separately funded.
 
-## Native setup on Mac/Linux
+## Native local setup
 
-Use a dedicated Devnet-only funded test wallet and synthetic keys. Do not put generated wallet files or target artifacts into source archives. Node >=22.12, Rust >=1.89, Anchor 0.32.1 and Agave/Solana 2.3.0 are the pinned baseline. Official sources:
-- https://www.anchor-lang.com/docs/updates/release-notes/0-32-1
-- https://www.anchor-lang.com/docs/updates/release-notes/0-32-0
-- https://www.anchor-lang.com/docs/installation
+Node >=22.12, host Rust 1.89.0, Anchor CLI/crate/test SDK 0.32.1 and Agave/Solana 2.3.0 are the tested baseline. `Cargo.lock` and `package-lock.json` pin the resolved dependencies; Anchor's transitive macro crates resolve to 0.32.2 under its published dependency ranges. Do not update them silently.
 
-Install the supported tools using official installation guidance. The version selection commands after Rust/AVM are installed are:
+Agave 2.3.0 bundles platform-tools v1.48 (Rust 1.84), which cannot build this Rust >=1.89 program and its locked edition-2024 dependencies. `Cargo.toml` therefore selects the official platform-tools v1.52 release (SBF Rust 1.89.0-dev). This is a compiler compatibility correction, with no change to the validator version or contract rules.
 
-    rustup update stable
-    avm install 0.32.1
-    avm use 0.32.1
-    sh -c "$(curl -sSfL https://release.anza.xyz/v2.3.0/install)"
-    rustc --version
-    anchor --version
-    solana --version
+All local keys, toolchains, caches, logs, ledger and build outputs live in the active session's `m1_runtime/` verification checkout. The canonical repository remains the source. The current development public program address is `BUJsC4HatdecjXB5YnpHU55SL3wr74Wbh1mgzkZXG4pL`; it matches `declare_id!`, both Anchor cluster entries, the generated IDL and the isolated program keypair. Preserve existing keys. A fresh machine must either securely receive that development key or generate a separate development key and explicitly synchronize all public addresses. Private bytes never belong in Git or browser code.
 
-Inside this chain directory:
+For an isolated repeat, set `CARGO_HOME` to the runtime's `cargo/`, `RUSTUP_HOME` to its `rust/`, and put its `bin/`, `cargo/bin/` and `solana-release/bin/` before the normal PATH. Install host Rust 1.89.0 into that isolated home and extract the official Agave 2.3.0 and platform-tools v1.52 archives there. Keep the npm cache and generated Node cache inside the session as well.
 
-    npm install
-    solana-keygen new --outfile ~/.config/solana/reliefvue-devnet.json
-    solana config set --url devnet --keypair ~/.config/solana/reliefvue-devnet.json
-    solana genesis-hash --url devnet
+Agave's SDK post-build `scripts/strip.sh` sources `env.sh`, which independently invokes `scripts/install.sh` even when cargo-build-sbf has `--skip-tools-install`. In the isolated SDK only, change that installer’s platform-tools version from v1.48 to v1.52 and its `cache_root` to the session cache. Extract v1.52 at `solana-release/bin/platform-tools-sdk/sbf/dependencies/platform-tools/` and create its `platform-tools-v1.52.md` installation marker. Install Criterion in that SDK's `dependencies/criterion/` with the matching `criterion-v2.3.2.md` marker on Intel macOS. These markers prevent redundant helper downloads after verified extraction.
 
-Verify the known Devnet genesis hash EtWTRABZaYq6iMfeYKouRu166VU2xqa1 against official network documentation. Stop on another network. Set Anchor.toml provider.wallet to that full wallet path (the default id.json above is only a template). The source program address is a placeholder. Generate a real program keypair, synchronize all declare_id/Anchor.toml addresses, then build:
+The runtime `bin/cargo-build-sbf` wrapper executes the absolute Agave binary with its original arguments plus `--skip-tools-install`. Use this wrapper only for the isolated, manually installed SDK. Do not pass that flag through `anchor build -- ...`: Anchor also forwards it to the IDL's host `cargo test`, which rejects it.
 
-    anchor keys list
-    anchor keys sync
-    anchor build
-    cargo test -p relief_reserve
-    npm run typecheck
-    anchor test
+Run from the runtime verification checkout root:
 
-'anchor build' generates target/deploy/relief_reserve-keypair.json on a clean workspace; run 'anchor keys sync' and rebuild after the first build if no program keypair existed before the keys commands. Confirm the source and both cluster entries match the generated keypair address. 'anchor test' uses a fresh local validator and performs actual program instruction tests. It intentionally does not run against Devnet: synthetic signers are funded locally from the provider; creating and running these fixtures remotely incurs test-SOL usage. Preserve command output, versions, generated IDL hash and binary hash in the handoff. Generate and commit the npm/Cargo lockfiles after the first successful supported build; this Windows staging source has no fabricated lockfile.
+```sh
+cargo test --manifest-path chain/Cargo.toml
+npm run chain:build
+npm --prefix chain run typecheck
+npm run chain:test
+```
+
+`Anchor.toml` explicitly selects Localnet, 127.0.0.1:8899 and the session payer key. The final command starts a fresh local validator, loads the actual SBF binary and executes real instructions. It must never target Devnet. Provider transaction fees are excluded from exact program/recipient state assertions. Tests use only synthetic identifiers and native test SOL.
+
+The detailed commands, failures, correction evidence, release archive hashes and separate binary/IDL hashes are recorded in `3-sessions/2026-10-24_reliefvue_development/task_02_report_v01.md` at workspace level. Official tool sources are the Anchor 0.32.1 release and anza-xyz Agave/platform-tools GitHub releases.
 
 ## Devnet deployment and application integration
 
@@ -63,6 +55,10 @@ Before enabling program mode, run a reviewed Devnet smoke script using that IDL:
 
 ## Verification status
 
-Windows checks found no cargo, rustc, solana or anchor commands; ~/.cargo/bin/cargo.exe was absent. wsl.exe exists but reports WSL is not installed; Docker was not found. No meaningful native/SBF compilation method was available, and no OS tools were installed. Rust helper tests and Mocha integration tests are authored contracts, **not executed tests**. Source macros, IDL generation, TypeScript client API and SBF compilation require supported native validation before this is represented as working.
+Local native verification passed on 2026-10-25: four Rust unit tests, SBF build plus generated IDL, chain TypeScript check and eleven real local-validator integration tests. The original Windows inability to compile has been resolved for the tested Intel macOS environment; other host architectures still require their own native run.
 
-Native suite covers collapsed/reinitialized roles, wrong/missing approval signature, backup activation, event replay, prior commitments, funded additive increases, verifier impersonation, wrong area, recipient substitution, duplicate household token, duplicate claim, regular/review caps and rent preservation. It uses the provider as fee payer so recipient balance assertions isolate the grant. More adversarial review and production governance/custody/privacy work remain mandatory before real funds.
+The build emits Anchor macro cfg warnings and an Agave postprocessor warning listing syscall names as unknown. These warnings were retained. Real local instruction execution exercised PDA derivation, System Program account creation, rent reads and native payouts successfully. This evidence is limited to the tested binary, toolchain and Agave 2.3.0 validator; it does not establish compatibility with another deployment environment.
+
+The suite covers collapsed/reinitialized roles, wrong/missing approval signatures, both approval paths, event replay, prior commitments, funded additive increases, verifier impersonation, wrong area, recipient substitution, zero/duplicate household tokens, duplicate/concurrent claims, cross-reserve/event isolation, altered signed terms, regular/review caps and rent/outstanding preservation. Rejected attempts assert exact account state rollback excluding external fee-payer charges. A concurrent race uses distinct transaction messages and proves exactly one payout while preserving the other event's commitment.
+
+Devnet deployment, smoke evidence and application integration remain outstanding. This is direct native-SOL grant enforcement, not Model B spending enforcement. Production governance, custody and privacy work remain outside the proof.

@@ -6,11 +6,15 @@ package_manager = "npm"
 resolution = true
 skip-lint = false
 [programs.localnet]
-relief_reserve = "Fg6PaFpoGXkYsidMpWxTWqkZ7FEfcYkgMQhgN3tR9Y4"
+relief_reserve = "BUJsC4HatdecjXB5YnpHU55SL3wr74Wbh1mgzkZXG4pL"
 [programs.devnet]
-relief_reserve = "Fg6PaFpoGXkYsidMpWxTWqkZ7FEfcYkgMQhgN3tR9Y4"
+relief_reserve = "BUJsC4HatdecjXB5YnpHU55SL3wr74Wbh1mgzkZXG4pL"
 [provider]
 cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+wallet = "../../../../3-sessions/2026-10-24_reliefvue_development/m1_runtime/keys/payer.json"
 [scripts]
 test = "npx ts-mocha -p tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test.validator]
+bind_address = "127.0.0.1"
+rpc_port = 8899
