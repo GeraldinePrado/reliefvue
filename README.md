@@ -2,7 +2,7 @@
 
 ## Prepare before disaster. Trace every relief payment.
 
-ReliefVue is a Thailand-first concept for household emergency grants on Solana. It proposes keeping a donated reserve ready before disasters strike, reviewing requests when real impact is confirmed, and sending approved aid directly to verified household wallets. Public payment records would show how funds move; personal information would stay off-chain.
+ReliefVue is a SEA-first concept for household emergency grants on Solana. It proposes keeping a donated reserve ready before disasters strike, reviewing requests when real impact is confirmed, and sending approved aid directly to verified household wallets. Public payment records would show how funds move; personal information would stay off-chain.
 
 **Current stage: ideathon concept and hackathon prototype.** The public walkthrough uses fictional households and simulated verification, donations and payouts. There are no live aid recipients, donated reserve or operating partners.
 
