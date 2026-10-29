@@ -1,10 +1,12 @@
+> **Operations platform MVP — 29 October 2026:** A working local product now sits beside the concept site at [`app.html`](app.html). It includes a donor flow, a recipient mobile web app, a staff dashboard with application review and 2-of-3 payout signatures, a public ledger, a SQLite API and a read-only partner REST/MCP surface. Run it with `npm run dev:platform` and open `http://127.0.0.1:5173/app.html`. It is a **local prototype**: money is simulated, identity verification is demo-only, and the API is not deployed. Read the [platform architecture](docs/platform_architecture_v01.md), [Thai pilot constraints](docs/platform_policy_constraints_v01.md) and [open decisions](docs/platform_open_questions_v01.md).
+>
 > **Development direction — 24 October 2026:** ReliefVue is a global network with a recipient mobile app, starting operational exploration in Southeast Asia country by country. Thailand-first and unrestricted-payout descriptions below describe the earlier prototype. Start with the [consolidated PRD v0.4](docs/prd_v04.md) and [development sequence](docs/development_sequence_v01.md). PromptPay is a Thailand-specific feasibility requirement; no live payment integration is claimed. The existing demo and historical notes remain preserved below.
 
 # ReliefVue
 
 Development work follows the [checkpoint workflow](docs/checkpoint_workflow_v01.md): one task at a time, verified implementation, a clear completed/next update, and a push to the GitHub development branch.
 
-Current development checkpoint: [Task 2 local reserve proof](docs/development_checkpoint_v01.md). Next: Task 3 generated client and signed-transaction validation.
+Current development checkpoint: [Operations platform MVP](docs/development_checkpoint_v02.md) (29 October 2026). Earlier checkpoint: [Task 2 local reserve proof](docs/development_checkpoint_v01.md).
 
 ## Prepare before disaster. Trace every relief payment.
 
@@ -59,6 +61,14 @@ npm run dev
 ```
 
 Open http://127.0.0.1:5173. The guided demo needs no API or wallet.
+
+### Operations platform
+
+```sh
+npm run dev:platform
+```
+
+This starts the platform API on port 8788 and Vite on 5173. Open http://127.0.0.1:5173/app.html. Staff demo: `admin@reliefvue.demo` / `reliefvue-demo`; reviewer and two approver personas are one-click on the sign-in screen. Recipient demo: phone `0810000001`, with the OTP shown on screen. Reset the database from Settings. All money is simulated; use fictional data only. See the [platform architecture](docs/platform_architecture_v01.md).
 
 ```sh
 npm run check
