@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS households (
   promptpay_phone TEXT,
   kyc_status TEXT NOT NULL DEFAULT 'unverified',
   kyc_method TEXT NOT NULL DEFAULT 'demo',
+  kyc_attempts INTEGER NOT NULL DEFAULT 1,
   created_at TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS activations (
@@ -224,6 +225,11 @@ export function openDatabase(file: string): DatabaseSync {
 
 export function migrate(db: DatabaseSync): void {
   db.exec(SCHEMA);
+  /* Additive migration for databases created before the counter existed. */
+  const columns = db.prepare("PRAGMA table_info(households)").all() as unknown as Array<{ name: string }>;
+  if (!columns.some((column) => column.name === "kyc_attempts")) {
+    db.exec("ALTER TABLE households ADD COLUMN kyc_attempts INTEGER NOT NULL DEFAULT 1");
+  }
 }
 
 export function resetDatabase(db: DatabaseSync): void {
@@ -440,7 +446,7 @@ function seed(db: DatabaseSync): void {
         person.cashout ?? "wallet",
         person.promptpay ?? null,
         "verified",
-        "demo",
+        person.seed === 3 ? "ndid" : "demo",
         at(12),
       );
     }

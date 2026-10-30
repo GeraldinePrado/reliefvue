@@ -167,6 +167,10 @@ export interface Household {
   promptpayPhone: string | null;
   kycStatus: KycStatus;
   kycMethod: string;
+  /** 0 format only, 1 document checked, 2 national registry matched, 3 field attested. */
+  kycLevel: 0 | 1 | 2 | 3;
+  /** Attempts used against a three-attempt allowance before human review. */
+  kycAttempts: number;
   createdAt: string;
 }
 

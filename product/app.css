@@ -6417,3 +6417,51 @@ pre,
 .recipient-topbar .locale-picker option:disabled {
   color: var(--faint);
 }
+
+/* ------------------------------------------------ verification level */
+
+.verification-level {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.level-badge {
+  flex: none;
+  min-width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--purple-soft);
+  color: var(--purple-deep);
+}
+
+.level-badge.level-0 {
+  background: var(--canvas-deep);
+  color: var(--ink-soft);
+}
+
+.level-badge.level-2,
+.level-badge.level-3 {
+  background: var(--purple);
+  color: var(--paper);
+}
+
+.verification-level strong {
+  display: block;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.verification-level small {
+  display: block;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}

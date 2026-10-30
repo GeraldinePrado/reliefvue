@@ -271,7 +271,129 @@ runbook with a PDPA 72-hour notification path.
 
 ---
 
-## 6. Decisions needed
+## 6. What a PSP is
+
+A **Payment Service Provider** is the licensed company that actually moves the money. It is
+not the KYC vendor and not the software.
+
+| Role | Who | What they do |
+| --- | --- | --- |
+| ReliefVue | Software | Decides who is eligible, records the decision, asks for two signatures |
+| PSP | Bank, payment gateway or e-money issuer | Holds the funds and executes the PromptPay transfer |
+| KYC provider | NDID Relying Party, bank, or document vendor | Answers "is this person who they say they are" |
+
+Possible PSPs in Thailand: a bank's corporate API (Krungsri, SCB, KBank), a payment gateway
+(2C2P, Opn/Omise, GB Prime Pay), or an e-money issuer. Some bundle KYC with payouts, which
+is simpler commercially.
+
+Ask every PSP the same ten questions: PromptPay proxy support, name-match endpoint, payout
+status webhook, dual control, idempotency keys, fees per transfer, settlement timing,
+reversal and dispute handling, data they store, and whether they will act as the licensed
+entity for a charity pilot.
+
+## 7. Should ReliefVue hold the KYC data?
+
+Three models. The choice is about liability, not convenience.
+
+| Model | Identity documents | What ReliefVue stores | Liability |
+| --- | --- | --- | --- |
+| 1. ReliefVue holds everything | ReliefVue | Documents, numbers, decisions | Highest; full controller obligations |
+| 2. Provider holds identity | KYC provider | Verified/unverified result and a reference | Lowest; least data to leak |
+| 3. Hybrid (recommended) | KYC provider | Assertion reference, hash, last four, plus claim evidence | Moderate and bounded |
+
+Recommended split:
+
+- **KYC provider holds** the ID card image, passport page, selfie and liveness video.
+- **ReliefVue holds** the verification result, the assurance level, the provider reference,
+  a peppered hash, the last four digits, and the **claim evidence** (flood photos, damage
+  notes) because no identity vendor will hold that.
+- **ReliefVue never stores** the raw national ID number, the face template, or the liveness
+  video.
+
+On "offline but accessible to onboarding staff": offline here should mean **not exposed to
+the public internet**, not air-gapped. In practice: no public bucket, no public URL,
+staff-only access with MFA, short-lived signed links, a private network or VPN for the
+review workspace, and every view written to the audit log. A truly offline store cannot
+serve a household onboarding from a phone, so it is the wrong target.
+
+## 8. Retention, and the right to try again
+
+### What retention means
+
+Retention is the rule for **how long each kind of data is kept before it is deleted**. It is
+not "keep everything forever because it might be useful". PDPA requires collecting only what
+is needed and keeping it only as long as necessary.
+
+Proposed schedule, to confirm with counsel:
+
+| Data | Keep | Then |
+| --- | --- | --- |
+| ID card image, selfie, liveness | 30 days after verification | Delete; keep the result and reference |
+| Verification result, level, reference | Life of the household record plus the accounting period | Delete with the household |
+| Claim evidence | 90 days after the response closes | Delete unless a legal hold applies |
+| Payout and donation records | Statutory accounting period, commonly 5 years | Minimise personal data; keep the financial fact |
+| Consent record | As long as processing continues plus 2 years | Keep as proof of consent |
+| Audit log | 2 years minimum | Keep hash chain; no PII inside |
+
+Deletion must cascade to object storage, backups and search indexes, and leave a tombstone
+that proves deletion without keeping the content.
+
+### The three-attempt rule and the right to prove it
+
+Verification failure is **not** ineligibility. A household whose KYC does not pass has not
+been rejected from relief, and the application must stay open while identity is resolved.
+
+Proposed policy:
+
+1. **Attempt 1 fails** — show a plain-language reason and exactly what to fix (glare on the
+   photo, expired document, name mismatch). Same-day retry allowed.
+2. **Attempt 2 fails** — offer a different route: ThaID instead of a card photo, or the
+   national ID proxy instead of a passport.
+3. **Attempt 3 fails** — route to a human reviewer with alternative evidence (lease, rent
+   receipt, local attestation, field visit). A person decides, not the vendor score.
+4. **Never** convert three failed attempts into a permanent ban. Allow a fresh attempt after
+   a cooling-off period, or immediately when new documents exist.
+5. **Appeal** — the applicant can ask for a human decision and can see the reason in their
+   own language.
+6. **Log every attempt**: timestamp, route, result code, deciding party (AI, vendor, human).
+   The log is evidence that the process was fair.
+
+These are product rights on top of PDPA rights: access, correction, deletion where it
+applies, and the right to complain to the PDPC.
+
+## 9. KYC provider options and cost
+
+Thai NDID access is **quoted commercially**, not published as a price list. Expect an
+onboarding or integration fee, possibly a monthly platform fee, and a per-verification fee;
+volume and contract length drive the number.
+
+| Option | Level | Published price | Notes |
+| --- | --- | --- | --- |
+| NDID Relying Party via Olympus or SCB TechX | L2 | Quoted | DOPA-backed match, consent inside ThaID or a bank app |
+| Bank partner e-KYC | L2 | Quoted, often bundled with payouts | One contract for KYC and PromptPay |
+| International document + liveness (Didit, Sumsub, Onfido) | L1 only | Didit publishes **$0.33 per full KYC** ([pricing](https://docs.didit.me/getting-started/pricing)) | No DOPA match; useful as a cheap pre-check |
+| Document-only manual review | L1 | Staff time | Does not scale; keep for edge cases |
+
+Rough maths for a ฿3,000 grant: a ฿11–40 verification is 0.4–1.3% of the grant. At pilot
+volume the fixed onboarding fee matters more than the per-check price.
+
+Recommendation: ask a bank partner to bundle L2 KYC with PromptPay payouts, fall back to
+NDID via Olympus or SCB TechX, and add an L1 pre-check only if it reduces failed L2 attempts.
+
+### What the demo now shows
+
+The recipient profile displays the verification level (L0–L3), what it unlocks, and the
+attempt counter, in English and Thai:
+
+- `L0 Phone only` — number checked, nothing else.
+- `L1 Document checked` — document inspected, not matched to the registry.
+- `L2 Registry matched` — matched through NDID or DOPA; required before a payout.
+- `L3 Field attested` — a field worker confirmed identity and residence.
+
+The card also states the retry right in plain language: a failed check is not a rejection,
+and after three attempts a person reviews alternative evidence.
+
+## 10. Decisions needed
 
 1. KYC provider: NDID through Olympus, SCB TechX, or a bank partner. This sets cost, speed
    and the consent wording.
@@ -281,10 +403,14 @@ runbook with a PDPA 72-hour notification path.
 5. Hosting region and data-residency position.
 6. PSP/bank for payouts, and whether it offers a name-match API.
 7. Whether a payout can proceed when name match is unavailable, or must be held for review.
+8. Data model: provider-held identity (recommended) or ReliefVue-held documents.
+9. Which PSP, and whether it offers name-match and PromptPay payouts in one contract.
+10. Retention schedule sign-off, especially the 30-day document and 90-day evidence windows.
+11. Three-attempt policy and who may grant an exception after the third failure.
 
 ---
 
-## 7. References
+## 11. References
 
 - [NDID platform](https://ndid.co.th/en/platform-en-2/) — membership model, ETDA licence, ISO 27001:2022, immutable audit log.
 - [CGAP, Beyond Access: Thailand](https://www.cgap.org/research/beyond-access-thailand-and-frontiers-of-financial-inclusion) — NDID scale, 2026.

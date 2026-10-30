@@ -47,6 +47,20 @@ import {
 } from "../components/ui";
 import mark from "../assets/reliefvue-mark.png";
 
+const KYC_LEVEL_NAME = {
+  0: "Phone only",
+  1: "Document checked",
+  2: "Registry matched",
+  3: "Field attested",
+} as const;
+
+const KYC_LEVEL_MEANING = {
+  0: "Only your mobile number is checked.",
+  1: "Your document was checked, but not against the national registry.",
+  2: "Your identity matched the national registry through NDID or DOPA.",
+  3: "A field worker confirmed your identity and residence.",
+} as const;
+
 const TABS = [
   { route: "/help", label: "Home", icon: Home },
   { route: "/help/request", label: "Request", icon: HandCoins },
@@ -1174,6 +1188,29 @@ function ProfileTab({ household, home }: { household: Household; home: Recipient
         </p>
         <StatusBadge value={household.kycStatus} label={status(household.kycStatus)} />
       </div>
+
+      <section className="profile-card">
+        <h3>{t("Verification")}</h3>
+        <div className="verification-level">
+          <span className={`level-badge level-${household.kycLevel}`}>L{household.kycLevel}</span>
+          <div>
+            <strong>{t(KYC_LEVEL_NAME[household.kycLevel])}</strong>
+            <small>{t(KYC_LEVEL_MEANING[household.kycLevel])}</small>
+          </div>
+        </div>
+        <p className="profile-note">
+          {household.kycLevel >= 2
+            ? t("Verified for payouts in an active response.")
+            : t("You can request support. A payout needs L2 identity verification.")}
+        </p>
+        <p className="profile-note">
+          {household.kycAttempts >= 3
+            ? t("Three attempts used. A person will review alternative evidence; your request stays open.")
+            : t("Attempt {used} of 3. A failed check is not a rejection: you can try again, and after three attempts a person reviews alternative evidence.", {
+                used: household.kycAttempts,
+              })}
+        </p>
+      </section>
 
       <section className="profile-card">
         <h3>{t("Identity")}</h3>

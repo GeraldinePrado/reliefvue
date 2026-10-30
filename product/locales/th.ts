@@ -240,6 +240,27 @@ export const th: Record<string, string> = {
   "Your district is not in the affected area list.": "อำเภอของคุณไม่อยู่ในรายชื่อพื้นที่ที่ได้รับผลกระทบ",
   "Your household already has a request for this response.": "ครัวเรือนของคุณมีคำขอสำหรับประกาศนี้แล้ว",
 
+  /* verification levels */
+  Verification: "การยืนยันตัวตน",
+  "Phone only": "เพียงเบอร์โทร",
+  "Document checked": "ตรวจเอกสารแล้ว",
+  "Registry matched": "ตรงกับทะเบียนราษฎร์",
+  "Field attested": "ยืนยันโดยเจ้าหน้าที่ภาคสนาม",
+  "Only your mobile number is checked.": "ตรวจสอบเพียงหมายเลขมือถือของคุณ",
+  "Your document was checked, but not against the national registry.":
+    "ตรวจเอกสารแล้ว แต่ยังไม่ได้ตรวจกับทะเบียนราษฎร์",
+  "Your identity matched the national registry through NDID or DOPA.":
+    "ข้อมูลของคุณตรงกับทะเบียนราษฎร์ผ่าน NDID หรือ DOPA",
+  "A field worker confirmed your identity and residence.":
+    "เจ้าหน้าที่ภาคสนามยืนยันตัวตนและที่อยู่ของคุณแล้ว",
+  "Verified for payouts in an active response.": "ยืนยันแล้วสำหรับการรับเงินในประกาศที่เปิดอยู่",
+  "You can request support. A payout needs L2 identity verification.":
+    "คุณขอความช่วยเหลือได้ แต่การจ่ายเงินต้องยืนยันตัวตนระดับ L2",
+  "Three attempts used. A person will review alternative evidence; your request stays open.":
+    "ใช้ครบสามครั้งแล้ว เจ้าหน้าที่จะพิจารณาหลักฐานทางเลือก และคำขอของคุณยังเปิดอยู่",
+  "Attempt {used} of 3. A failed check is not a rejection: you can try again, and after three attempts a person reviews alternative evidence.":
+    "ครั้งที่ {used} จาก 3 การตรวจไม่ผ่านไม่ใช่การปฏิเสธ คุณลองใหม่ได้ และเมื่อครบสามครั้งเจ้าหน้าที่จะพิจารณาหลักฐานทางเลือก",
+
   /* income bands */
   "Under ฿10,000 / month": "ต่ำกว่า ฿10,000 / เดือน",
   "฿10,000 – ฿20,000 / month": "฿10,000 – ฿20,000 / เดือน",

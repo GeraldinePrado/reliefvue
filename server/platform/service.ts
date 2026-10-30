@@ -90,6 +90,7 @@ interface HouseholdRow {
   promptpay_phone: string | null;
   kyc_status: string;
   kyc_method: string;
+  kyc_attempts: number;
   created_at: string;
 }
 
@@ -209,6 +210,21 @@ function mapUser(row: UserRow): SessionUser {
   return { ...base, role: row.role as StaffRole, email: row.email ?? "" };
 }
 
+/**
+ * Verification level. Format checks are L0; anything verified without a
+ * national-registry match is L1. Only an NDID/DOPA match reaches L2, and only a
+ * field attestation reaches L3. A payout requires L2.
+ */
+function kycLevelFor(status: string, method: string): 0 | 1 | 2 | 3 {
+  if (status === "verified") {
+    if (method === "ndid" || method === "dopa") return 2;
+    if (method === "field") return 3;
+    return 1;
+  }
+  if (status === "pending") return 1;
+  return 0;
+}
+
 function mapHousehold(row: HouseholdRow): Household {
   return {
     id: row.id,
@@ -231,6 +247,8 @@ function mapHousehold(row: HouseholdRow): Household {
     promptpayPhone: row.promptpay_phone,
     kycStatus: row.kyc_status as Household["kycStatus"],
     kycMethod: row.kyc_method,
+    kycLevel: kycLevelFor(row.kyc_status, row.kyc_method),
+    kycAttempts: row.kyc_attempts ?? 1,
     createdAt: row.created_at,
   };
 }
