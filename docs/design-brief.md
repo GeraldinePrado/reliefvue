@@ -1,6 +1,6 @@
 # Design brief - read first for the hackathon UI
 
-Updated 2026-10-04 from Geraldine's approvals. This is the entry point for GIE design direction, interface building and review. It consolidates current user decisions; it does not approve a palette, final name or claim deployment.
+Updated 2026-10-30. This is the entry point for design direction, interface building and review. The identity, palette and type in [Brandbook v06](brandbook_v06/index.html) are the approved source of truth; do not introduce colours outside it. The recipient mobile app has its own build-ready specification in [mobile design handover v01](mobile_design_handover_v01.md) — use that document, not this brief, for mobile screens.
 
 ## Stage, audience and delivery
 
@@ -89,9 +89,13 @@ Current local UI source does not implement these revised guided journeys. Docume
 
 The current app now includes guided receiver, donor and reviewer routes, sample receipts and recent activity. Preserve their meaning and state transitions during UI design. Existing styles were reused; no final visual identity has been approved. Guided entries are transient in-memory examples, with no real database, KYC, fiat provider or payment execution. The previous technical interface is separately accessible through `#technical`. Read `src/main.ts`, `src/demo-state.ts`, the journey documents and README before changing presentation.
 
-## Current brand direction — 2026-10-04
+## Current brand direction — 2026-10-30
 
-See [Brandbook v03](brandbook_v03/index.html) for the current review edition: selected B sculpted elephant, Alegreya Sans Bold wordmark, Gentle Ivory canvas, purple/coral accents, Fraunces / Literata / IBM Plex Sans with IBM Plex Sans Thai Looped. Earlier visual candidates remain historical. Imagery uses documentary humanitarian photography references, not synthetic victims. Flat logo exports, final contextual photography and fluent Thai review remain pending. The brandbook contains proposed static UI applications; the current app has not been redesigned by this branding step.
+[Brandbook v06](brandbook_v06/index.html) is the current edition: selected B sculpted elephant, Alegreya Sans Bold wordmark, Gentle Ivory `#FDFBF7` canvas, Navy `#111D2D`, Purple `#6840B5`, Lavender `#A78BFA` and Coral `#FF8B86` as accents, with Fraunces for display, IBM Plex Sans for UI and IBM Plex Sans Thai Looped for Thai. Earlier brandbooks are historical.
+
+Colour rule, from the brandbook: navy on ivory and white on purple for important text; lavender and coral are accents, never small-text colours. There is no green, amber or blue in the brand — success states use purple.
+
+The recipient mobile app is specified separately in [mobile design handover v01](mobile_design_handover_v01.md), including the eight screens, component states, the Malay-Chinese sample household and a paste-ready prompt for an AI designer. Imagery uses documentary humanitarian photography references, not synthetic victims. Fluent Thai review remains pending.
 
 
 ## Positioning clarification — 2026-10-04

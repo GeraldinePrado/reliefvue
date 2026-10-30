@@ -49,7 +49,7 @@ The guided demo creates no real account or database record. Entered details stay
 
 The selected identity combines the **B 3D elephant**, Alegreya Sans wordmark, a gentle ivory canvas, navy text, purple actions and lavender/coral logo accents. English and Thai typography directions are documented in the current guide.
 
-Use [the approved identity package](docs/approved-identity_v01/README.md) and [design brief](docs/design-brief.md) when redesigning the interface. The guided app and optional Devnet workspace share the selected identity and navigation; their explanatory and technical datasets remain separate. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
+Use [the approved identity package](docs/approved-identity_v01/README.md), [brandbook v06](docs/brandbook_v06/index.html) and [design brief](docs/design-brief.md) when redesigning the interface. The recipient mobile app has a build-ready specification in [mobile design handover v01](docs/mobile_design_handover_v01.md): eight screens, the locked palette, component states, the Malay-Chinese sample household and a paste-ready prompt for an AI designer. The guided app and optional Devnet workspace share the selected identity and navigation; their explanatory and technical datasets remain separate. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
 
 ## Run locally — Windows or Mac
 

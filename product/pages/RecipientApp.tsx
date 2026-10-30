@@ -737,7 +737,7 @@ function HomeTab({ home, household }: { home: RecipientHome; household: Househol
     <div className="recipient-home">
       <section className="recipient-greeting">
         <p>
-          {t("Sawasdee, {name}", { name: "" }).trim()} <strong>{firstName(household.fullName)}</strong>
+          {t("Sawasdee, {name}", { name: household.fullName })}
         </p>
         <div className="verified-line">
           <BadgeCheck size={15} /> {t("Identity verified")} <span>·</span> {household.district}

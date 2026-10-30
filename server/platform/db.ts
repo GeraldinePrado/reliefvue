@@ -309,7 +309,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 1,
         id: "usr_rcpt_1",
-        name: "Kanya W.",
+        name: "Tan Wei Ming",
         phone: "0810000001",
         district: "Mae Rim",
         subdistrict: "San Phi Suea",
@@ -318,11 +318,12 @@ function seed(db: DatabaseSync): void {
         income: "Under ฿10,000 / month",
         cashout: "promptpay",
         promptpay: "0810000001",
+        foreign: true,
       },
       {
         seed: 2,
         id: "usr_rcpt_2",
-        name: "Sompong R.",
+        name: "Lim Mei Ling",
         phone: "0810000002",
         district: "Saraphi",
         subdistrict: "Nong Phueng",
@@ -333,7 +334,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 3,
         id: "usr_rcpt_3",
-        name: "Niran C.",
+        name: "Ng Jia Hui",
         phone: "0810000003",
         district: "Chang Phueak",
         subdistrict: "Chang Phueak",
@@ -346,7 +347,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 4,
         id: "usr_rcpt_4",
-        name: "Duangjai P.",
+        name: "Cheah Boon Keat",
         phone: "0810000004",
         district: "Hang Dong",
         subdistrict: "Nong Kaeo",
@@ -357,7 +358,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 5,
         id: "usr_rcpt_5",
-        name: "Aranya S.",
+        name: "Ong Siew Lan",
         phone: "0810000005",
         district: "Mae Rim",
         subdistrict: "Rim Tai",
@@ -368,7 +369,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 6,
         id: "usr_rcpt_6",
-        name: "Prasert K.",
+        name: "Goh Chun Hong",
         phone: "0810000006",
         district: "Saraphi",
         subdistrict: "Tha Wang Tan",
@@ -381,7 +382,7 @@ function seed(db: DatabaseSync): void {
       {
         seed: 7,
         id: "usr_rcpt_7",
-        name: "Chaiwat B.",
+        name: "Chan Wai Kit",
         phone: "0810000007",
         district: "Bang Kapi",
         subdistrict: "Hua Mak",
