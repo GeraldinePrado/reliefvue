@@ -12,10 +12,13 @@ server.on("error", (error) => {
   process.exitCode = 1;
 });
 
-server.listen(config.port, "127.0.0.1", () => {
+server.listen(config.port, config.host, () => {
+  const shown = config.host === "0.0.0.0" || config.host === "::" ? "127.0.0.1" : config.host;
   console.log("");
   console.log("ReliefVue operations platform");
-  console.log(`  API        http://127.0.0.1:${config.port}/api/meta`);
+  console.log(`  Bind       ${config.host}:${config.port}`);
+  console.log(`  API        http://${shown}:${config.port}/api/meta`);
+  console.log(`  App        http://${shown}:${config.port}/app.html`);
   console.log(`  Database   ${databasePath}`);
   console.log(`  Mode       ${config.demoMode ? "demo (simulated money, fictional households)" : "live"}`);
   console.log("");

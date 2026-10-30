@@ -14,6 +14,7 @@
     "chain:build": "cd chain && anchor build",
     "chain:test": "cd chain && anchor test",
     "platform": "tsx server/platform/index.ts",
+    "start": "tsx server/platform/index.ts",
     "dev:platform": "node scripts/dev-platform.mjs",
     "test:platform": "tsx --test tests/platform.test.ts"
   },

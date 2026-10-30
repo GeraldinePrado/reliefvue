@@ -1,0 +1,15 @@
+node_modules
+dist
+data
+.git
+.gitignore
+*.zip
+*.bundle
+docs
+3-sessions
+chain/target
+browser_profile
+faucet_profile
+live_profile
+Icon
+.DS_Store

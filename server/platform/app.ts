@@ -14,6 +14,7 @@ import {
   sessionCookie,
 } from "./http.ts";
 import { handleMcp, MCP_TOOLS, MCP_PROTOCOL_VERSION, type JsonRpcRequest } from "./mcp.ts";
+import { serveStaticFile } from "./static.ts";
 import {
   allDonations,
   applicationById,
@@ -89,7 +90,11 @@ export function createPlatformServer(db: DatabaseSync): Server {
 
 async function route(db: DatabaseSync, req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url ?? "/", "http://localhost");
-  const path = url.pathname.replace(/\/+$/, "") || "/";
+  const rawPath = url.pathname.replace(/\/+$/, "") || "/";
+  /* The built client calls /papi (the Vite dev proxy target). When this server
+     is the only process, accept that prefix as an alias of /api. */
+  const path =
+    rawPath === "/papi" ? "/api" : rawPath.startsWith("/papi/") ? `/api${rawPath.slice(5)}` : rawPath;
   const method = (req.method ?? "GET").toUpperCase();
 
   res.setHeader("x-content-type-options", "nosniff");
@@ -447,6 +452,12 @@ async function route(db: DatabaseSync, req: IncomingMessage, res: ServerResponse
   if (path.startsWith("/api/")) {
     throw new HttpError(404, "API route not found.", "not_found");
   }
+
+  /* Single-process hosting: this server also serves the built interface. */
+  if ((method === "GET" || method === "HEAD") && (await serveStaticFile(req, res, path))) {
+    return;
+  }
+
   throw new HttpError(404, "Not found.", "not_found");
 }
 
