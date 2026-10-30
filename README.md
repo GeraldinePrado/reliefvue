@@ -93,6 +93,8 @@ The planned mobile app is the recipient route for private household verification
 - [Receiver journey](docs/receiver-journey.md) and [donor journey](docs/donor-journey.md).
 - [Developer handoff](docs/developer-handoff.md), [technical design](docs/spec.md) and [progress](docs/progress.md).
 - [Identity, PromptPay and KYC data security](docs/identity_kyc_payout_and_data_security_v01.md): national ID checksum limits, KYC tiers, PromptPay payout models, and how household documents should be stored, encrypted and tamper-evidenced.
+- [Identity on Solana](docs/solana_identity_and_attestation_v01.md): what `.sol` names, Solana attestations and KYC/KYB providers prove, and what they do not.
+- [Southeast Asia country readiness](docs/sea_country_readiness_v01.md): the four-part test for a new country and research starting points for identity and payout rails.
 - [Mobile design handover](docs/mobile_design_handover_v01.md): eight recipient screens, locked brand palette and a prompt for an AI designer.
 - [Reserve program handoff](chain/README.md): Anchor program compiled and tested on a local validator; Devnet deployment and application integration remain pending.
 - [Brand guide v06](docs/brandbook_v06/index.html): current direction; earlier guides are historical. The deployed website serves it at `/brand-guide/`.
