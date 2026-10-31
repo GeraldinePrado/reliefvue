@@ -25,3 +25,6 @@ chain/node_modules/
 *-keypair.json
 !docs/brandbook_v06/assets/pastel_wavescape_v02.png
 !docs/brandbook_v06/assets/reliefvue_elephant_selected.png
+
+!product/assets/reliefvue-mark.png
+!product/assets/reliefvue-elephant.png

@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FDFBF7">
+<title>ReliefVue — 30 second explainer</title>
+<link rel="icon" href="../product/assets/reliefvue-mark.png">
+<style>
+  @font-face{font-family:"Fraunces";src:url("../src/assets/brand/fraunces-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+  @font-face{font-family:"Alegreya Sans";src:url("../src/assets/brand/alegreyasans-700.ttf") format("truetype");font-weight:700;font-style:normal;font-display:block}
+  @font-face{font-family:"IBM Plex Sans";src:url("../src/assets/brand/ibmplexsans-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+  @font-face{font-family:"IBM Plex Sans Thai Looped";src:url("../src/assets/brand/ibmplexsansthilooped-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+
+  :root{
+    --ivory:#FDFBF7;
+    --navy:#111D2D;
+    --ink-soft:#4A5260;
+    --muted:#626C7B;
+    --faint:#8A919D;
+    --purple:#6840B5;
+    --purple-deep:#4C2B91;
+    --purple-soft:#F3EDF9;
+    --lavender:#A78BFA;
+    --coral:#FF8B86;
+    --coral-soft:#FDF0EE;
+    --line:#DED9E2;
+    --paper:#FFFFFF;
+    --display:"Fraunces",Georgia,serif;
+    --sans:"IBM Plex Sans","IBM Plex Sans Thai Looped",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --wordmark:"Alegreya Sans","IBM Plex Sans Thai Looped",Arial,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --shadow:0 30px 80px rgba(47,25,64,.18);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  html{background:#0d1420}
+  body{
+    margin:0;overflow:hidden;background:var(--ivory);color:var(--navy);
+    font-family:var(--sans);font-size:16px;line-height:1.5;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  img{display:block;max-width:100%}
+  button{font:inherit}
+
+  .stage{
+    position:relative;width:100vw;height:100dvh;overflow:hidden;
+    background:var(--ivory);isolation:isolate;
+  }
+
+  /* ---------- background ---------- */
+  .bg{
+    position:absolute;inset:0;z-index:-3;overflow:hidden;
+    background:radial-gradient(120% 100% at 70% 50%,#f6ecf6 0%,#fdfbf7 62%);
+  }
+  .bg img{
+    position:absolute;inset:-12%;width:124%;height:124%;max-width:none;object-fit:cover;object-position:center;
+    opacity:.96;animation:drift 30s ease-in-out infinite;will-change:transform;
+  }
+  .veil{
+    position:absolute;inset:0;z-index:-2;
+    background:
+      linear-gradient(90deg,#FDFBF7 0%,rgba(253,251,247,.99) 30%,rgba(253,251,247,.93) 46%,rgba(253,251,247,.42) 72%,rgba(253,251,247,.10) 100%),
+      linear-gradient(0deg,rgba(253,251,247,.72) 0%,rgba(253,251,247,0) 24%,rgba(253,251,247,0) 78%,rgba(253,251,247,.55) 100%);
+    transition:background 1.1s var(--ease);
+  }
+  body[data-scene="end"] .veil{
+    background:
+      radial-gradient(72% 78% at 50% 48%,rgba(253,251,247,.98) 0%,rgba(253,251,247,.90) 48%,rgba(253,251,247,.55) 74%,rgba(253,251,247,.22) 100%),
+      linear-gradient(0deg,rgba(253,251,247,.7) 0%,rgba(253,251,247,0) 30%,rgba(253,251,247,0) 75%,rgba(253,251,247,.5) 100%);
+  }
+  .grain{
+    position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.28;
+    background-image:radial-gradient(rgba(17,29,45,.16) .6px,transparent .7px);
+    background-size:4px 4px;mix-blend-mode:multiply;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:absolute;top:0;left:0;right:0;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:clamp(20px,3.2vh,38px) clamp(24px,5vw,84px);
+    transition:opacity .6s var(--ease);
+  }
+  .brand-inline{display:flex;align-items:center;gap:12px;min-width:0}
+  .brand-inline img{width:clamp(30px,2.6vw,44px);height:auto}
+  .wordmark{
+    font-family:var(--wordmark);font-weight:700;font-size:clamp(24px,2.1vw,34px);
+    line-height:1;letter-spacing:-.02em;color:var(--navy);white-space:nowrap;
+  }
+  .loop-chip{
+    display:inline-flex;align-items:center;gap:9px;white-space:nowrap;
+    font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);
+    padding:8px 13px;border:1px solid rgba(17,29,45,.12);border-radius:999px;
+    background:rgba(255,255,255,.55);backdrop-filter:blur(12px);
+  }
+  .loop-dot{width:6px;height:6px;border-radius:50%;background:var(--coral);animation:blink 2.4s ease-in-out infinite}
+  body[data-scene="end"] .topbar{opacity:0}
+
+  /* ---------- scenes ---------- */
+  .scenes{position:absolute;inset:0;z-index:1}
+  .scene{
+    position:absolute;inset:0;
+    display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    align-items:center;gap:clamp(24px,4vw,76px);
+    padding:clamp(94px,12vh,142px) clamp(24px,5.2vw,104px) clamp(76px,10vh,112px);
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .6s var(--ease),visibility 0s linear .6s;
+  }
+  .scene.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease),visibility 0s}
+  .copy{max-width:min(790px,100%);position:relative;z-index:2}
+  .eyebrow{
+    margin:0 0 clamp(16px,2.2vh,24px);display:flex;align-items:center;gap:12px;
+    font-size:clamp(10px,.78vw,13px);font-weight:700;line-height:1.4;
+    letter-spacing:.19em;text-transform:uppercase;color:var(--purple);
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:currentColor;opacity:.55;flex:none}
+  h1,h2{
+    margin:0;font-family:var(--display);font-weight:400;color:var(--navy);
+    font-size:clamp(46px,5.5vw,104px);line-height:1.02;letter-spacing:-.038em;
+    text-wrap:balance;
+  }
+  h1 em,h2 em{font-style:italic;color:var(--purple);font-weight:400}
+  .lede{
+    margin:clamp(18px,2.5vh,30px) 0 0;max-width:34ch;
+    font-size:clamp(17px,1.45vw,28px);line-height:1.46;color:#354052;
+  }
+  .micro{
+    margin:clamp(20px,3vh,36px) 0 0;display:flex;align-items:center;gap:12px;
+    font-size:clamp(12px,.95vw,16px);color:var(--muted);letter-spacing:.01em;
+  }
+  .micro::before{content:"";width:34px;height:1px;background:var(--line);flex:none}
+  .step-no{
+    display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;
+    font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple)
+  }
+  .step-no span{
+    display:grid;place-items:center;width:26px;height:26px;border:1px solid rgba(104,64,181,.28);
+    border-radius:50%;font-size:10px;letter-spacing:0;background:rgba(255,255,255,.5)
+  }
+
+  /* reveal motion: base stays visible so exits crossfade, active restarts the animation */
+  .reveal{opacity:1}
+  .scene.is-active .reveal{animation:rise .95s var(--ease) both;animation-delay:calc(.12s + var(--i,0) * .1s)}
+
+  /* ---------- visual column ---------- */
+  .visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:0}
+  .glass{
+    position:relative;width:min(36vw,560px);
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(255,255,255,.95);
+    border-radius:clamp(18px,1.5vw,28px);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(18px);
+    padding:clamp(24px,2.5vw,42px);
+  }
+  .card-kicker{
+    margin:0 0 22px;font-size:10px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--purple)
+  }
+
+  /* scene 1 */
+  .brand-visual{
+    position:relative;width:min(39vw,640px);aspect-ratio:1/1;
+    display:grid;place-items:center;
+  }
+  .brand-visual::before{
+    content:"";position:absolute;inset:15%;border-radius:50%;
+    background:radial-gradient(circle at 38% 32%,#fff 0%,#F7F1FB 44%,#EADFF8 100%);
+    box-shadow:inset 0 0 90px rgba(167,139,250,.22),0 30px 80px rgba(104,64,181,.16);
+  }
+  .halo{position:absolute;border-radius:50%;pointer-events:none}
+  .halo-a{inset:3%;border:1px solid rgba(104,64,181,.18);animation:spin 46s linear infinite}
+  .halo-b{inset:10%;border:1px dashed rgba(255,139,134,.45);animation:spin 32s linear infinite reverse}
+  .elephant{
+    position:relative;z-index:2;width:84%;height:auto;
+    filter:drop-shadow(0 28px 46px rgba(76,43,145,.22));
+    animation:float 6.4s ease-in-out infinite;
+  }
+  .orbit-label{
+    position:absolute;z-index:3;display:inline-flex;align-items:center;gap:7px;
+    padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.78);
+    border:1px solid rgba(17,29,45,.08);box-shadow:0 8px 24px rgba(47,25,64,.08);
+    font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);
+    backdrop-filter:blur(10px);white-space:nowrap;
+  }
+  .orbit-label i{width:5px;height:5px;border-radius:50%;background:var(--coral);display:block}
+  .orbit-one{top:17%;right:2%}
+  .orbit-two{bottom:16%;left:0}
+
+  /* scene 2 */
+  .delay-card{width:min(34vw,520px)}
+  .tl-row{display:flex;align-items:flex-start;gap:15px}
+  .tl-dot{width:11px;height:11px;border-radius:50%;margin-top:7px;flex:none;background:var(--coral);box-shadow:0 0 0 6px rgba(255,139,134,.15)}
+  .tl-row strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(19px,1.65vw,29px);line-height:1.15}
+  .tl-row small{display:block;margin-top:5px;font-size:12px;color:var(--muted)}
+  .tl-line{
+    height:86px;margin:8px 0 8px 5px;padding-left:25px;
+    border-left:1px dashed rgba(104,64,181,.38);display:flex;align-items:center
+  }
+  .tl-line em{
+    font-style:normal;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);background:var(--ivory);border:1px solid var(--line);
+    padding:6px 10px;border-radius:999px;white-space:nowrap
+  }
+  .tl-row.muted .tl-dot{background:var(--lavender);box-shadow:0 0 0 6px rgba(167,139,250,.16)}
+  .trail-chip{
+    margin-top:26px;padding:14px 16px;border-radius:12px;background:rgba(253,240,238,.9);
+    border:1px solid rgba(255,139,134,.3);font-size:12px;line-height:1.4;color:var(--navy);
+    display:flex;align-items:center;gap:9px
+  }
+  .trail-chip b{font-weight:600}
+
+  /* scene 3 */
+  .flow-card{width:min(36vw,570px)}
+  .flow-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .flow-head .card-kicker{margin:0}
+  .pill{
+    font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--purple-deep);background:var(--purple-soft);border:1px solid rgba(104,64,181,.16);
+    padding:6px 9px;border-radius:999px;white-space:nowrap
+  }
+  .flow-grid{display:grid;grid-template-columns:1fr 50px 1.12fr;align-items:center;gap:8px;margin:26px 0 20px}
+  .donor{
+    display:flex;align-items:center;gap:9px;margin-bottom:9px;padding:9px 10px;
+    background:#fff;border:1px solid var(--line);border-radius:11px;
+    font-size:12px;color:var(--ink-soft);white-space:nowrap
+  }
+  .donor:last-child{margin-bottom:0}
+  .avatar{
+    width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:var(--purple-soft);color:var(--purple-deep);font-size:9px;font-weight:700
+  }
+  .flow-line{position:relative;align-self:stretch;min-height:112px}
+  .flow-line::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px dotted rgba(104,64,181,.34)}
+  .flow-dot{position:absolute;top:calc(50% - 4px);left:0;width:8px;height:8px;border-radius:50%;background:var(--purple);animation:flow 2.4s linear infinite}
+  .flow-dot:nth-child(2){animation-delay:.8s}
+  .flow-dot:nth-child(3){animation-delay:1.6s}
+  .vault{
+    background:var(--navy);color:#fff;border-radius:15px;padding:clamp(16px,1.5vw,22px);
+    box-shadow:0 22px 44px rgba(17,29,45,.22)
+  }
+  .vault-icon{
+    width:36px;height:36px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+    background:rgba(167,139,250,.18);color:var(--lavender)
+  }
+  .vault strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(18px,1.4vw,23px);line-height:1.1}
+  .vault small{display:block;margin-top:4px;font-size:11px;color:#C9C2DD}
+  .vault-bar{height:5px;border-radius:99px;background:rgba(255,255,255,.14);margin-top:16px;overflow:hidden}
+  .vault-bar span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--lavender),var(--coral));animation:fill 2.6s var(--ease) .35s both}
+  .flow-foot{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+  .flow-foot i{width:5px;height:5px;border-radius:50%;background:var(--lavender);display:block;flex:none}
+
+  /* scene 4 */
+  .household-card{width:min(36vw,560px)}
+  .hh-head{display:flex;align-items:center;gap:13px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+  .hh-avatar{
+    width:46px;height:46px;border-radius:13px;display:grid;place-items:center;flex:none;
+    background:var(--purple-soft);color:var(--purple-deep);font-size:12px;font-weight:700;letter-spacing:.02em
+  }
+  .hh-head strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(19px,1.55vw,25px);line-height:1.1}
+  .hh-head small{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
+  .badge{
+    margin-left:auto;flex:none;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--purple-deep);background:var(--purple-soft);border:1px solid rgba(104,64,181,.16);
+    padding:6px 9px;border-radius:999px
+  }
+  .checks{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px}
+  .checks li{display:flex;align-items:center;gap:11px;font-size:13px;color:var(--ink-soft)}
+  .check-ic{
+    width:20px;height:20px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:var(--purple-soft);color:var(--purple-deep)
+  }
+  .review-stamp{
+    display:inline-flex;align-items:center;gap:9px;margin-top:20px;padding:9px 13px;
+    border:1px solid rgba(104,64,181,.22);background:rgba(243,237,249,.85);border-radius:9px;
+    font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple-deep)
+  }
+  .blocked{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:15px;
+    border-top:1px dashed var(--line);font-size:11px;color:var(--muted)
+  }
+  .blocked strong{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy)}
+
+  /* scene 5 */
+  .ledger-card{width:min(36vw,560px)}
+  .ledger-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+  .ledger-head .card-kicker{margin:0}
+  .live-pill{
+    display:inline-flex;align-items:center;gap:7px;font-size:9px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--purple-deep)
+  }
+  .live-pill i{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:blink 2.4s ease-in-out infinite}
+  .payout-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:16px 0 18px;border-bottom:1px solid var(--line)}
+  .payout-row strong{display:block;font-family:var(--display);font-weight:400;font-size:clamp(19px,1.55vw,26px);line-height:1.1}
+  .payout-row small{display:block;margin-top:4px;font-size:11px;color:var(--muted)}
+  .amount{font-family:var(--display);font-weight:400;font-size:clamp(30px,2.6vw,46px);line-height:1;letter-spacing:-.03em}
+  .tx-row{display:flex;align-items:center;gap:9px;padding:14px 0;border-bottom:1px solid var(--line);font-size:11px;color:var(--muted);flex-wrap:wrap}
+  .tx-row code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:var(--purple-deep);
+    background:var(--purple-soft);border-radius:5px;padding:4px 7px
+  }
+  .status{
+    margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--purple-deep);white-space:nowrap
+  }
+  .status i{width:6px;height:6px;border-radius:50%;background:var(--purple);display:block}
+  .ledger-rows{display:grid;gap:9px;margin-top:16px;font-size:12px;color:var(--ink-soft)}
+  .ledger-rows div{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .ledger-rows b{font-weight:600;color:var(--navy)}
+  .privacy-note{display:flex;align-items:center;gap:7px;margin-top:18px;font-size:10px;color:var(--muted)}
+  .privacy-note svg{flex:none;color:var(--purple)}
+
+  /* scene 6 */
+  .scene-end{grid-template-columns:1fr;place-items:center;text-align:center;padding-bottom:clamp(70px,9vh,100px)}
+  .end-card{display:flex;flex-direction:column;align-items:center;max-width:min(980px,90vw)}
+  .end-mark{
+    width:clamp(66px,6.4vw,112px);height:auto;margin-bottom:clamp(18px,2.6vh,30px);
+    filter:drop-shadow(0 20px 36px rgba(76,43,145,.18));animation:float 6.4s ease-in-out infinite
+  }
+  .end-card .eyebrow{justify-content:center;margin-bottom:16px}
+  .end-card .eyebrow::before{display:none}
+  .end-card h2{font-size:clamp(48px,6vw,112px);line-height:1.01}
+  .end-line{margin:clamp(16px,2.2vh,24px) 0 0;font-size:clamp(15px,1.25vw,22px);color:var(--ink-soft)}
+  .end-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:clamp(20px,2.8vh,30px)}
+  .end-meta span{
+    font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--purple-deep);
+    background:rgba(255,255,255,.66);border:1px solid rgba(104,64,181,.18);
+    padding:7px 11px;border-radius:999px
+  }
+  .end-url{
+    margin:clamp(20px,2.8vh,30px) 0 0;font-family:var(--wordmark);font-weight:700;
+    font-size:clamp(19px,1.7vw,27px);letter-spacing:-.01em;color:var(--navy)
+  }
+  .disclaimer{margin:9px 0 0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+  /* ---------- controls ---------- */
+  .progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:12;background:rgba(17,29,45,.08)}
+  .progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--purple),var(--coral));transform:scaleX(0);transform-origin:left;will-change:transform}
+  .hint{
+    position:absolute;right:clamp(20px,4vw,56px);bottom:clamp(18px,3vh,30px);z-index:12;
+    display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;
+    font-size:10px;letter-spacing:.08em;color:rgba(17,29,45,.58);
+    background:rgba(255,255,255,.62);border:1px solid rgba(17,29,45,.08);
+    backdrop-filter:blur(10px);transition:opacity .45s var(--ease)
+  }
+  .hint kbd{font:inherit;font-weight:600;color:var(--ink-soft)}
+  .hint.is-hidden{opacity:0;pointer-events:none}
+  body.is-paused .loop-dot{animation-play-state:paused;background:var(--faint)}
+
+  /* record mode for screen capture */
+  body.is-recording .topbar,body.is-recording .hint,body.is-recording .progress{display:none}
+  body.is-recording{cursor:none}
+
+  /* ---------- keyframes ---------- */
+  @keyframes drift{
+    0%,100%{transform:scale(1) translate3d(0,0,0)}
+    50%{transform:scale(1.05) translate3d(-.6%,-.6%,0)}
+  }
+  @keyframes rise{
+    from{opacity:0;transform:translateY(22px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(0deg)}
+    50%{transform:translateY(-12px) rotate(-.6deg)}
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+  @keyframes flow{
+    0%{left:-2%;opacity:0}
+    14%{opacity:1}
+    86%{opacity:1}
+    100%{left:100%;opacity:0}
+  }
+  @keyframes fill{to{width:72%}}
+
+  /* ---------- narrow / portrait ---------- */
+  @media (max-width:900px),(orientation:portrait){
+    .scene{grid-template-columns:1fr;align-content:center;gap:clamp(16px,3vh,28px);padding:100px 26px 84px}
+    .copy{max-width:none}
+    h1,h2{font-size:clamp(36px,8.4vw,64px)}
+    .lede{font-size:clamp(15px,2.4vw,19px);max-width:44ch}
+    .micro{display:none}
+    .visual{justify-content:flex-start}
+    .glass,.delay-card,.flow-card,.household-card,.ledger-card{width:min(100%,520px)}
+    .brand-visual{width:min(52vw,300px);margin-left:auto;margin-right:auto}
+    .orbit-label{display:none}
+    .scene-end{place-items:center;text-align:center}
+    .end-card h2{font-size:clamp(38px,8.6vw,64px)}
+    .topbar{padding:16px 20px}
+    .hint{display:none}
+    .flow-grid{grid-template-columns:1fr 34px 1.1fr}
+    .donor{font-size:11px;padding:7px 8px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .bg img,.elephant,.end-mark,.halo,.loop-dot,.live-pill i,.flow-dot,.vault-bar span{animation:none!important}
+    .scene{transition:none}
+    .scene.is-active .reveal{animation:none}
+    .veil{transition:none}
+    .hint{display:none}
+  }
+</style>
+</head>
+<body data-scene="brand">
+  <div class="stage" id="stage">
+    <div class="bg" aria-hidden="true">
+      <img src="../src/assets/brand/pastel-wavescape.png" alt="">
+    </div>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand-inline">
+        <img src="../product/assets/reliefvue-mark.png" alt="">
+        <span class="wordmark">ReliefVue</span>
+      </div>
+      <span class="loop-chip"><span class="loop-dot" aria-hidden="true"></span>30s loop</span>
+    </header>
+
+    <main class="scenes" id="scenes">
+      <section class="scene is-active" data-scene="brand" data-start="0" aria-label="ReliefVue: emergency funds, ready before disaster">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--i:0">ReliefVue</p>
+          <h1 class="reveal" style="--i:1">Emergency funds,<br><em>ready before disaster.</em></h1>
+          <p class="lede reveal" style="--i:2">Fast cash grants for households after disaster.</p>
+          <p class="micro reveal" style="--i:3">Prepared relief. Trace every payment.</p>
+        </div>
+        <div class="visual">
+          <div class="brand-visual reveal" style="--i:2">
+            <span class="halo halo-a" aria-hidden="true"></span>
+            <span class="halo halo-b" aria-hidden="true"></span>
+            <img class="elephant" src="../product/assets/reliefvue-elephant.png" alt="ReliefVue elephant symbol">
+            <span class="orbit-label orbit-one"><i aria-hidden="true"></i>Funded before</span>
+            <span class="orbit-label orbit-two"><i aria-hidden="true"></i>Sent after review</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene" data-scene="why" data-start="5" aria-label="The gap: disaster hits in hours, relief can take days">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--i:0">The gap</p>
+          <h2 class="reveal" style="--i:1">Disaster hits in hours.<br><em>Relief can take days.</em></h2>
+          <p class="lede reveal" style="--i:2">Households need cash they can use. Donors need to see where it went.</p>
+        </div>
+        <div class="visual">
+          <aside class="glass delay-card reveal" style="--i:2">
+            <p class="card-kicker">Between the disaster and the household</p>
+            <div class="tl-row">
+              <span class="tl-dot" aria-hidden="true"></span>
+              <div><strong>Disaster</strong><small>It happens in hours.</small></div>
+            </div>
+            <div class="tl-line"><em>Uncertain wait</em></div>
+            <div class="tl-row muted">
+              <span class="tl-dot" aria-hidden="true"></span>
+              <div><strong>Household support</strong><small>Often days later.</small></div>
+            </div>
+            <div class="trail-chip"><b>And the trail?</b> Hard to follow across intermediaries.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="scene" data-scene="prepare" data-start="10" aria-label="Step one: prepare the reserve before disaster">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--i:0">How it works</p>
+          <p class="step-no reveal" style="--i:1"><span>01</span>Prepare</p>
+          <h2 class="reveal" style="--i:1">Fill the reserve<br><em>before it is needed.</em></h2>
+          <p class="lede reveal" style="--i:2">Donations build a shared relief reserve — kept separate from operating support.</p>
+        </div>
+        <div class="visual">
+          <aside class="glass flow-card reveal" style="--i:2">
+            <div class="flow-head">
+              <p class="card-kicker">Prepared reserve</p>
+              <span class="pill">Separate</span>
+            </div>
+            <div class="flow-grid">
+              <div class="donors" aria-hidden="true">
+                <div class="donor"><span class="avatar">A</span>Donor</div>
+                <div class="donor"><span class="avatar">M</span>Donor</div>
+                <div class="donor"><span class="avatar">J</span>Donor</div>
+              </div>
+              <div class="flow-line" aria-hidden="true">
+                <span class="flow-dot"></span>
+                <span class="flow-dot"></span>
+                <span class="flow-dot"></span>
+              </div>
+              <div class="vault">
+                <div class="vault-icon" aria-hidden="true">
+                  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 9.5-4.1-1.3-7-5.1-7-9.5V6l7-3z"/><path d="M9.5 12l1.7 1.7L14.8 10"/></svg>
+                </div>
+                <strong>Relief reserve</strong>
+                <small>Held for disaster</small>
+                <div class="vault-bar"><span></span></div>
+              </div>
+            </div>
+            <div class="flow-foot"><i aria-hidden="true"></i>Operating support stays in its own account</div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="scene" data-scene="verify" data-start="15" aria-label="Step two: verify one household and one fixed grant">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--i:0">How it works</p>
+          <p class="step-no reveal" style="--i:1"><span>02</span>Verify</p>
+          <h2 class="reveal" style="--i:1">One household.<br><em>One fixed grant.</em></h2>
+          <p class="lede reveal" style="--i:2">Official alerts and evidence guide review. People decide. Duplicate requests are blocked.</p>
+        </div>
+        <div class="visual">
+          <aside class="glass household-card reveal" style="--i:2">
+            <div class="hh-head">
+              <div class="hh-avatar">TW</div>
+              <div><strong>Tan Wei Ming</strong><small>Household · Chiang Mai</small></div>
+              <span class="badge">Verified</span>
+            </div>
+            <ul class="checks">
+              <li><span class="check-ic" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Identity matched</li>
+              <li><span class="check-ic" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>Inside the affected area</li>
+              <li><span class="check-ic" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>First request for this response</li>
+            </ul>
+            <div class="review-stamp">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 9.5-4.1-1.3-7-5.1-7-9.5V6l7-3z"/><path d="M9.5 12l1.7 1.7L14.8 10"/></svg>
+              Human review
+            </div>
+            <div class="blocked"><span>Duplicate request</span><strong>Blocked</strong></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="scene" data-scene="deliver" data-start="20" aria-label="Step three: send directly and trace every payment">
+        <div class="copy">
+          <p class="eyebrow reveal" style="--i:0">How it works</p>
+          <p class="step-no reveal" style="--i:1"><span>03</span>Deliver</p>
+          <h2 class="reveal" style="--i:1">Sent directly.<br><em>Traceable by anyone.</em></h2>
+          <p class="lede reveal" style="--i:2">Public Solana records show the payment. Names and documents stay private.</p>
+        </div>
+        <div class="visual">
+          <aside class="glass ledger-card reveal" style="--i:2">
+            <div class="ledger-head">
+              <p class="card-kicker">Public ledger</p>
+              <span class="live-pill"><i aria-hidden="true"></i>Public record</span>
+            </div>
+            <div class="payout-row">
+              <div><strong>Household grant</strong><small>USDC wallet · Solana</small></div>
+              <div class="amount">฿3,000</div>
+            </div>
+            <div class="tx-row">
+              <span>Solana settlement</span>
+              <code>5Kd3…9fQ2</code>
+              <span class="status"><i aria-hidden="true"></i>Confirmed</span>
+            </div>
+            <div class="ledger-rows">
+              <div><span>Donation</span><b>+25 USDC</b></div>
+              <div><span>Grant</span><b>−฿3,000</b></div>
+              <div><span>Reserve</span><b>Ready</b></div>
+            </div>
+            <div class="privacy-note">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+              Names, phones and documents stay off-chain.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="scene scene-end" data-scene="end" data-start="25" aria-label="ReliefVue: prepared relief, trace every payment">
+        <div class="end-card">
+          <img class="end-mark reveal" style="--i:0" src="../product/assets/reliefvue-elephant.png" alt="">
+          <p class="eyebrow reveal" style="--i:1">ReliefVue</p>
+          <h2 class="reveal" style="--i:2">Prepared relief.<br><em>Trace every payment.</em></h2>
+          <p class="end-line reveal" style="--i:3">Fast cash grants for households after disaster.</p>
+          <div class="end-meta reveal" style="--i:4"><span>Built on Solana</span><span>Starting in Thailand</span><span>Southeast Asia network</span></div>
+          <p class="end-url reveal" style="--i:4">reliefvue.vercel.app</p>
+          <p class="disclaimer reveal" style="--i:5">Concept demo · simulated funds</p>
+        </div>
+      </section>
+    </main>
+
+    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+    <div class="hint" id="hint"><kbd>Space</kbd> pause · <kbd>R</kbd> restart · <kbd>F</kbd> fullscreen</div>
+  </div>
+
+<script>
+(() => {
+  const DURATION = 30;
+  const scenes = Array.from(document.querySelectorAll(".scene"));
+  const starts = scenes.map((scene) => Number(scene.dataset.start || 0));
+  const bar = document.getElementById("bar");
+  const hint = document.getElementById("hint");
+  const stage = document.getElementById("stage");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const params = new URLSearchParams(window.location.search);
+
+  let start = performance.now();
+  let paused = reduceMotion;
+  let pausedElapsed = 0;
+  let activeIndex = -1;
+
+  document.body.classList.toggle("is-paused", paused);
+
+  function sceneAt(time) {
+    let index = 0;
+    for (let i = 0; i < starts.length; i += 1) {
+      if (time >= starts[i]) index = i;
+    }
+    return index;
+  }
+
+  function render(time) {
+    const index = sceneAt(time);
+    if (index !== activeIndex) {
+      scenes.forEach((scene, i) => {
+        const active = i === index;
+        scene.classList.toggle("is-active", active);
+        scene.setAttribute("aria-hidden", active ? "false" : "true");
+        scene.inert = !active;
+      });
+      document.body.dataset.scene = scenes[index].dataset.scene;
+      activeIndex = index;
+    }
+    bar.style.transform = `scaleX(${Math.min(time / DURATION, 1)})`;
+  }
+
+  function elapsed(now) {
+    if (paused) return pausedElapsed;
+    return ((now - start) / 1000) % DURATION;
+  }
+
+  function frame(now) {
+    render(elapsed(now));
+    window.requestAnimationFrame(frame);
+  }
+
+  function setPaused(next) {
+    const now = performance.now();
+    if (next === paused) return;
+    if (next) {
+      pausedElapsed = elapsed(now);
+      paused = true;
+    } else {
+      start = now - pausedElapsed * 1000;
+      paused = false;
+    }
+    document.body.classList.toggle("is-paused", paused);
+    showHint();
+  }
+
+  function seek(time) {
+    pausedElapsed = Math.max(0, Math.min(DURATION - 0.001, Number(time) || 0));
+    start = performance.now() - pausedElapsed * 1000;
+    render(pausedElapsed);
+  }
+
+  function restart() {
+    paused = false;
+    pausedElapsed = 0;
+    start = performance.now();
+    document.body.classList.remove("is-paused");
+    render(0);
+  }
+
+  let hintTimer;
+  function showHint() {
+    if (!hint) return;
+    hint.classList.remove("is-hidden");
+    window.clearTimeout(hintTimer);
+    hintTimer = window.setTimeout(() => hint.classList.add("is-hidden"), 5200);
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+      event.preventDefault();
+      setPaused(!paused);
+    } else if (event.key === "r" || event.key === "R") {
+      restart();
+      showHint();
+    } else if (event.key === "f" || event.key === "F") {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else stage.requestFullscreen?.();
+    }
+  });
+
+  document.addEventListener("pointermove", showHint, { passive: true });
+
+  const record = params.get("record") === "1";
+  if (record) document.body.classList.add("is-recording");
+
+  const seekTo = params.get("t");
+  if (seekTo !== null) {
+    seek(Number(seekTo));
+    if (params.get("pause") === "1") {
+      paused = true;
+      pausedElapsed = Number(seekTo) || 0;
+      document.body.classList.add("is-paused");
+    }
+  }
+
+  showHint();
+  render(pausedElapsed);
+  window.requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

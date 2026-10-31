@@ -12,7 +12,14 @@
     "test": "tsx --test tests/*.test.ts",
     "check": "npm run typecheck && npm test && npm run build && npm run build:web",
     "chain:build": "cd chain && anchor build",
-    "chain:test": "cd chain && anchor test"
+    "chain:test": "cd chain && anchor test",
+    "platform": "tsx server/platform/index.ts",
+    "start": "tsx server/platform/index.ts",
+    "dev:platform": "node scripts/dev-platform.mjs",
+    "demo": "node scripts/dev-platform.mjs",
+    "demo:check": "node scripts/demo-check.mjs",
+    "demo:reset": "tsx scripts/reset-demo.ts",
+    "test:platform": "tsx --test tests/platform.test.ts"
   },
   "dependencies": {
     "@solana-program/system": "0.15.0",
@@ -21,11 +28,17 @@
     "@wallet-standard/app": "1.1.1",
     "@wallet-standard/base": "1.1.1",
     "@wallet-standard/features": "1.1.1",
-    "leaflet": "^1.9.4"
+    "leaflet": "^1.9.4",
+    "lucide-react": "1.64.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.21",
     "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
     "prettier": "3.6.2",
     "tsx": "4.23.15",
     "typescript": "5.9.3",

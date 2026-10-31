@@ -1,0 +1,23 @@
+# Render blueprint for the ReliefVue operations platform.
+# One Docker service serves the API and the built interface on the same origin,
+# so session cookies stay first-party and no CORS is needed.
+services:
+  - type: web
+    name: reliefvue
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    healthCheckPath: /api/health
+    autoDeploy: true
+    disk:
+      name: reliefvue-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: RV_DB
+        value: /data/platform.db
+      - key: RV_HOST
+        value: 0.0.0.0
+      # Signs the demo duplicate-ID hash. Generated once by Render.
+      - key: RV_ID_SALT
+        generateValue: true
