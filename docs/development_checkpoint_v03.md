@@ -56,7 +56,8 @@ QA captures and the e2e script are in
 - No Devnet payout: all money is simulated; the platform does not show a live Solana signature.
 - No production authentication; demo accounts and one-click personas only.
 - No custom domain, monitoring, backups or scheduled reset.
-- `main` is still at `0944e06`; the work is on `codex/reliefvue-mvp`.
+- `main` is at the 25 October merge `cc42c87`; this work is on `codex/reliefvue-mvp` and
+  open PR #2, not on `main`.
 
 ## Founder decisions
 
@@ -78,7 +79,7 @@ QA captures and the e2e script are in
 
 ## Publication
 
-The launcher, preflight and reset changes were pushed as `5b47954` to
-`origin/codex/reliefvue-mvp`. The documentation and checkpoint changes are committed with this
-checkpoint. No main merge, deployment, Drive sync, real funds or real household data were
-involved.
+The launcher, preflight and reset changes were pushed as `5b47954`; the runbook, provider
+research and this checkpoint followed as `00ba4b2`, all on `origin/codex/reliefvue-mvp`. PR #2
+is open against `main` and now contains both commits. No main merge, deployment, Drive sync,
+real funds or real household data were involved.
