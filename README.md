@@ -1,6 +1,6 @@
 > **Operations platform MVP — 29 October 2026:** A working local product now sits beside the concept site at [`app.html`](app.html). It includes a donor flow, a recipient mobile web app, a staff dashboard with application review and 2-of-3 payout signatures, a public ledger, a SQLite API and a read-only partner REST/MCP surface. Run it with `npm run demo` and open `http://127.0.0.1:5173/app.html` (see the [demo runbook](docs/demo_runbook_v01.md)). It is a **local prototype**: money is simulated, identity verification is demo-only, and the API is not deployed. Read the [platform architecture](docs/platform_architecture_v01.md), [Thai pilot constraints](docs/platform_policy_constraints_v01.md) and [open decisions](docs/platform_open_questions_v01.md).
 >
-> **Development direction — 24 October 2026:** ReliefVue is a global network with a recipient mobile app, starting operational exploration in Southeast Asia country by country. Thailand-first and unrestricted-payout descriptions below describe the earlier prototype. Start with the [consolidated PRD v0.4](docs/prd_v04.md) and [development sequence](docs/development_sequence_v01.md). PromptPay is a Thailand-specific feasibility requirement; no live payment integration is claimed. The existing demo and historical notes remain preserved below.
+> **Development direction — 24 October 2026:** ReliefVue is a global network with a recipient mobile app, starting operational exploration in Southeast Asia country by country. Thailand-first and unrestricted-payout descriptions below describe the earlier prototype. Start with the [consolidated PRD v0.5](docs/prd_v05.md) and [development sequence](docs/development_sequence_v01.md). PromptPay is a Thailand-specific feasibility requirement; no live payment integration is claimed. The existing demo and historical notes remain preserved below.
 
 # ReliefVue
 
@@ -14,7 +14,7 @@ ReliefVue is a Thailand-first concept for household emergency grants on Solana. 
 
 **Current stage: ideathon concept and hackathon prototype.** The public walkthrough uses fictional households and simulated verification, donations and payouts. There are no live aid recipients, donated reserve or operating partners.
 
-[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brand guide](docs/brandbook_v06/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
+[Explore the demo](https://reliefvue.vercel.app/) · [Read the product brief](docs/brief.md) · [Current brand guide](docs/brandbook_v07/index.html) · [Approved identity package](docs/approved-identity_v01/README.md)
 
 ## The problem we want to address
 
@@ -49,7 +49,7 @@ The guided demo creates no real account or database record. Entered details stay
 
 The selected identity combines the **B 3D elephant**, Alegreya Sans wordmark, a gentle ivory canvas, navy text, purple actions and lavender/coral logo accents. English and Thai typography directions are documented in the current guide.
 
-Use [the approved identity package](docs/approved-identity_v01/README.md), [brandbook v06](docs/brandbook_v06/index.html) and [design brief](docs/design-brief.md) when redesigning the interface. The recipient mobile app has a build-ready specification in [mobile design handover v01](docs/mobile_design_handover_v01.md): eight screens, the locked palette, component states, the Malay-Chinese sample household and a paste-ready prompt for an AI designer. The guided app and optional Devnet workspace share the selected identity and navigation; their explanatory and technical datasets remain separate. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
+Use [the approved identity package](docs/approved-identity_v01/README.md), [brandbook v07](docs/brandbook_v07/index.html) and [design brief](docs/design-brief.md) when redesigning the interface. The recipient mobile app has a build-ready specification in [mobile design handover v01](docs/mobile_design_handover_v01.md): eight screens, the locked palette, component states, the Malay-Chinese sample household and a paste-ready prompt for an AI designer. The guided app and optional Devnet workspace share the selected identity and navigation; their explanatory and technical datasets remain separate. The rejected flat elephant reconstruction is not an approved asset. Brandbook application examples are proposals; documentary photograph reuse permission remains pending.
 
 ## Run locally — Windows or Mac
 
@@ -105,7 +105,7 @@ The planned mobile app is the recipient route for private household verification
 - [Southeast Asia country readiness](docs/sea_country_readiness_v01.md): the four-part test for a new country and research starting points for identity and payout rails.
 - [Mobile design handover](docs/mobile_design_handover_v01.md): eight recipient screens, locked brand palette and a prompt for an AI designer.
 - [Reserve program handoff](chain/README.md): Anchor program compiled and tested on a local validator; Devnet deployment and application integration remain pending.
-- [Brand guide v06](docs/brandbook_v06/index.html): current direction; earlier guides are historical. The deployed website serves it at `/brand-guide/`.
+- [Brand guide v07](docs/brandbook_v07/index.html): current direction, including the mission, vision, values and anti-corruption platform; earlier guides are historical. The deployed website serves the guide at `/brand-guide/`.
 
 The stack is Vite, strict TypeScript, Solana Kit and Wallet Standard, with a separate local policy/persistence/chain API. Production authentication, KYC, custody, fiat conversion and a public payout backend are outside this submission's scope.
 

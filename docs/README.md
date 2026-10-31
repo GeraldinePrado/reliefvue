@@ -4,7 +4,7 @@ Ownership: shared client/colleague project. Current direction: global network, i
 
 Start here:
 
-1. [Consolidated PRD v0.4](prd_v04.md).
+1. [Consolidated PRD v0.5](prd_v05.md).
 2. [Review findings and resolutions](requirements_review_v01.md).
 3. [Development sequence and decision gates](development_sequence_v01.md).
 4. [M1 Devnet engineering brief v02](m1_build_brief_v02.md).

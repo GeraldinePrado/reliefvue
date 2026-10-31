@@ -1,8 +1,8 @@
 # ReliefVue brand platform — v01
 
 Recorded 1 November 2026. This is the canonical wording for the mission, vision, values and
-tagline. The next brandbook and PRD revision should absorb this section; the repository's
-current PRD is v0.4, so this is not a rollback to an earlier version.
+tagline. It is carried into **brandbook v07** and **PRD v05**; product scope remains v0.4, so
+this is not a rollback to an earlier version.
 
 ## Tagline
 
@@ -63,7 +63,8 @@ partners. Keep it visible in the brandbook, the PRD and the public explanation.
 
 ## Where this is used
 
-- The 42-second film: [`reliefvue_explainer_42s_v01.html`](reliefvue_explainer_42s_v01.html).
-- The 30-second short cut: [`reliefvue_explainer_30s_v04.html`](reliefvue_explainer_30s_v04.html).
-- The website and future brandbook revision.
-- The next PRD revision, carried forward from v0.4.
+- The **42-second film**: [`reliefvue_explainer_42s_v01.html`](reliefvue_explainer_42s_v01.html).
+- The **30-second short cut**: [`reliefvue_explainer_30s_v04.html`](reliefvue_explainer_30s_v04.html).
+- **Brandbook v07**: [`brandbook_v07/index.html`](brandbook_v07/index.html), hero tagline and the “Platform” section.
+- **PRD v05**: [`prd_v05.md`](prd_v05.md), the “Brand platform” section.
+- The website and any future brandbook/PRD revision.
