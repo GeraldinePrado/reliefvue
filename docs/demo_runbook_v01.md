@@ -32,20 +32,20 @@ open.
 
 ## Optional 30-second opener
 
-Open [`reliefvue_explainer_30s_v02.html`](reliefvue_explainer_30s_v02.html) directly in Chrome
-— it also works from disk with no server. It is a silent, 16:9, brand-locked loop:
+Two silent 16:9 loops; both open from disk with no server.
 
-1. What ReliefVue is
-2. The gap it closes
-3. Prepare the reserve
-4. Verify one household, one grant
-5. Deliver and trace
-6. End card
+**Character-led cut (primary)** — [reliefvue_explainer_chibi_v01.html](reliefvue_explainer_chibi_v01.html)
+Mai, a chibi guide, gives the five-second product answer, then explains the reserve, the
+private KYC check, the ฿3,000 grocery QR with a grant-use dropdown, the anti-abuse controls and
+`@ReliefVue`. Use this one for an investor, a judge or a mixed audience.
 
-It loops every 30 seconds. Press `F` for fullscreen, `Space` to pause, `R` to restart. For a
-clean screen recording, add `?record=1` to the URL to hide the controls. The film is silent by
-design; speak over it or let it run. It ends on “Concept demo · simulated funds” — keep that
-visible.
+**Brand film (alternate)** — [reliefvue_explainer_30s_v02.html](reliefvue_explainer_30s_v02.html)
+Six brand scenes without a presenter; better as a background loop.
+
+Both loop every 30 seconds. Press `F` for fullscreen, `Space` to pause, `R` to restart. For a
+clean screen recording, add `?record=1` to the URL to hide the controls. The chibi cut is
+silent by design; speak the captions or let it run. It ends on “Concept demo · figures
+illustrative · basket pending local validation” — keep that visible.
 
 ## Demo path (about 8 minutes)
 

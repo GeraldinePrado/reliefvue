@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FDFBF7">
+<title>ReliefVue — 30 second chibi explainer</title>
+<link rel="icon" href="../product/assets/reliefvue-mark.png">
+<style>
+  @font-face{font-family:"Fraunces";src:url("../src/assets/brand/fraunces-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+  @font-face{font-family:"Alegreya Sans";src:url("../src/assets/brand/alegreyasans-700.ttf") format("truetype");font-weight:700;font-style:normal;font-display:block}
+  @font-face{font-family:"IBM Plex Sans";src:url("../src/assets/brand/ibmplexsans-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+  @font-face{font-family:"IBM Plex Sans Thai Looped";src:url("../src/assets/brand/ibmplexsansthilooped-400.ttf") format("truetype");font-weight:400;font-style:normal;font-display:block}
+
+  :root{
+    --ivory:#FDFBF7;--navy:#111D2D;--ink-soft:#4A5260;--muted:#626C7B;--faint:#8A919D;
+    --purple:#6840B5;--purple-deep:#4C2B91;--purple-soft:#F3EDF9;--lavender:#A78BFA;
+    --coral:#FF8B86;--coral-soft:#FDF0EE;--line:#DED9E2;--paper:#FFFFFF;
+    --display:"Fraunces",Georgia,serif;--sans:"IBM Plex Sans","IBM Plex Sans Thai Looped",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --wordmark:"Alegreya Sans","IBM Plex Sans Thai Looped",Arial,sans-serif;
+    --ease:cubic-bezier(.22,1,.36,1);--shadow:0 30px 90px rgba(47,25,64,.16);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;overflow:hidden;background:#0c111b;color:var(--navy);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  img{display:block;max-width:100%}
+  button{font:inherit}
+  .viewport{position:fixed;inset:0;background:#0c111b}
+  .frame{
+    position:absolute;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;
+    background:var(--ivory);transform-origin:center center;
+    box-shadow:0 50px 140px rgba(0,0,0,.45);
+  }
+
+  /* background */
+  .bg{position:absolute;inset:0;z-index:-4;overflow:hidden;background:radial-gradient(120% 100% at 70% 45%,#f6ecf6 0%,#fdfbf7 62%)}
+  .bg img{position:absolute;inset:-12%;width:124%;height:124%;max-width:none;object-fit:cover;object-position:center;opacity:.94;animation:drift 30s ease-in-out infinite;will-change:transform}
+  .veil{position:absolute;inset:0;z-index:-3;background:linear-gradient(90deg,#FDFBF7 0%,rgba(253,251,247,.98) 30%,rgba(253,251,247,.88) 48%,rgba(253,251,247,.36) 76%,rgba(253,251,247,.10) 100%),linear-gradient(0deg,rgba(253,251,247,.82) 0%,rgba(253,251,247,0) 28%,rgba(253,251,247,0) 76%,rgba(253,251,247,.55) 100%);transition:background 1s var(--ease)}
+  body[data-panel="end"] .veil{background:radial-gradient(72% 78% at 50% 48%,rgba(253,251,247,.98) 0%,rgba(253,251,247,.90) 48%,rgba(253,251,247,.55) 74%,rgba(253,251,247,.22) 100%)}
+  .orb{position:absolute;z-index:-2;border-radius:50%;pointer-events:none;opacity:.38;mix-blend-mode:multiply;filter:blur(42px);will-change:transform}
+  .orb-a{width:36vw;height:36vw;left:-8vw;top:4vh;background:radial-gradient(circle at 40% 40%,rgba(167,139,250,.34),rgba(167,139,250,0) 70%);animation:orbA 24s ease-in-out infinite}
+  .orb-b{width:32vw;height:32vw;right:0;top:-8vh;background:radial-gradient(circle,rgba(255,139,134,.20),rgba(255,139,134,0) 70%);animation:orbB 28s ease-in-out infinite}
+  .orb-c{width:26vw;height:26vw;right:18vw;bottom:-10vh;background:radial-gradient(circle,rgba(104,64,181,.18),rgba(104,64,181,0) 70%);animation:orbA 32s ease-in-out infinite reverse}
+  .grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;background-image:radial-gradient(rgba(17,29,45,.16) .6px,transparent .7px);background-size:4px 4px;mix-blend-mode:multiply}
+
+  /* top bar */
+  .topbar{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:30px 72px;transition:opacity .5s var(--ease)}
+  .brand-inline{display:flex;align-items:center;gap:12px}
+  .brand-inline img{width:40px}
+  .wordmark{font-family:var(--wordmark);font-weight:700;font-size:32px;line-height:1;letter-spacing:-.02em}
+  .top-meta{display:flex;align-items:center;gap:12px}
+  .concept-chip,.loop-chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(17,29,45,.10);background:rgba(255,255,255,.58);backdrop-filter:blur(12px);border-radius:999px;padding:8px 13px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .loop-dot{width:6px;height:6px;border-radius:50%;background:var(--coral);animation:blink 2.4s ease-in-out infinite}
+  body[data-panel="end"] .topbar{opacity:0}
+
+  /* layout */
+  .layout{position:absolute;inset:0;display:grid;grid-template-columns:620px minmax(0,1fr);gap:48px;padding:112px 72px 190px;align-items:stretch}
+  .presenter{position:relative;display:flex;align-items:flex-end;justify-content:center;min-width:0}
+  .arch{position:absolute;bottom:0;width:560px;height:660px;border-radius:280px 280px 40px 40px;background:linear-gradient(180deg,#F7F0FC 0%,#EFE4FA 58%,#E7D8F6 100%);border:1px solid rgba(255,255,255,.85);box-shadow:inset 0 0 80px rgba(167,139,250,.16),0 28px 70px rgba(76,43,145,.12)}
+  .arch::before{content:"";position:absolute;inset:30px 30px 24px;border-radius:250px 250px 28px 28px;border:1px dashed rgba(104,64,181,.16)}
+  .arch::after{content:"";position:absolute;left:50%;bottom:0;width:370px;height:70px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(17,29,45,.12),transparent 70%)}
+  .name-tag{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:4;display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(104,64,181,.14);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple-deep);white-space:nowrap;backdrop-filter:blur(8px)}
+  .name-tag i{width:5px;height:5px;border-radius:50%;background:var(--coral);display:block}
+
+  /* chibi */
+  .chibi-wrap{position:relative;z-index:3;width:420px;height:640px;margin-bottom:22px;opacity:0;transform:translateY(20px) scale(.96);animation:chibiIn .9s var(--ease) .1s both}
+  .chibi{width:100%;height:100%;overflow:visible}
+  .chibi-bob{animation:bob 4.6s ease-in-out infinite;transform-box:view-box;transform-origin:210px 620px}
+  .chibi-head{animation:tilt 6.2s ease-in-out infinite;transform-box:view-box;transform-origin:210px 310px}
+  .lids{transform-box:fill-box;transform-origin:center;transform:scaleY(0);animation:blink 4.8s infinite}
+  .mouth{transform-box:fill-box;transform-origin:center;animation:none}
+  .is-talking .mouth{animation:talk .32s ease-in-out infinite alternate}
+  .arm-right{transform-box:view-box;transform-origin:286px 332px;animation:gesture 5.4s ease-in-out infinite}
+  .is-waving .arm-right{animation:wave 1.6s ease-in-out infinite}
+  .is-paused .chibi-bob,.is-paused .chibi-head,.is-paused .mouth,.is-paused .arm-right{animation-play-state:paused}
+
+  /* board */
+  .board{
+    position:relative;align-self:center;height:680px;border-radius:30px;overflow:hidden;
+    background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.95);
+    box-shadow:var(--shadow);backdrop-filter:blur(20px);
+    transition:background .7s var(--ease),border-color .7s var(--ease);
+  }
+  .board.is-end{background:var(--navy);border-color:rgba(255,255,255,.14)}
+  .board.is-end::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(70% 80% at 80% 20%,rgba(167,139,250,.22),transparent 65%)}
+  .panel{position:absolute;inset:0;padding:40px 48px 34px;opacity:0;transform:translateY(14px);transition:opacity .48s var(--ease),transform .55s var(--ease);pointer-events:none;display:flex;flex-direction:column}
+  .panel.is-active{opacity:1;transform:none;pointer-events:auto}
+  .kicker{margin:0 0 14px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--purple);display:flex;align-items:center;gap:10px}
+  .kicker::before{content:"";width:22px;height:1px;background:currentColor;opacity:.55}
+  h1,h2{margin:0;font-family:var(--display);font-weight:400;color:var(--navy);letter-spacing:-.038em;line-height:1.02;text-wrap:balance}
+  h1{font-size:62px}
+  h2{font-size:52px}
+  h1 em,h2 em{font-style:italic;color:var(--purple)}
+  .sub{margin:16px 0 0;max-width:54ch;font-size:19px;line-height:1.45;color:#354052}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;background:var(--purple-soft);border:1px solid rgba(104,64,181,.14);font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-deep)}
+  .chip.coral{background:var(--coral-soft);border-color:rgba(255,139,134,.28);color:var(--navy)}
+  .chip i{width:5px;height:5px;border-radius:50%;background:var(--coral);display:block}
+  .footnote{margin:auto 0 0;padding-top:14px;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);border-top:1px solid rgba(222,217,226,.7)}
+  .footnote i{width:5px;height:5px;border-radius:50%;background:var(--lavender);display:block;flex:none}
+
+  /* hook */
+  .hook-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;align-items:center;flex:1;min-height:0}
+  .hook-copy{min-width:0}
+  .hook-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:0}
+  .phone{position:relative;width:252px;height:470px;border-radius:32px;background:#111D2D;padding:10px;box-shadow:0 30px 60px rgba(17,29,45,.30);transform:rotate(2deg)}
+  .phone::before{content:"";position:absolute;top:12px;left:50%;transform:translateX(-50%);width:64px;height:14px;border-radius:0 0 10px 10px;background:#111D2D;z-index:2}
+  .phone-screen{height:100%;border-radius:24px;background:linear-gradient(180deg,#fff 0%,#F7F2FB 100%);overflow:hidden;padding:18px 16px;display:flex;flex-direction:column}
+  .mini-brand{display:flex;align-items:center;gap:6px;font-family:var(--wordmark);font-weight:700;font-size:13px;margin-top:6px}
+  .mini-brand img{width:18px}
+  .mini-label{margin-top:16px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
+  .mini-amount{font-family:var(--display);font-size:40px;letter-spacing:-.03em;line-height:1;margin-top:4px}
+  .mini-qr{margin:14px auto 0;width:150px;height:150px}
+  .mini-note{margin-top:auto;text-align:center;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .float-pill{position:absolute;right:-16px;top:48px;padding:9px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px rgba(47,25,64,.14);font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-deep);transform:rotate(-3deg)}
+  .float-pill.coral{top:auto;bottom:54px;right:auto;left:-18px;background:var(--coral-soft);border-color:rgba(255,139,134,.25);color:var(--navy);transform:rotate(2deg)}
+
+  /* prepare */
+  .prepare-grid{display:grid;grid-template-columns:1fr 116px 1.1fr;align-items:center;gap:14px;margin-top:26px;flex:1;min-height:0}
+  .donor-stack{display:grid;gap:9px}
+  .donor{display:flex;align-items:center;gap:9px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:11px;font-size:13px;color:var(--ink-soft)}
+  .avatar{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--purple-soft);color:var(--purple-deep);font-size:9px;font-weight:700}
+  .donor-note{margin:2px 0 0;text-align:center;font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .coin-track{position:relative;height:150px}
+  .coin{position:absolute;left:0;top:0;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff;background:linear-gradient(145deg,#8a63d2,#4C2B91);box-shadow:0 10px 22px rgba(76,43,145,.30);offset-path:path("M 0 70 C 22 12, 72 12, 96 70");animation:travel 2.8s linear infinite;z-index:2}
+  .vault{position:relative;background:var(--navy);color:#fff;border-radius:16px;padding:22px;box-shadow:0 22px 44px rgba(17,29,45,.22)}
+  .vault-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;margin-bottom:16px;background:rgba(167,139,250,.18);color:var(--lavender)}
+  .vault strong{display:block;font-family:var(--display);font-weight:400;font-size:26px;line-height:1.1}
+  .vault small{display:block;margin-top:5px;font-size:12px;color:#C9C2DD}
+  .vault-bar{height:6px;border-radius:99px;background:rgba(255,255,255,.14);margin-top:18px;overflow:hidden}
+  .vault-bar span{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--lavender),var(--coral));animation:fill 2.6s var(--ease) .3s both}
+
+  /* verify */
+  .verify-grid{display:grid;grid-template-columns:300px 1fr;gap:26px;align-items:center;margin-top:22px;flex:1;min-height:0}
+  .id-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 18px 36px rgba(47,25,64,.10);overflow:hidden}
+  .id-card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--purple),var(--lavender),var(--coral))}
+  .id-top{display:flex;justify-content:space-between;align-items:center;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+  .id-top span{color:var(--purple-deep)}
+  .id-photo{width:62px;height:62px;border-radius:14px;display:grid;place-items:center;margin:14px 0 10px;background:var(--purple-soft);color:var(--purple-deep);font-size:15px;font-weight:700}
+  .id-name{font-family:var(--display);font-size:24px;line-height:1.1}
+  .id-name small{display:block;font-family:var(--sans);font-size:11px;color:var(--muted);margin-top:4px}
+  .id-number{margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;letter-spacing:.12em;color:var(--ink-soft)}
+  .id-check{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:6px 9px;border-radius:999px;background:var(--purple-soft);color:var(--purple-deep);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .checks li{display:flex;align-items:flex-start;gap:12px;padding-bottom:11px;border-bottom:1px solid rgba(222,217,226,.7)}
+  .checks li:last-child{border-bottom:0}
+  .check-ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--purple-soft);color:var(--purple-deep)}
+  .checks strong{display:block;font-size:15px;font-weight:600;color:var(--navy);line-height:1.2}
+  .checks small{display:block;margin-top:3px;font-size:12px;color:var(--muted);line-height:1.4}
+  .gate{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .gate span{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--purple-deep);background:var(--purple-soft);border:1px solid rgba(104,64,181,.14);border-radius:999px;padding:6px 9px}
+
+  /* grant */
+  .grant-grid{display:grid;grid-template-columns:1fr 306px;gap:26px;align-items:center;margin-top:18px;flex:1;min-height:0}
+  .grant-breakdown{min-width:0}
+  .grant-amount{font-family:var(--display);font-weight:400;font-size:86px;line-height:.95;letter-spacing:-.045em;color:var(--navy)}
+  .grant-amount small{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--purple);display:block;margin-bottom:8px}
+  .grant-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .grant-list{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+  .grant-list li{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-soft)}
+  .grant-list i{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;background:var(--purple-soft);color:var(--purple-deep);flex:none}
+  .grant-note{
+    margin:16px 0 0;padding:11px 13px;border-radius:11px;background:var(--purple-soft);
+    border:1px solid rgba(104,64,181,.14);font-size:13px;line-height:1.45;color:var(--ink-soft);max-width:42ch;
+  }
+  .grant-note b{display:block;margin-bottom:3px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--purple-deep)}
+  .grant-phone{position:relative;width:306px;height:484px;border-radius:30px;background:#111D2D;padding:9px;box-shadow:0 30px 60px rgba(17,29,45,.28);justify-self:end}
+  .grant-phone .phone-screen{padding:16px 14px;border-radius:22px}
+  .phone-head{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+  .phone-head b{color:var(--purple-deep);font-size:14px;letter-spacing:-.02em;font-family:var(--display);font-weight:400}
+  .select{margin-top:12px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
+  .select-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 11px;font-size:12px;font-weight:600;color:var(--navy)}
+  .select-row span:last-child{color:var(--purple);font-size:10px}
+  .select-options{max-height:0;overflow:hidden;transition:max-height .5s var(--ease);border-top:0 solid var(--line)}
+  .board.is-open .select-options{max-height:132px;border-top-width:1px}
+  .select-options div{padding:8px 11px;font-size:11px;color:var(--ink-soft);border-top:1px solid rgba(222,217,226,.6)}
+  .select-options div:first-child{border-top:0}
+  .select-options .selected{color:var(--purple-deep);font-weight:700;background:var(--purple-soft)}
+  .qr-wrap{position:relative;width:176px;height:176px;margin:14px auto 0;padding:8px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .qr{width:100%;height:100%}
+  .scan{position:absolute;left:8px;right:8px;top:8px;height:2px;background:linear-gradient(90deg,transparent,var(--purple),transparent);box-shadow:0 0 10px rgba(104,64,181,.55);animation:scan 2.4s ease-in-out infinite}
+  .phone-note{margin:10px 0 0;text-align:center;font-size:10px;color:var(--muted)}
+  .phone-badge{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;border-radius:9px;background:var(--purple-soft);color:var(--purple-deep);font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .phone-badge i{width:5px;height:5px;border-radius:50%;background:var(--purple);display:block}
+
+  /* protect */
+  .protect-grid{display:grid;grid-template-columns:230px 1fr;gap:30px;align-items:center;margin-top:20px;flex:1;min-height:0}
+  .shield-wrap{position:relative;display:grid;place-items:center}
+  .shield-wrap::before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.22),transparent 68%);filter:blur(8px)}
+  .shield{position:relative;width:190px;height:222px;filter:drop-shadow(0 22px 34px rgba(76,43,145,.22));animation:shieldFloat 5s ease-in-out infinite}
+  .control-list{display:grid;gap:10px}
+  .control{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px}
+  .control b{display:block;font-size:14px;color:var(--navy);line-height:1.2}
+  .control small{display:block;margin-top:3px;font-size:11px;color:var(--muted);line-height:1.35}
+  .control .num{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--purple-soft);color:var(--purple-deep);font-size:10px;font-weight:700}
+
+  /* end */
+  .end-panel{align-items:center;justify-content:center;text-align:center;padding:38px 48px}
+  .end-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:760px}
+  .end-logo{position:relative;display:grid;place-items:center;width:128px;height:128px;margin-bottom:10px}
+  .end-logo::before{content:"";position:absolute;inset:6%;border-radius:50%;background:radial-gradient(circle at 42% 36%,#fff 0%,#F7F1FB 48%,#EADFF8 100%);box-shadow:inset 0 0 50px rgba(167,139,250,.22)}
+  .end-ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(255,255,255,.22);animation:spin 44s linear infinite}
+  .end-ring::after{content:"";position:absolute;inset:11px;border-radius:50%;border:1px dashed rgba(255,139,134,.42)}
+  .end-logo img{position:relative;z-index:1;width:64px;animation:bob 4.6s ease-in-out infinite}
+  .end-wordmark{font-family:var(--wordmark);font-weight:700;font-size:28px;color:#fff;letter-spacing:-.02em;margin:0 0 8px}
+  .end-panel h2{color:#fff;font-size:48px}
+  .end-panel h2 em{color:#C9B5F2}
+  .end-line{margin:12px 0 0;font-size:15px;color:#C9C2DD}
+  .follow{margin-top:18px;display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;background:#fff;color:var(--navy);text-decoration:none;font-size:15px;font-weight:700;box-shadow:0 12px 26px rgba(0,0,0,.18)}
+  .follow svg{width:15px;height:15px}
+  .end-links{margin-top:10px;display:flex;flex-direction:column;gap:4px;font-size:14px;color:#C9C2DD}
+  .end-links b{color:#fff;font-weight:600;letter-spacing:.02em}
+  .end-panel .disclaimer{margin-top:14px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#8E86A6}
+
+  /* caption */
+  .caption{
+    position:absolute;left:72px;right:72px;bottom:64px;height:104px;z-index:15;
+    display:flex;align-items:center;gap:22px;padding:0 28px;
+    background:rgba(255,255,255,.80);border:1px solid rgba(255,255,255,.95);border-radius:22px;
+    box-shadow:0 24px 60px rgba(47,25,64,.12);backdrop-filter:blur(18px);
+  }
+  .quote-mark{font-family:var(--display);font-size:58px;line-height:1;color:var(--coral);height:60px;flex:none;opacity:.85;transform:translateY(12px)}
+  .speaker{flex:none;display:flex;align-items:center;gap:10px;padding-right:20px;border-right:1px solid rgba(222,217,226,.9)}
+  .speaker-dot{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--purple);color:#fff;font-family:var(--wordmark);font-weight:700;font-size:16px}
+  .speaker span{display:block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--purple-deep);white-space:nowrap}
+  .speaker small{display:block;margin-top:2px;font-size:10px;color:var(--muted);white-space:nowrap}
+  .caption p{margin:0;font-family:var(--display);font-size:30px;line-height:1.28;color:var(--navy);letter-spacing:-.015em;max-height:78px;overflow:hidden}
+  .caption.is-changing p{animation:captionIn .45s var(--ease) both}
+
+  /* controls */
+  .progress{position:absolute;left:0;right:0;bottom:0;height:3px;z-index:30;background:rgba(17,29,45,.08)}
+  .progress span{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--purple),var(--coral));transform:scaleX(0);transform-origin:left}
+  .hint{position:absolute;right:28px;bottom:20px;z-index:30;font-size:9px;letter-spacing:.08em;color:rgba(17,29,45,.48);background:rgba(255,255,255,.55);border:1px solid rgba(17,29,45,.07);border-radius:999px;padding:6px 10px;backdrop-filter:blur(8px);transition:opacity .4s}
+  .hint.is-hidden{opacity:0;pointer-events:none}
+  body.is-recording .topbar,body.is-recording .hint,body.is-recording .progress{display:none}
+  body.is-recording{cursor:none}
+
+  /* keyframes */
+  @keyframes drift{0%,100%{transform:scale(1) translate3d(0,0,0)}50%{transform:scale(1.05) translate3d(-.6%,-.6%,0)}}
+  @keyframes orbA{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(3vw,-2.5vh,0) scale(1.1)}}
+  @keyframes orbB{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-2.5vw,3vh,0) scale(1.08)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes tilt{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1.4deg)}}
+  @keyframes chibiIn{to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes talk{0%{transform:scaleY(.42)}100%{transform:scaleY(1)}}
+  @keyframes gesture{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(-24deg)}}
+  @keyframes wave{0%,100%{transform:rotate(-16deg)}50%{transform:rotate(-38deg)}}
+  @keyframes travel{0%{offset-distance:0%;opacity:0;transform:scale(.8)}12%{opacity:1;transform:scale(1)}86%{opacity:1}100%{offset-distance:100%;opacity:0;transform:scale(.7)}}
+  @keyframes fill{to{width:74%}}
+  @keyframes scan{0%,100%{top:8px;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:calc(100% - 10px);opacity:0}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes shieldFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes captionIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,139,134,.28)}50%{box-shadow:0 0 0 8px rgba(255,139,134,0)}}
+
+  @media (prefers-reduced-motion:reduce){
+    .bg img,.orb,.chibi-wrap,.chibi-bob,.chibi-head,.lids,.mouth,.arm-right,.coin,.vault-bar span,.scan,.shield,.end-ring,.loop-dot{animation:none!important}
+    .chibi-wrap{opacity:1;transform:none}
+    .panel{transition:none}
+    .caption.is-changing p{animation:none}
+    .hint{display:none}
+  }
+</style>
+</head>
+<body data-panel="hook">
+  <div class="viewport">
+    <div class="frame" id="frame">
+      <div class="bg" aria-hidden="true"><img src="../src/assets/brand/pastel-wavescape.png" alt=""></div>
+      <div class="veil" aria-hidden="true"></div>
+      <div class="orb orb-a" aria-hidden="true"></div>
+      <div class="orb orb-b" aria-hidden="true"></div>
+      <div class="orb orb-c" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <div class="brand-inline">
+          <img src="../product/assets/reliefvue-mark.png" alt="">
+          <span class="wordmark">ReliefVue</span>
+        </div>
+        <div class="top-meta">
+          <span class="concept-chip">Concept explainer</span>
+          <span class="loop-chip"><span class="loop-dot" aria-hidden="true"></span>30s loop</span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="presenter" aria-label="Mai, the ReliefVue guide">
+          <div class="arch" aria-hidden="true"></div>
+          <div class="chibi-wrap" id="chibiWrap">
+            <svg class="chibi" viewBox="0 0 420 640" role="img" aria-label="Chibi illustration of a young Thai woman">
+    <defs>
+      <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F4CBA8"/><stop offset="1" stop-color="#E5B08A"/></linearGradient>
+      <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3B2C47"/><stop offset="1" stop-color="#231B2C"/></linearGradient>
+      <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#8057C9"/><stop offset="1" stop-color="#5B349F"/></linearGradient>
+      <linearGradient id="pants" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#243149"/><stop offset="1" stop-color="#111D2D"/></linearGradient>
+      <linearGradient id="shoe" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#EEE8F4"/></linearGradient>
+      <radialGradient id="cheek" cx=".5" cy=".5" r=".5"><stop stop-color="#FF8B86" stop-opacity=".55"/><stop offset="1" stop-color="#FF8B86" stop-opacity="0"/></radialGradient>
+      <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#4C2B91" flood-opacity=".18"/></filter>
+    </defs>
+    <g class="chibi-bob">
+      <ellipse cx="210" cy="606" rx="118" ry="17" fill="#111D2D" opacity=".10"/>
+      <!-- legs -->
+      <rect x="146" y="424" width="54" height="156" rx="27" fill="url(#pants)"/>
+      <rect x="220" y="424" width="54" height="156" rx="27" fill="url(#pants)"/>
+      <rect x="132" y="556" width="84" height="38" rx="19" fill="url(#shoe)"/>
+      <rect x="204" y="556" width="84" height="38" rx="19" fill="url(#shoe)"/>
+      <rect x="132" y="580" width="84" height="14" rx="7" fill="#111D2D"/>
+      <rect x="204" y="580" width="84" height="14" rx="7" fill="#111D2D"/>
+      <!-- body -->
+      <path d="M132 332 Q132 304 160 298 L260 298 Q288 304 288 332 L282 430 Q210 448 138 430 Z" fill="url(#shirt)"/>
+      <path d="M148 420 Q210 436 272 420" stroke="#4C2B91" stroke-width="6" fill="none" opacity=".35"/>
+      <path d="M186 302 Q210 328 234 302" stroke="#F3EDF9" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <!-- left arm on hip -->
+      <path d="M142 330 Q114 372 128 418" stroke="#6D46B8" stroke-width="44" stroke-linecap="round" fill="none"/>
+      <path d="M128 408 Q132 430 140 438" stroke="#E9B58E" stroke-width="24" stroke-linecap="round" fill="none"/>
+      <path d="M132 430 Q146 424 154 434 Q158 444 146 448 Q136 450 132 442 Z" fill="#E9B58E"/>
+      <path d="M146 433 Q154 430 158 435" stroke="#D9A47C" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <!-- right arm pointing -->
+      <g class="arm-right">
+        <path d="M286 332 Q320 332 336 318" stroke="#6D46B8" stroke-width="44" stroke-linecap="round" fill="none"/>
+        <path d="M334 318 Q356 306 370 296" stroke="#E9B58E" stroke-width="24" stroke-linecap="round" fill="none"/>
+        <circle cx="374" cy="292" r="14" fill="#E9B58E"/>
+        <path d="M382 286 Q400 278 406 286" stroke="#E9B58E" stroke-width="9" stroke-linecap="round" fill="none"/>
+      </g>
+      <!-- neck -->
+      <rect x="190" y="282" width="40" height="42" rx="19" fill="#DFA77D"/>
+      <!-- head group -->
+      <g class="head">
+        <!-- hair back -->
+        <path d="M104 192 Q96 72 210 66 Q324 72 316 192 L316 296 Q298 330 274 302 L146 302 Q122 330 104 296 Z" fill="url(#hair)"/>
+        <!-- bun -->
+        <circle cx="210" cy="58" r="44" fill="url(#hair)"/>
+        <path d="M174 72 Q210 48 246 72" stroke="#59456A" stroke-width="8" fill="none" opacity=".55"/>
+        <circle cx="210" cy="92" r="31" fill="none" stroke="#FF8B86" stroke-width="11" opacity=".95"/>
+        <!-- face -->
+        <ellipse cx="210" cy="202" rx="104" ry="112" fill="url(#skin)" filter="url(#soft)"/>
+        <ellipse cx="106" cy="212" rx="18" ry="24" fill="#E3AA82"/>
+        <ellipse cx="314" cy="212" rx="18" ry="24" fill="#E3AA82"/>
+        <!-- fringe -->
+        <path d="M108 182 Q108 96 210 92 Q312 96 312 182 Q286 146 252 152 Q232 128 210 150 Q188 126 166 152 Q132 146 108 182 Z" fill="url(#hair)"/>
+        <path d="M138 140 Q176 112 214 118" stroke="#5B466C" stroke-width="8" fill="none" stroke-linecap="round" opacity=".6"/>
+        <path d="M282 140 Q248 112 220 120" stroke="#5B466C" stroke-width="6" fill="none" stroke-linecap="round" opacity=".4"/>
+        <!-- eyebrows -->
+        <path d="M146 174 Q168 162 190 172" stroke="#4B3553" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M230 172 Q252 162 274 174" stroke="#4B3553" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- eyes -->
+        <ellipse cx="170" cy="208" rx="24" ry="28" fill="#fff"/>
+        <ellipse cx="250" cy="208" rx="24" ry="28" fill="#fff"/>
+        <ellipse cx="172" cy="211" rx="14" ry="17" fill="#6B4A3A"/>
+        <ellipse cx="248" cy="211" rx="14" ry="17" fill="#6B4A3A"/>
+        <circle cx="172" cy="213" r="7.5" fill="#2B1D2A"/>
+        <circle cx="248" cy="213" r="7.5" fill="#2B1D2A"/>
+        <circle cx="166" cy="202" r="5.5" fill="#fff"/>
+        <circle cx="242" cy="202" r="5.5" fill="#fff"/>
+        <circle cx="177" cy="219" r="2.4" fill="#fff" opacity=".85"/>
+        <circle cx="253" cy="219" r="2.4" fill="#fff" opacity=".85"/>
+        <g class="lids">
+          <ellipse cx="170" cy="208" rx="25" ry="29" fill="#E7B28A"/>
+          <ellipse cx="250" cy="208" rx="25" ry="29" fill="#E7B28A"/>
+          <path d="M145 207 Q170 218 195 207" stroke="#4B3553" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <path d="M225 207 Q250 218 275 207" stroke="#4B3553" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- blush -->
+        <ellipse cx="138" cy="244" rx="24" ry="14" fill="url(#cheek)"/>
+        <ellipse cx="282" cy="244" rx="24" ry="14" fill="url(#cheek)"/>
+        <!-- nose -->
+        <path d="M206 236 Q210 242 214 236" stroke="#CE8F69" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- earrings -->
+        <circle cx="106" cy="230" r="7" fill="none" stroke="#E6B566" stroke-width="3"/>
+        <circle cx="314" cy="230" r="7" fill="none" stroke="#E6B566" stroke-width="3"/>
+        <!-- mouth -->
+        <g class="mouth">
+          <path d="M180 258 Q210 292 240 258 Q210 276 180 258 Z" fill="#7A3B3B"/>
+          <path d="M192 268 Q210 284 228 268 Q210 276 192 268" fill="#FF8B86"/>
+        </g>
+      </g>
+      <!-- heart pin on the shirt -->
+      <path d="M260 352 C252 342 240 354 260 370 C280 354 268 342 260 352 Z" fill="#FF8B86"/>
+      <circle cx="256" cy="356" r="2.6" fill="#FDFBF7" opacity=".9"/>
+    </g>
+  </svg>
+          </div>
+          <span class="name-tag"><i aria-hidden="true"></i>Mai · your ReliefVue guide</span>
+        </section>
+
+        <section class="board" id="board" aria-label="ReliefVue explainer">
+          <article class="panel is-active" data-panel="hook">
+            <div class="hook-grid">
+              <div class="hook-copy">
+                <p class="kicker">Pre-funded disaster relief</p>
+                <h1>฿3,000 of groceries.<br><em>Verified. Traceable.</em></h1>
+                <p class="sub">ReliefVue gives a verified household three days of essentials — as a QR, not cash.</p>
+                <div class="chips">
+                  <span class="chip coral"><i aria-hidden="true"></i>QR, not cash</span>
+                  <span class="chip">3 days · 3–5 people</span>
+                  <span class="chip">Public Solana ledger</span>
+                </div>
+              </div>
+              <div class="hook-visual">
+                <div class="phone">
+                  <div class="phone-screen">
+                    <div class="mini-brand"><img src="../product/assets/reliefvue-mark.png" alt="">ReliefVue</div>
+                    <p class="mini-label">Essentials grant</p>
+                    <p class="mini-amount">฿3,000</p>
+                    <svg class="mini-qr" viewBox="0 0 100 100" aria-hidden="true">
+                      <rect width="100" height="100" fill="#fff"/>
+                      <g fill="#111D2D">
+                        <rect x="4" y="4" width="22" height="22" rx="3"/><rect x="74" y="4" width="22" height="22" rx="3"/><rect x="4" y="74" width="22" height="22" rx="3"/>
+                        <rect x="10" y="10" width="10" height="10" fill="#fff"/><rect x="80" y="10" width="10" height="10" fill="#fff"/><rect x="10" y="80" width="10" height="10" fill="#fff"/>
+                        <rect x="34" y="6" width="6" height="6"/><rect x="46" y="6" width="6" height="6"/><rect x="58" y="6" width="6" height="6"/>
+                        <rect x="34" y="18" width="6" height="6"/><rect x="52" y="18" width="6" height="6"/><rect x="66" y="18" width="6" height="6"/>
+                        <rect x="6" y="34" width="6" height="6"/><rect x="18" y="34" width="6" height="6"/><rect x="34" y="34" width="6" height="6"/><rect x="46" y="34" width="6" height="6"/><rect x="58" y="34" width="6" height="6"/><rect x="74" y="34" width="6" height="6"/><rect x="86" y="34" width="6" height="6"/>
+                        <rect x="10" y="46" width="6" height="6"/><rect x="24" y="46" width="6" height="6"/><rect x="40" y="46" width="6" height="6"/><rect x="54" y="46" width="6" height="6"/><rect x="68" y="46" width="6" height="6"/><rect x="82" y="46" width="6" height="6"/>
+                        <rect x="6" y="58" width="6" height="6"/><rect x="18" y="58" width="6" height="6"/><rect x="34" y="58" width="6" height="6"/><rect x="46" y="58" width="6" height="6"/><rect x="62" y="58" width="6" height="6"/><rect x="76" y="58" width="6" height="6"/>
+                        <rect x="34" y="72" width="6" height="6"/><rect x="50" y="72" width="6" height="6"/><rect x="66" y="72" width="6" height="6"/><rect x="80" y="72" width="6" height="6"/>
+                        <rect x="34" y="84" width="6" height="6"/><rect x="48" y="84" width="6" height="6"/><rect x="62" y="84" width="6" height="6"/><rect x="82" y="84" width="6" height="6"/>
+                      </g>
+                    </svg>
+                    <p class="mini-note">Groceries · 3 days</p>
+                  </div>
+                </div>
+                <span class="float-pill">QR, not cash</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel" data-panel="prepare">
+            <p class="kicker">01 · Prepare</p>
+            <h2>Fill the reserve<br><em>before it's needed.</em></h2>
+            <div class="prepare-grid">
+              <div class="donor-stack">
+                <div class="donor"><span class="avatar">A</span>Donor</div>
+                <div class="donor"><span class="avatar">M</span>Donor</div>
+                <div class="donor"><span class="avatar">J</span>Donor</div>
+                <p class="donor-note">SOL · USDC · THB</p>
+              </div>
+              <div class="coin-track" aria-hidden="true"><span class="coin">SOL</span></div>
+              <div class="vault">
+                <div class="vault-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-2.9 8.2-7 9.5-4.1-1.3-7-5.1-7-9.5V6l7-3z"/><path d="M9.5 12l1.7 1.7L14.8 10"/></svg></div>
+                <strong>Relief reserve</strong>
+                <small>Held for disaster</small>
+                <div class="vault-bar"><span></span></div>
+              </div>
+            </div>
+            <p class="footnote"><i aria-hidden="true"></i>Operating support stays in its own account</p>
+          </article>
+
+          <article class="panel" data-panel="verify">
+            <p class="kicker">02 · Verify</p>
+            <h2>One private check.<br><em>One household.</em></h2>
+            <div class="verify-grid">
+              <div class="id-card">
+                <div class="id-top">ReliefVue KYC <span>Private</span></div>
+                <div class="id-photo">TW</div>
+                <div class="id-name">Tan Wei Ming<small>Household · Chiang Mai</small></div>
+                <div class="id-number">•••• •••• 0010</div>
+                <div class="id-check">Verified</div>
+              </div>
+              <ul class="checks">
+                <li><span class="check-ic" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>Identity</strong><small>Thai ID / passport + selfie/liveness</small></div></li>
+                <li><span class="check-ic" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>Home</strong><small>Pre-disaster address evidence</small></div></li>
+                <li><span class="check-ic" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><div><strong>Household</strong><small>One grant per household; duplicates reviewed</small></div></li>
+              </ul>
+            </div>
+            <div class="gate"><span>Official alert ✓</span><span>Human review ✓</span><span>Documents off-chain ✓</span></div>
+          </article>
+
+          <article class="panel" data-panel="grant">
+            <p class="kicker">03 · Deliver</p>
+            <h2>฿3,000. Three days.<br><em>Three to five people.</em></h2>
+            <div class="grant-grid">
+              <div class="grant-breakdown">
+                <div class="grant-amount"><small>Fixed essentials grant</small>฿3,000</div>
+                <div class="grant-chips">
+                  <span class="chip">3 days</span>
+                  <span class="chip">3–5 people</span>
+                  <span class="chip coral"><i aria-hidden="true"></i>No cash</span>
+                </div>
+                <ul class="grant-list">
+                  <li><i aria-hidden="true">✓</i>Food — ready to eat</li>
+                  <li><i aria-hidden="true">✓</i>Safe drinking water</li>
+                  <li><i aria-hidden="true">✓</i>Hygiene and basic needs</li>
+                </ul>
+                <p class="grant-note"><b>Why ฿3,000?</b> It is the reference cost of three days of food, water and hygiene for 3–5 people. Fixed, so no one negotiates your worth.</p>
+              </div>
+              <div class="grant-phone">
+                <div class="phone-screen">
+                  <div class="phone-head"><span>ReliefVue grant</span><b>฿3,000</b></div>
+                  <div class="select">
+                    <div class="select-row"><span>Emergency food &amp; water</span><span>▾</span></div>
+                    <div class="select-options">
+                      <div class="selected">Emergency food &amp; water</div>
+                      <div>Baby &amp; hygiene</div>
+                      <div>Medicine &amp; first aid</div>
+                      <div>Shelter &amp; transport</div>
+                    </div>
+                  </div>
+                  <div class="qr-wrap">
+                    <svg class="qr" viewBox="0 0 100 100" aria-hidden="true">
+                      <rect width="100" height="100" fill="#fff"/>
+                      <g fill="#111D2D">
+                        <rect x="4" y="4" width="22" height="22" rx="3"/><rect x="74" y="4" width="22" height="22" rx="3"/><rect x="4" y="74" width="22" height="22" rx="3"/>
+                        <rect x="10" y="10" width="10" height="10" fill="#fff"/><rect x="80" y="10" width="10" height="10" fill="#fff"/><rect x="10" y="80" width="10" height="10" fill="#fff"/>
+                        <rect x="34" y="6" width="6" height="6"/><rect x="46" y="6" width="6" height="6"/><rect x="58" y="6" width="6" height="6"/>
+                        <rect x="34" y="18" width="6" height="6"/><rect x="52" y="18" width="6" height="6"/><rect x="66" y="18" width="6" height="6"/>
+                        <rect x="6" y="34" width="6" height="6"/><rect x="18" y="34" width="6" height="6"/><rect x="34" y="34" width="6" height="6"/><rect x="46" y="34" width="6" height="6"/><rect x="58" y="34" width="6" height="6"/><rect x="74" y="34" width="6" height="6"/><rect x="86" y="34" width="6" height="6"/>
+                        <rect x="10" y="46" width="6" height="6"/><rect x="24" y="46" width="6" height="6"/><rect x="40" y="46" width="6" height="6"/><rect x="54" y="46" width="6" height="6"/><rect x="68" y="46" width="6" height="6"/><rect x="82" y="46" width="6" height="6"/>
+                        <rect x="6" y="58" width="6" height="6"/><rect x="18" y="58" width="6" height="6"/><rect x="34" y="58" width="6" height="6"/><rect x="46" y="58" width="6" height="6"/><rect x="62" y="58" width="6" height="6"/><rect x="76" y="58" width="6" height="6"/>
+                        <rect x="34" y="72" width="6" height="6"/><rect x="50" y="72" width="6" height="6"/><rect x="66" y="72" width="6" height="6"/><rect x="80" y="72" width="6" height="6"/>
+                        <rect x="34" y="84" width="6" height="6"/><rect x="48" y="84" width="6" height="6"/><rect x="62" y="84" width="6" height="6"/><rect x="82" y="84" width="6" height="6"/>
+                      </g>
+                    </svg>
+                    <span class="scan" aria-hidden="true"></span>
+                  </div>
+                  <p class="phone-note">Show at a participating shop</p>
+                  <div class="phone-badge"><i aria-hidden="true"></i>Single-use · Essentials only</div>
+                </div>
+              </div>
+            </div>
+            <p class="footnote"><i aria-hidden="true"></i>The shop scans the basket; only approved essentials are paid</p>
+          </article>
+
+          <article class="panel" data-panel="protect">
+            <p class="kicker">04 · Protect</p>
+            <h2>No cash handoff.<br><em>No hidden middleman.</em></h2>
+            <div class="protect-grid">
+              <div class="shield-wrap">
+                <svg class="shield" viewBox="0 0 180 210" aria-hidden="true">
+                  <defs><linearGradient id="shieldFill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8E66D6"/><stop offset="1" stop-color="#4C2B91"/></linearGradient></defs>
+                  <path d="M90 8 L166 40 V104 C166 152 132 186 90 202 C48 186 14 152 14 104 V40 Z" fill="url(#shieldFill)"/>
+                  <path d="M90 24 L150 49 V104 C150 143 123 171 90 184 C57 171 30 143 30 104 V49 Z" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2"/>
+                  <path d="M62 104 L82 124 L122 82" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="control-list">
+                <div class="control"><span class="num">01</span><div><b>1 household · 1 grant</b><small>Duplicate IDs and rooms are reviewed.</small></div></div>
+                <div class="control"><span class="num">02</span><div><b>2-of-3 approvals</b><small>No single person can release reserve funds.</small></div></div>
+                <div class="control"><span class="num">03</span><div><b>Restricted QR</b><small>Essentials only; no cash-out at the shop.</small></div></div>
+                <div class="control"><span class="num">04</span><div><b>Public Solana ledger</b><small>Every payment is traceable; names stay private.</small></div></div>
+              </div>
+            </div>
+            <p class="footnote"><i aria-hidden="true"></i>Official alert + human review gates every response; no weather warning alone releases funds</p>
+          </article>
+
+          <article class="panel end-panel" data-panel="end">
+            <div class="end-content">
+              <div class="end-logo"><span class="end-ring" aria-hidden="true"></span><img src="../src/assets/brand/reliefvue-elephant-selected.png" alt=""></div>
+              <p class="end-wordmark">ReliefVue</p>
+              <h2>Prepared relief.<br><em>Trace every payment.</em></h2>
+              <p class="end-line">Emergency essentials for households after disaster — not cash.</p>
+              <a class="follow" href="https://x.com/ReliefVue" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.2 2h6.5l4.4 5.8L18.9 2zm-1.1 18h1.7L6.6 3.8H4.8L17.8 20z"/></svg>
+                Follow @ReliefVue
+              </a>
+              <div class="end-links"><b>x.com/ReliefVue</b><span>reliefvue.vercel.app</span></div>
+              <p class="disclaimer">Concept demo · figures illustrative · basket pending local validation</p>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <div class="caption" id="caption" aria-live="polite">
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <span class="speaker"><span class="speaker-dot">M</span><div><span>Mai</span><small>ReliefVue guide</small></div></span>
+        <p id="captionText">What if relief was already funded — before the disaster?</p>
+      </div>
+
+      <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+      <div class="hint" id="hint">Space pause · R restart · F fullscreen</div>
+    </div>
+  </div>
+<script>
+(() => {
+  const DURATION = 30;
+  const BEATS = [
+    {start:0, end:5, panel:"hook", caption:"What if relief was already funded — before the disaster?"},
+    {start:5, end:10, panel:"prepare", caption:"Donors fill a shared reserve before disaster — not after."},
+    {start:10, end:15, panel:"verify", caption:"When disaster hits, verify identity, home and one household — privately."},
+    {start:15, end:19, panel:"grant", caption:"฿3,000 is the reference cost of a three-day survival basket for three to five people."},
+    {start:19, end:23, panel:"grant", open:true, caption:"No cash. A single-use grocery QR for food, water and hygiene at participating shops."},
+    {start:23, end:27, panel:"protect", caption:"One household, one grant. Two of three approvals. The QR pays the shop — every payment is public on Solana."},
+    {start:27, end:30, panel:"end", caption:"Follow @ReliefVue — get ready before the next disaster."},
+  ];
+  const frame = document.getElementById("frame");
+  const board = document.getElementById("board");
+  const panels = Array.from(document.querySelectorAll(".panel"));
+  const caption = document.getElementById("caption");
+  const captionText = document.getElementById("captionText");
+  const bar = document.getElementById("bar");
+  const hint = document.getElementById("hint");
+  const chibi = document.getElementById("chibiWrap");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const params = new URLSearchParams(location.search);
+
+  let start = performance.now();
+  let paused = reduceMotion;
+  let pausedElapsed = 0;
+  let activePanel = null;
+  let activeCaption = "";
+  let activeBeat = -1;
+
+  function fit() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    frame.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+  window.addEventListener("resize", fit);
+  fit();
+
+  function beatAt(time) {
+    let index = 0;
+    for (let i = 0; i < BEATS.length; i += 1) {
+      if (time >= BEATS[i].start) index = i;
+    }
+    return index;
+  }
+
+  function render(time) {
+    const index = beatAt(time);
+    const beat = BEATS[index];
+    if (index !== activeBeat) {
+      activeBeat = index;
+      panels.forEach((panel) => {
+        const active = panel.dataset.panel === beat.panel;
+        panel.classList.toggle("is-active", active);
+        panel.setAttribute("aria-hidden", active ? "false" : "true");
+        panel.inert = !active;
+      });
+      if (beat.panel !== activePanel) {
+        activePanel = beat.panel;
+        board.classList.toggle("is-end", beat.panel === "end");
+        document.body.dataset.panel = beat.panel;
+      }
+      chibi.classList.toggle("is-waving", beat.panel === "hook" || beat.panel === "end");
+    }
+    board.classList.toggle("is-open", Boolean(beat.open));
+    if (beat.caption !== activeCaption) {
+      activeCaption = beat.caption;
+      captionText.textContent = beat.caption;
+      caption.classList.remove("is-changing");
+      void caption.offsetWidth;
+      caption.classList.add("is-changing");
+    }
+    bar.style.transform = `scaleX(${Math.min(time / DURATION, 1)})`;
+  }
+
+  function elapsed(now) {
+    if (paused) return pausedElapsed;
+    return ((now - start) / 1000) % DURATION;
+  }
+
+  function frameLoop(now) {
+    render(elapsed(now));
+    requestAnimationFrame(frameLoop);
+  }
+
+  function setPaused(next) {
+    const now = performance.now();
+    if (next === paused) return;
+    if (next) {
+      pausedElapsed = elapsed(now);
+      paused = true;
+    } else {
+      start = now - pausedElapsed * 1000;
+      paused = false;
+    }
+    document.body.classList.toggle("is-paused", paused);
+    chibi.classList.toggle("is-talking", !paused);
+    showHint();
+  }
+
+  function seek(time) {
+    pausedElapsed = Math.max(0, Math.min(DURATION - 0.001, Number(time) || 0));
+    start = performance.now() - pausedElapsed * 1000;
+    render(pausedElapsed);
+  }
+
+  function restart() {
+    paused = false;
+    pausedElapsed = 0;
+    start = performance.now();
+    document.body.classList.remove("is-paused");
+    chibi.classList.add("is-talking");
+    render(0);
+  }
+
+  let hintTimer;
+  function showHint() {
+    hint.classList.remove("is-hidden");
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(() => hint.classList.add("is-hidden"), 5200);
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") { event.preventDefault(); setPaused(!paused); }
+    else if (event.key === "r" || event.key === "R") { restart(); showHint(); }
+    else if (event.key === "f" || event.key === "F") {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen?.();
+    }
+  });
+  document.addEventListener("pointermove", showHint, { passive: true });
+
+  const record = params.get("record") === "1";
+  if (record) document.body.classList.add("is-recording");
+  const seekTo = params.get("t");
+  if (seekTo !== null) {
+    seek(Number(seekTo));
+    if (params.get("pause") === "1") {
+      paused = true;
+      pausedElapsed = Number(seekTo) || 0;
+      document.body.classList.add("is-paused");
+    }
+  }
+
+  document.body.classList.toggle("is-paused", paused);
+  chibi.classList.toggle("is-talking", !paused);
+  showHint();
+  render(pausedElapsed);
+  requestAnimationFrame(frameLoop);
+})();
+</script>
+</body>
+</html>
