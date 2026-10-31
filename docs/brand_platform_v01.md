@@ -63,6 +63,7 @@ partners. Keep it visible in the brandbook, the PRD and the public explanation.
 
 ## Where this is used
 
-- The 30-second film: [`reliefvue_explainer_30s_v04.html`](reliefvue_explainer_30s_v04.html).
+- The 42-second film: [`reliefvue_explainer_42s_v01.html`](reliefvue_explainer_42s_v01.html).
+- The 30-second short cut: [`reliefvue_explainer_30s_v04.html`](reliefvue_explainer_30s_v04.html).
 - The website and future brandbook revision.
 - The next PRD revision, carried forward from v0.4.

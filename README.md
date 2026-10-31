@@ -99,7 +99,8 @@ The planned mobile app is the recipient route for private household verification
 - [KYC/KYB provider update — Didit](docs/kyc_kyb_provider_update_didit_v01.md): the Thai DOPA data-match and Thai KYB it advertises, the Solana attestation gap, and the questions to ask before integrating.
 - [Demo runbook](docs/demo_runbook_v01.md): pre-demo reset and smoke check, the eight-minute path, fallbacks and the claims not to make.
 - [Brand platform](docs/brand_platform_v01.md): vision, mission, five values, the preferred tagline and the before/during/after anti-corruption standard.
-- [30-second explainer](docs/reliefvue_explainer_30s_v04.html): minimal-text, image-led six-scene film — Protect aid, then Prepare, Review, Verify, Deliver and Trace. 0.8 SOL, wallet or fiat via a planned PromptPay route, the five values and `@ReliefVue`. No presenter, no paragraphs. Opens directly from disk; press `F` for fullscreen.
+- [42-second explainer](docs/reliefvue_explainer_42s_v01.html): the full visual journey — Protect aid, then Prepare, Review, Verify, Deliver, Trace, and a six-second closing manifesto with the five values and `@ReliefVue`. 0.8 SOL, wallet or fiat via a planned PromptPay route. No presenter, no paragraphs.
+- [30-second cut](docs/reliefvue_explainer_30s_v04.html): the same visual language in a shorter loop, ending on the ledger instead of the manifesto.
 - [Earlier brand film](docs/reliefvue_explainer_30s_v02.html): the first cut, kept for comparison.
 - [Southeast Asia country readiness](docs/sea_country_readiness_v01.md): the four-part test for a new country and research starting points for identity and payout rails.
 - [Mobile design handover](docs/mobile_design_handover_v01.md): eight recipient screens, locked brand palette and a prompt for an AI designer.

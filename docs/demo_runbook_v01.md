@@ -30,19 +30,23 @@ different surface; do not start there.
 port automatically and passes that port to Vite, so the app keeps working. Keep the terminal
 open.
 
-## Optional 30-second opener
+## Optional film opener
 
-**Current film (primary)** — [reliefvue_explainer_30s_v04.html](reliefvue_explainer_30s_v04.html)
-Minimal-text, image-led six-scene film: Protect aid, then Prepare, Review, Verify, Deliver and
-Trace. Big infographic objects and short labels carry the story; there are no body paragraphs.
-It shows 0.8 SOL, “keep it or take fiat via a planned PromptPay route”, random face-video KYC,
-one household = one wallet, the UNAID-style six-month misuse ban, the five values and the
-`@ReliefVue` follow. No presenter.
+**Current film (primary)** — [reliefvue_explainer_42s_v01.html](reliefvue_explainer_42s_v01.html)
+The full 42-second visual journey: 6 seconds for the opening, 6 for each of Prepare, Review,
+Verify, Deliver and Trace, then a 6-second closing manifesto. Big infographic objects and short
+labels carry the story; there are no body paragraphs. It shows 0.8 SOL, “keep it or take fiat
+via a planned PromptPay route”, random face-video KYC, one household = one wallet, the
+UNAID-style six-month misuse ban, the five values, the preferred tagline and the `@ReliefVue`
+follow. No presenter.
+
+**Short cut** — [reliefvue_explainer_30s_v04.html](reliefvue_explainer_30s_v04.html)
+The same visual language in 30 seconds; it ends on the public ledger instead of the manifesto.
 
 **Earlier brand film** — [reliefvue_explainer_30s_v02.html](reliefvue_explainer_30s_v02.html)
 The first cut, kept for comparison.
 
-Both loop every 30 seconds. Press `F` for fullscreen, `Space` to pause, `R` to restart. For a
+The 42-second film loops every 42 seconds; the 30-second cut every 30. Press `F` for fullscreen, `Space` to pause, `R` to restart. For a
 clean screen recording, add `?record=1` to the URL to hide the controls. The film is silent by
 design; speak over it or let it run. It ends on “Concept demo · 0.8 SOL reference value · fiat
 conversion planned” — keep that visible.
