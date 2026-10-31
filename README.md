@@ -98,7 +98,7 @@ The planned mobile app is the recipient route for private household verification
 - [Identity on Solana](docs/solana_identity_and_attestation_v01.md): what `.sol` names, Solana attestations and KYC/KYB providers prove, and what they do not.
 - [KYC/KYB provider update — Didit](docs/kyc_kyb_provider_update_didit_v01.md): the Thai DOPA data-match and Thai KYB it advertises, the Solana attestation gap, and the questions to ask before integrating.
 - [Demo runbook](docs/demo_runbook_v01.md): pre-demo reset and smoke check, the eight-minute path, fallbacks and the claims not to make.
-- [30-second explainer](docs/reliefvue_explainer_30s_v01.html): silent, brand-locked 30-second loop — what ReliefVue is, how it works and what it is for. Opens directly from disk; press `F` for fullscreen.
+- [30-second explainer](docs/reliefvue_explainer_30s_v02.html): silent, brand-locked 30-second loop — what ReliefVue is, how it works and what it is for. Uses the high-resolution selected logo, layered light and richer motion. Opens directly from disk; press `F` for fullscreen.
 - [Southeast Asia country readiness](docs/sea_country_readiness_v01.md): the four-part test for a new country and research starting points for identity and payout rails.
 - [Mobile design handover](docs/mobile_design_handover_v01.md): eight recipient screens, locked brand palette and a prompt for an AI designer.
 - [Reserve program handoff](chain/README.md): Anchor program compiled and tested on a local validator; Devnet deployment and application integration remain pending.

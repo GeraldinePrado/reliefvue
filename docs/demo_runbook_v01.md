@@ -32,7 +32,7 @@ open.
 
 ## Optional 30-second opener
 
-Open [`reliefvue_explainer_30s_v01.html`](reliefvue_explainer_30s_v01.html) directly in Chrome
+Open [`reliefvue_explainer_30s_v02.html`](reliefvue_explainer_30s_v02.html) directly in Chrome
 — it also works from disk with no server. It is a silent, 16:9, brand-locked loop:
 
 1. What ReliefVue is
