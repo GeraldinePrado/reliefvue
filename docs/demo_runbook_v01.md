@@ -32,11 +32,12 @@ open.
 
 ## Optional 30-second opener
 
-**Current film (primary)** — [reliefvue_explainer_30s_v03.html](reliefvue_explainer_30s_v03.html)
-Six full-screen scenes following the site’s five steps: Prepare together, Review the disaster,
-Verify the household, Deliver the grant and Trace the funds. It shows 0.8 SOL, “keep it or take
-fiat via a planned PromptPay route”, random face-video KYC, one household = one wallet, the
-UNAID-style six-month misuse ban and the `@ReliefVue` follow. No presenter.
+**Current film (primary)** — [reliefvue_explainer_30s_v04.html](reliefvue_explainer_30s_v04.html)
+Minimal-text, image-led six-scene film: Protect aid, then Prepare, Review, Verify, Deliver and
+Trace. Big infographic objects and short labels carry the story; there are no body paragraphs.
+It shows 0.8 SOL, “keep it or take fiat via a planned PromptPay route”, random face-video KYC,
+one household = one wallet, the UNAID-style six-month misuse ban, the five values and the
+`@ReliefVue` follow. No presenter.
 
 **Earlier brand film** — [reliefvue_explainer_30s_v02.html](reliefvue_explainer_30s_v02.html)
 The first cut, kept for comparison.
