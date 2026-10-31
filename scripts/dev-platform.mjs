@@ -5,27 +5,27 @@ import path from "node:path";
 const root = process.cwd();
 const children = [];
 
-/** Prefer the requested port, then the next free one, so a busy port never blocks a demo. */
-function findFreePort(start) {
-  return new Promise((resolve, reject) => {
-    let port = start;
-    const tryPort = () => {
-      if (port > start + 20) {
-        reject(new Error(`No free port between ${start} and ${start + 20}`));
-        return;
-      }
-      const probe = net.createServer();
-      probe.once("error", () => {
-        port += 1;
-        tryPort();
-      });
-      probe.once("listening", () => {
-        probe.close(() => resolve(port));
-      });
-      probe.listen(port, "127.0.0.1");
+/** A listener on any interface can still answer 127.0.0.1, so probe by connecting too. */
+function portInUse(port) {
+  return new Promise((resolve) => {
+    const socket = net.connect({ host: "127.0.0.1", port });
+    const finish = (inUse) => {
+      socket.destroy();
+      resolve(inUse);
     };
-    tryPort();
+    socket.setTimeout(400);
+    socket.once("connect", () => finish(true));
+    socket.once("timeout", () => finish(false));
+    socket.once("error", () => finish(false));
   });
+}
+
+/** Prefer the requested port, then the next free one, so a busy port never blocks a demo. */
+async function findFreePort(start) {
+  for (let port = start; port <= start + 20; port += 1) {
+    if (!(await portInUse(port))) return port;
+  }
+  throw new Error(`No free port between ${start} and ${start + 20}`);
 }
 
 function start(label, command, args, env) {
