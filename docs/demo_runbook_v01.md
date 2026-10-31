@@ -30,6 +30,23 @@ different surface; do not start there.
 port automatically and passes that port to Vite, so the app keeps working. Keep the terminal
 open.
 
+## Optional 30-second opener
+
+Open [`reliefvue_explainer_30s_v01.html`](reliefvue_explainer_30s_v01.html) directly in Chrome
+— it also works from disk with no server. It is a silent, 16:9, brand-locked loop:
+
+1. What ReliefVue is
+2. The gap it closes
+3. Prepare the reserve
+4. Verify one household, one grant
+5. Deliver and trace
+6. End card
+
+It loops every 30 seconds. Press `F` for fullscreen, `Space` to pause, `R` to restart. For a
+clean screen recording, add `?record=1` to the URL to hide the controls. The film is silent by
+design; speak over it or let it run. It ends on “Concept demo · simulated funds” — keep that
+visible.
+
 ## Demo path (about 8 minutes)
 
 | # | Surface | Action | What to say |
