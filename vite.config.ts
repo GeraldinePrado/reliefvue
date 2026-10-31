@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 const entry = (name: string) => fileURLToPath(new URL(name, import.meta.url));
+// The demo launcher picks a free port and exports it, so Vite must proxy there too.
+const platformPort = process.env.RV_PORT ?? "8788";
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
@@ -18,7 +20,7 @@ export default defineConfig(({ mode }) => ({
     proxy: {
       "/api": { target: "http://127.0.0.1:8787", changeOrigin: false },
       "/papi": {
-        target: "http://127.0.0.1:8788",
+        target: `http://127.0.0.1:${platformPort}`,
         changeOrigin: false,
         rewrite: (path) => path.replace(/^\/papi/, "/api"),
       },

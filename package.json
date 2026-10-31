@@ -16,6 +16,9 @@
     "platform": "tsx server/platform/index.ts",
     "start": "tsx server/platform/index.ts",
     "dev:platform": "node scripts/dev-platform.mjs",
+    "demo": "node scripts/dev-platform.mjs",
+    "demo:check": "node scripts/demo-check.mjs",
+    "demo:reset": "tsx scripts/reset-demo.ts",
     "test:platform": "tsx --test tests/platform.test.ts"
   },
   "dependencies": {
